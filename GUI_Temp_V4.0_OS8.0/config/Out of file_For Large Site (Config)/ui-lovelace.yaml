@@ -1,0 +1,4859 @@
+button_card_templates: !include button_card_templates.yaml
+
+title: CFC
+
+views:
+  - path: default_view
+    title: Home
+    type: custom:grid-layout
+    layout:
+      grid-auto-columns: 100%
+    icon: mdi:home
+    badges: []
+    cards:
+      - type: custom:layout-card
+        layout_type: grid
+        layout:
+          grid-template-columns: 100%
+
+          grid-template-rows: 20px 90px 0px
+          grid-template-areas: |
+            "extras "
+            "weather "
+            "message"
+        cards:
+          - !include popup/menu-all-devices-popup.yaml
+          - type: custom:weather-card
+            entity: weather.home
+
+            details: false
+            forecast: false
+
+            style:
+              .: |
+                ha-card {
+                  background-color: transparent;
+                  box-shadow: 0px 0px transparent;
+
+                }
+
+            view_layout:
+              grid-area: weather
+          - type: markdown
+            content: |
+
+              {% if now().hour  < 5 %} Good Night {{user}}{{'\U0001F634'}}
+              {% elif now().hour < 12 %} Good Morning {{user}}{{'\u2615\uFE0F'}}
+              {% elif now().hour < 18 %} Good Afternoon {{user}} {{'\U0001F44B\U0001F3FB'}}
+              {% else %} Good Evening {{user}} {{'\U0001F44B\U0001F3FB'}}{% endif %}
+            style: |
+              ha-card {
+                background-color: transparent;
+                box-shadow: 0px 0px transparent;
+                text-align: start;
+                display: flex;
+                align-items: center;
+                font-size: 15px;
+                font-weight: normal;
+                padding-left: 10px;
+                transition: 0s;
+                font-family:  "gravity";
+              }
+              @media only screen and (min-width: 0px) {
+                ha-card {
+                  font-size: 14px;
+                  left: 3%;
+                }
+              }
+              @media only screen and (min-width: 768px) {
+                ha-card {
+                  font-size: 16px;
+                  left: 11%;
+                  bottom: 42px;
+                }
+              }
+              @media only screen and (min-width: 992px) {
+                ha-card {
+                  font-size: 25px;
+
+                  left: 7%;
+                  bottom: 42px;
+                }
+              }
+            view_layout:
+              grid-area: message
+      - content: |
+          # Basement Floor
+        type: markdown
+        style: &markdown_style
+          .: |
+            ha-card {
+               #width: 50px;
+               #height: 10px;
+               background-color: rgba(0,0,0,0);
+               border-top-left-radius: 20px;
+               border-top-right-radius: 20px;
+                box-shadow: none;
+            }
+          ha-markdown:
+            $: |
+              h1 {
+                font-size: 20px;
+               #font-weight: bold;
+                text-align: left;
+                letter-spacing: '-0.01em';
+                font-family: "Raleway", sans-serif;
+              }
+      - type: custom:swipe-card
+        start_card: 3
+        card_width: 25em
+        parameters:
+          centeredSlides: true
+          centeredSlidesBounds: true
+          slidesPerView: auto
+          spaceBetween: 10
+          pagination:
+            type: custom
+          navigation: null
+          keyboard:
+            enabled: true
+            onlyInViewport: true
+          grabCursor: true
+        cards:
+          - aspect_ratio: 0%
+            entities: []
+            image: /local/Home-Images/Entrance2.png
+            tap_action:
+              action: navigate
+              navigation_path: /lovelace/basement-entrance
+            title: Entrance
+            type: picture-glance
+
+
+
+          - aspect_ratio: 0%
+            entities: []
+            image: /local/Home-Images/Dinning2.png
+            tap_action:
+              action: navigate
+              navigation_path: /lovelace/basement-living
+            title: Living Room
+            type: picture-glance
+
+          - aspect_ratio: 0%
+            entities: []
+            image: /local/Home-Images/bedroom4.png
+            tap_action:
+              action: navigate
+              navigation_path: /lovelace/mark-bedroom
+            title: Mark Bedroom
+            type: picture-glance
+
+          - aspect_ratio: 0%
+            entities: []
+            image: /local/Home-Images/Bedroom1.jpg
+            tap_action:
+              action: navigate
+              navigation_path: /lovelace/miros-bedroom
+            title: Miros Bedroom
+            type: picture-glance
+
+      - content: |
+          # Ground Floor
+        type: markdown
+        style: *markdown_style
+      - type: custom:swipe-card
+        start_card: 3
+        card_width: 25em
+        parameters:
+          centeredSlides: true
+          centeredSlidesBounds: true
+          slidesPerView: auto
+          spaceBetween: 10
+          pagination:
+            type: custom
+          navigation: null
+          keyboard:
+            enabled: true
+            onlyInViewport: true
+          grabCursor: true
+        cards:
+          - aspect_ratio: 0%
+            entities: []
+            image: /local/Home-Images/Entrance2.png
+            tap_action:
+              action: navigate
+              navigation_path: /lovelace/ground-entrance
+            title: Entrance
+            type: picture-glance
+
+
+
+
+          - aspect_ratio: 0%
+            entities: []
+            image: /local/iconHA/reception.jpg
+            tap_action:
+              action: navigate
+              navigation_path: /lovelace/reception1&2
+            title: Reception 1,2
+            type: picture-glance
+
+          - aspect_ratio: 0%
+            entities: []
+            image: /local/Home-Images/Family.jpg
+            tap_action:
+              action: navigate
+              navigation_path: /lovelace/reception3
+            title: Reception 3
+            type: picture-glance
+
+          - aspect_ratio: 0%
+            entities: []
+            image: /local/Home-Images/Dinning2.png
+            tap_action:
+              action: navigate
+              navigation_path: /lovelace/dining
+            title: Dining
+            type: picture-glance
+
+      - content: |
+          # First Floor
+        type: markdown
+        style:
+          .: |
+            ha-card {
+               #width: 50px;
+               #height: 10px;
+               background-color: rgba(0,0,0,0);
+               border-top-left-radius: 20px;
+               border-top-right-radius: 20px;
+                box-shadow: none;
+            }
+          ha-markdown:
+            $: |
+              h1 {
+                font-size: 20px;
+               # font-weight: bold;
+                text-align: left;
+                letter-spacing: '-0.01em';
+                font-family: "Raleway", sans-serif;
+              }
+      - type: custom:swipe-card
+        card_width: 25em
+
+        start_card: 3
+        parameters:
+          centeredSlides: true
+          slidesPerView: auto
+          spaceBetween: 10
+          pagination:
+            type: custom
+          navigation: null
+          keyboard:
+            enabled: true
+            onlyInViewport: true
+          grabCursor: true
+        cards:
+          - aspect_ratio: 0%
+            entities: []
+            image: /local/Home-Images/Stairs1.png
+            tap_action:
+              action: navigate
+              navigation_path: /lovelace/stairs
+            title: Stairs
+            type: picture-glance
+
+          - aspect_ratio: 0%
+            entities: []
+            image: /local/Home-Images/MasterRoom1.jpg
+            tap_action:
+              action: navigate
+              navigation_path: /lovelace/masterroom
+            title: Master Room
+            type: picture-glance
+          - aspect_ratio: 0%
+            entities: []
+            image: /local/Home-Images/Bedroom.jpg
+            tap_action:
+              action: navigate
+              navigation_path: /lovelace/bedroom1
+            title: Bedroom 1
+            type: picture-glance
+          - aspect_ratio: 0%
+            entities: []
+            image: /local/Home-Images/Family.jpg
+            tap_action:
+              action: navigate
+              navigation_path: /lovelace/living
+            title: Living Room
+            type: picture-glance
+
+
+          - aspect_ratio: 0%
+            entities: []
+            image: /local/Home-Images/office1.png
+            tap_action:
+              action: navigate
+              navigation_path: /lovelace/office
+            title: Office
+            type: picture-glance
+
+      - content: |
+          # Outdoor
+        type: markdown
+        style:
+          .: |
+            ha-card {
+               #width: 50px;
+               #height: 10px;
+               background-color: rgba(0,0,0,0);
+               border-top-left-radius: 20px;
+               border-top-right-radius: 20px;
+                box-shadow: none;
+            }
+          ha-markdown:
+            $: |
+              h1 {
+                font-size: 20px;
+                font-family: "Raleway", sans-serif;
+               # font-weight: bold;
+                text-align: left;
+                letter-spacing: '-0.01em';
+              }
+      - type: custom:swipe-card
+        card_width: 25em
+
+        start_card: 3
+        parameters:
+          centeredSlides: true
+          slidesPerView: auto
+          spaceBetween: 10
+
+          navigation: null
+          keyboard:
+            enabled: true
+            onlyInViewport: true
+          grabCursor: true
+        cards:
+
+
+          - aspect_ratio: 0%
+            entities: []
+            image: /local/iconHA/Landscape.jpg
+            tap_action:
+              action: navigate
+              navigation_path: /lovelace/landscape
+            title: Landscape
+            type: picture-glance
+         
+          - aspect_ratio: 0%
+            entities: []
+            image: /local/Home-Images/pool.png
+            tap_action:
+              action: navigate
+              navigation_path: /lovelace/utilities
+            title: Utilities
+            type: picture-glance
+
+      - type: custom:button-card
+        template: footer_button
+
+
+
+
+
+
+  ##################################### office1 ###############################
+  #   - !include /lovelace/page.yaml
+  - title: Office
+
+    path: office1
+    type: custom:grid-layout
+    layout: &Room_Page_layout
+      grid-gap: var(--custom-layout-card-padding)
+      grid-auto-columns: 10% 80% 10%
+      grid-template-areas: |
+        "sidebar sidebar sidebar"
+        ". select ."
+        ".       list    ."
+        "footer  footer  footer"
+      mediaquery:
+        "(max-width: 800px)":
+          grid-auto-columns: 50% 50%
+
+          grid-template-areas: |
+            "sidebar  sidebar  "
+            " select select"
+            "list     list    "
+            "footer   footer   "
+        "(max-width: 1200px)":
+          grid-gap: var(--custom-layout-card-padding)
+          grid-auto-columns: 50% 50%
+          grid-template-areas: |
+            "sidebar   sidebar"
+            " select select"
+
+            "list      list"
+            "footer    footer"
+    badges: []
+    cards:
+      - type: custom:mod-card
+        view_layout:
+          grid-area: sidebar
+        card_mod:
+          style: |
+            ha-card {
+              background-color: transparent;
+              width: 100%;
+              margin: 0px;
+              padding: 0px;
+              height: 260px;
+              box-shadow: none !important;
+              background-repeat: no-repeat;
+              background-position: center center;
+              background-size: cover;
+              border-radius: 0px 0px 30px 30px;
+            }
+            @media only screen and (min-width: 0px) {
+              ha-card {
+                background-image: url("/local/iconHA/office.jpeg");
+              }
+            }
+            @media only screen and (min-width: 768px) {
+              ha-card {
+                background-image: url("/local/iconHA/office.jpeg");
+              }
+            }
+            @media only screen and (min-width: 992px) {
+              ha-card {
+                background-image: url("/local/iconHA/office-pc.png");
+                height: 300px;
+              }
+            }
+        card:
+          type: custom:mod-card
+          card_mod: &Room_Page_Header_Style
+            style: |
+              ha-card {
+                background: linear-gradient(0deg, #06090F 0%, rgba(0,0,0,0.3475140056022409) 90%);
+               // backdrop-filter: blur(2px);
+                box-shadow: none;
+                height: 262px;
+                border-radius: 0px 0px 25px 25px;
+                width: 100%;
+                margin: 0px;
+                padding: 0px;
+                transition: 2s ease;
+              }
+              @media only screen and (min-width: 992px) {
+                ha-card {
+
+                  height: 302px;
+                }
+              }
+          card:
+            type: custom:layout-card
+            layout_type: grid
+            layout: &Room_Page_Header_Layout
+              grid-gap: 0px
+              grid-template-columns: 40px 3fr 1fr
+              grid-template-rows: 40px 130px 90px
+              grid-template-areas: |
+                "back weather  extras"
+                ".  text  text"
+
+                "scene scene scene"
+            cards:
+              - type: custom:button-card
+                view_layout:
+                  grid-area: back
+                template: back_home
+
+              - type: markdown
+                content: >
+                  # Office
+                view_layout:
+                  grid-area: text
+                style: &Room_Page_Header_Markdown_Style |
+                  ha-card {
+                    background-color: transparent;
+                    box-shadow: 0px 0px transparent;
+                    text-align: center;
+                    display: flex;
+                    align-items: center;
+                    font-size: 15px;
+                    font-weight: normal;
+                    padding-right: 10px;
+                    transition: 0s;
+
+
+                  }
+                  @media only screen and (min-width: 0px) {
+                    ha-card {
+                      font-size: 16px;
+                      lign-items: center;
+                    }
+                  }
+                  @media only screen and (min-width: 768px) {
+                    ha-card {
+                      font-size: 16px;
+                    }
+                  }
+                  @media only screen and (min-width: 992px) {
+                    ha-card {
+                      font-size: 25px;
+                    }
+                  }
+              - type: custom:swipe-card
+                view_layout:
+                  grid-area: scene
+
+                start_card: 1
+                parameters:
+                  centeredSlides: false
+                  slidesPerView: auto
+                  spaceBetween: 10
+                cards:
+
+                        - type: custom:button-card
+                          entity: script.villa_lights_on
+                          name: Room Off
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="mdi:power"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+                        - type: custom:button-card
+                          entity: script.office_lights_on
+                          name:  Lights On
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="hue:bulb-group-sultan-lightstrip"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+                        - type: custom:button-card
+                          entity: script.office_lights_off
+                          name:  Lights Off
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="hue:bulb-group-sultan-lightstrip-off"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+
+                        - type: custom:button-card
+                          entity: script.villa_shutters_on
+                          name: Villa Covers On
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="mdi:blinds-open"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+                        - type: custom:button-card
+                          entity: script.villa_shutters_off
+                          name: Villa Covers Off
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="mdi:blinds"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+                        - type: custom:button-card
+                          entity: script.1632840865496
+                          name: Work Mode
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="mdi:pen"
+                                  style="width: 20px; height: 20px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+
+
+              - !include popup/menu-all-devices-popup.yaml
+
+
+      - type: vertical-stack
+        cards:
+          - !include popup/selection-devices.yaml
+
+          - type: custom:mod-card
+            style: |
+              ha-card {
+                //background: var( --ha-card-background, var(--card-background-color, white) );
+                border-radius: 30px;
+                  }
+            card:
+              type: custom:state-switch
+              entity: input_select.devices_office1
+              default: lights
+
+              transition_time: 250
+              states:
+
+                lights:
+                  type: custom:layout-card
+                  layout_type: grid
+                  layout:
+                    grid-template-columns: repeat(auto-fill, minmax(115px, auto))
+                  cards:
+                    - type: custom:button-card
+                      entity: light.office_chandelier
+                      name: Chandelier
+                      icon: hue:amaze-alt
+                      template: light_button
+
+                    - type: custom:button-card
+                      entity: light.office_led
+                      name: LED
+                      icon: hue:lightstrip
+                      template: light_button
+
+
+                shutter:
+                  type: custom:layout-card
+                  layout_type: grid
+
+                  layout:
+                    grid-template-columns: repeat(auto-fill, minmax(280px, auto))
+                  cards:
+
+
+                    - type: custom:button-card
+                      entity: cover.office_curtain
+                      name: Office Curtain
+                      template:
+                        - curtain_icon_slider   ## Curtain Slider Type (cover.)
+
+                # ac:
+                #   type: custom:layout-card
+                #   layout_type: grid
+                #   layout:
+                #     grid-template-columns: repeat(auto-fill, minmax(280px, auto))
+                #   cards:
+
+
+                #       - !include
+                #         - /config/lovelace/Climate.yaml
+                #         - climate_name: Office 1 AC
+                #           climate_entity: climate.office_1_ac
+                #           fan_entity: light.office_1_ac_fan_speed
+        view_layout:
+          grid-area: list
+      - type: custom:button-card
+        template: footer_button
+        view_layout:
+          grid-area: footer
+
+  ##################################### basement-entrance ###############################
+  - title: basement-entrance
+
+
+    path: basement-entrance
+    type: custom:grid-layout
+    layout: *Room_Page_layout
+    badges: []
+    cards:
+      - type: custom:mod-card
+        view_layout:
+          grid-area: sidebar
+        card_mod:
+          style: |
+            ha-card {
+              background-color: transparent;
+              width: 100%;
+              margin: 0px;
+              padding: 0px;
+              height: 260px;
+              box-shadow: none !important;
+              background-repeat: no-repeat;
+              background-position: center center;
+              background-size: cover;
+              border-radius: 0px 0px 30px 30px;
+            }
+            @media only screen and (min-width: 0px) {
+              ha-card {
+                background-image: url("/local/Home-Images/Entrance2.png");
+              }
+            }
+            @media only screen and (min-width: 768px) {
+              ha-card {
+                background-image: url("/local/Home-Images/Entrance2.png");
+              }
+            }
+            @media only screen and (min-width: 992px) {
+              ha-card {
+                background-image: url("/local/Home-Images/Entrance2.png");
+              }
+            }
+        card:
+          type: custom:mod-card
+          card_mod: *Room_Page_Header_Style
+          card:
+            type: custom:layout-card
+            layout_type: grid
+            layout: *Room_Page_Header_Layout
+            cards:
+              - type: custom:swipe-card
+                view_layout:
+                  grid-area: scene
+
+                start_card: 1
+                parameters:
+                  centeredSlides: false
+                  slidesPerView: auto
+                  spaceBetween: 10
+                cards:
+
+                        - type: custom:button-card
+                          entity: script.villa_lights_on
+                          name: Room Off
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="mdi:power"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+                        - type: custom:button-card
+                          entity: script.basement_entrance_lights_on
+                          name:  Lights On
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="hue:bulb-group-sultan-lightstrip"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+                        - type: custom:button-card
+                          entity: script.basement_entrance_lights_off
+                          name:  Lights Off
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="hue:bulb-group-sultan-lightstrip-off"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+
+                        - type: custom:button-card
+                          entity: script.villa_shutters_on
+                          name:  Covers On
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="mdi:blinds-open"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+                        - type: custom:button-card
+                          entity: script.villa_shutters_off
+                          name:  Covers Off
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="mdi:blinds"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+
+
+              - !include popup/menu-all-devices-popup.yaml
+              - type: custom:button-card
+                view_layout:
+                  grid-area: back
+                template: back_home
+              - type: markdown
+                content: >
+
+                  # Basement Entrance
+                view_layout:
+                  grid-area: text
+                style: *Room_Page_Header_Markdown_Style
+
+      - type: vertical-stack
+        cards:
+          - !include popup/selection-devices-roof.yaml
+          - type: custom:mod-card
+            style: |
+              ha-card {
+                //background: var( --ha-card-background, var(--card-background-color, white) );
+                border-radius: 30px;
+                  }
+            card:
+              type: custom:state-switch
+              entity: input_select.devices_basement_entrance
+              default: lights
+
+              transition_time: 300
+              states:
+                ac:
+                  type: custom:layout-card
+                  layout_type: grid
+                  layout:
+                    grid-template-columns: repeat(auto-fill, minmax(280px, auto))
+                  cards:
+
+                lights:
+                  type: custom:layout-card
+                  layout_type: grid
+                  layout:
+
+                  cards:
+                    - content: |
+                        # Stairs Area
+                      type: markdown
+                      style:
+                        .: |
+                          ha-card {
+                            background-color: rgba(0,0,0,0);
+                            box-shadow: none;
+                          }
+                        ha-markdown:
+                          $: |
+                            h1 {
+                              font-size: 20px;
+                              text-align: left;
+                              font-family: "Raleway", sans-serif;
+                            }
+
+                    - type: custom:layout-card
+                      layout_type: grid
+                      layout:
+                        grid-template-columns: repeat(auto-fill, minmax(115px, auto))
+                      cards:
+                        - type: custom:button-card
+                          entity: light.basement_to_ground_stairs_lights
+                          name: Stairs Light
+                          icon: hue:double-spot
+                          template: light_button
+
+                        - type: custom:button-card
+                          entity: light.basement_stairs_area_pendent
+                          name: Pendent
+                          icon: hue:double-spot
+                          template: light_button
+
+                        - type: custom:button-card
+                          entity: light.basement_stairs_area_side_spots
+                          name: Side Spots
+                          icon: hue:double-spot
+                          template: light_button
+
+                        - type: custom:button-card
+                          entity: light.basement_stairs_area_spotlights_1
+                          name: Spot Lights 1
+                          icon: hue:wall-shade
+                          template: light_button
+
+                        - type: custom:button-card
+                          entity: light.basement_stairs_area_spotlights_2
+                          name: Spot Lights 2
+                          icon: hue:wall-shade
+                          template: light_button
+
+                    - content: |
+                        # Basement Entrance
+                      type: markdown
+                      style:
+                        .: |
+                          ha-card {
+                            background-color: rgba(0,0,0,0);
+                            box-shadow: none;
+                          }
+                        ha-markdown:
+                          $: |
+                            h1 {
+                              font-size: 20px;
+                              text-align: left;
+                              font-family: "Raleway", sans-serif;
+                            }
+
+                    - type: custom:layout-card
+                      layout_type: grid
+                      layout:
+                        grid-template-columns: repeat(auto-fill, minmax(115px, auto))
+                      cards:
+                        - type: custom:button-card
+                          entity: light.basement_to_ground_stairs_lights
+                          name: Stairs Light
+                          icon: hue:double-spot
+                          template: light_button
+                        - type: custom:button-card
+                          entity: light.basement_entrance_pendent
+                          name: Pendent Light
+                          icon: hue:double-spot
+                          template: light_button
+                        - type: custom:button-card
+                          entity: light.basement_entrance_led
+                          name: LED
+                          icon: hue:lightstrip
+                          template: light_button
+
+                        - type: custom:button-card
+                          entity: light.basement_entrance_cove
+                          name: Cove Light
+                          icon: hue:lightstrip
+                          template: light_button
+
+                        - type: custom:button-card
+                          entity: light.basement_entrance_spotlights_1
+                          name: Spot Lights 1
+                          icon: hue:wall-shade
+                          template: light_button
+
+                        - type: custom:button-card
+                          entity: light.basement_entrance_spotlights_2
+                          name: Spot Lights 2
+                          icon: hue:wall-shade
+                          template: light_button 
+
+        view_layout:
+          grid-area: list
+      - type: custom:button-card
+        template: footer_button
+        view_layout:
+          grid-area: footer
+  ##################################### basement-living ###############################
+  - title: basement-living
+
+
+    path: basement-living
+    type: custom:grid-layout
+    layout: *Room_Page_layout
+    badges: []
+    cards:
+      - type: custom:mod-card
+        view_layout:
+          grid-area: sidebar
+        card_mod:
+          style: |
+            ha-card {
+              background-color: transparent;
+              width: 100%;
+              margin: 0px;
+              padding: 0px;
+              height: 260px;
+              box-shadow: none !important;
+              background-repeat: no-repeat;
+              background-position: center center;
+              background-size: cover;
+              border-radius: 0px 0px 30px 30px;
+            }
+            @media only screen and (min-width: 0px) {
+              ha-card {
+                background-image: url("/local/Home-Images/Entrance2.png");
+              }
+            }
+            @media only screen and (min-width: 768px) {
+              ha-card {
+                background-image: url("/local/Home-Images/Entrance2.png");
+              }
+            }
+            @media only screen and (min-width: 992px) {
+              ha-card {
+                background-image: url("/local/Home-Images/Entrance2.png");
+              }
+            }
+        card:
+          type: custom:mod-card
+          card_mod: *Room_Page_Header_Style
+          card:
+            type: custom:layout-card
+            layout_type: grid
+            layout: *Room_Page_Header_Layout
+            cards:
+
+              - !include popup/menu-all-devices-popup.yaml
+              - type: custom:button-card
+                view_layout:
+                  grid-area: back
+                template: back_home
+              - type: markdown
+                content: >
+
+                  # Basement Living
+                view_layout:
+                  grid-area: text
+                style: *Room_Page_Header_Markdown_Style
+              - type: custom:swipe-card
+                view_layout:
+                  grid-area: scene
+
+                start_card: 1
+                parameters:
+                  centeredSlides: false
+                  slidesPerView: auto
+                  spaceBetween: 10
+                cards:
+
+                        - type: custom:button-card
+                          entity: script.villa_lights_on
+                          name: Room Off
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="mdi:power"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+                        - type: custom:button-card
+                          entity: script.basement_living_lights_on
+                          name:  Lights On
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="hue:bulb-group-sultan-lightstrip"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+                        - type: custom:button-card
+                          entity: script.basement_living_lights_off
+                          name:  Lights Off
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="hue:bulb-group-sultan-lightstrip-off"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+
+                        - type: custom:button-card
+                          entity: script.villa_shutters_on
+                          name:  Covers On
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="mdi:blinds-open"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+                        - type: custom:button-card
+                          entity: script.villa_shutters_off
+                          name:  Covers Off
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="mdi:blinds"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+
+
+      - type: vertical-stack
+        cards:
+          - !include popup/selection-devices-stairs.yaml
+          - type: custom:mod-card
+            style: |
+              ha-card {
+                //background: var( --ha-card-background, var(--card-background-color, white) );
+                border-radius: 30px;
+                  }
+            card:
+              type: custom:state-switch
+              entity: input_select.devices_basement_entrance
+              default: lights
+
+              transition_time: 300
+              states:
+
+                lights:
+                  type: custom:layout-card
+                  layout_type: grid
+                  layout:
+
+                  cards:
+                    - content: |
+                        # Basement Kitchen
+                      type: markdown
+                      style:
+                        .: |
+                          ha-card {
+                            background-color: rgba(0,0,0,0);
+                            box-shadow: none;
+                          }
+                        ha-markdown:
+                          $: |
+                            h1 {
+                              font-size: 20px;
+                              text-align: left;
+                              font-family: "Raleway", sans-serif;
+                            }
+
+                    - type: custom:layout-card
+                      layout_type: grid
+                      layout:
+                        grid-template-columns: repeat(auto-fill, minmax(115px, auto))
+                      cards:
+                        - type: custom:button-card
+                          entity: light.basement_kitchen_spotlights
+                          name: Spot Lights
+                          icon: hue:double-spot
+                          template: light_button
+
+
+
+                    - content: |
+                        # Basement Dining
+                      type: markdown
+                      style:
+                        .: |
+                          ha-card {
+                            background-color: rgba(0,0,0,0);
+                            box-shadow: none;
+                          }
+                        ha-markdown:
+                          $: |
+                            h1 {
+                              font-size: 20px;
+                              text-align: left;
+                              font-family: "Raleway", sans-serif;
+                            }
+
+                    - type: custom:layout-card
+                      layout_type: grid
+                      layout:
+                        grid-template-columns: repeat(auto-fill, minmax(115px, auto))
+                      cards:
+                        - type: custom:button-card
+                          entity: light.basement_dining_chandelier_1
+                          name: Chandelier 1
+                          icon: hue:amaze-alt
+                          template: light_button
+                        - type: custom:button-card
+                          entity: light.basement_dining_chandelier_2
+                          name: Chandelier 2
+                          icon: hue:amaze-alt
+                          template: light_button
+
+
+                        - type: custom:button-card
+                          entity: light.basement_dining_spotlights_1
+                          name: Spot Lights 1
+                          icon: hue:wall-shade
+                          template: light_button
+
+                        - type: custom:button-card
+                          entity: light.basement_dining_spotlights_2
+                          name: Spot Lights 2
+                          icon: hue:wall-shade
+                          template: light_button 
+
+                        - type: custom:button-card
+                          entity: light.basement_tv_led
+                          name: LED
+                          icon: hue:gradient-lightstrip
+                          template: light_button 
+                    - content: |
+                        # Basement TV Area
+                      type: markdown
+                      style:
+                        .: |
+                          ha-card {
+                            background-color: rgba(0,0,0,0);
+                            box-shadow: none;
+                          }
+                        ha-markdown:
+                          $: |
+                            h1 {
+                              font-size: 20px;
+                              text-align: left;
+                              font-family: "Raleway", sans-serif;
+                            }
+
+                    - type: custom:layout-card
+                      layout_type: grid
+                      layout:
+                        grid-template-columns: repeat(auto-fill, minmax(115px, auto))
+                      cards:
+                        - type: custom:button-card
+                          entity: light.basement_tv_area_spotlights
+                          name: Spot Light
+                          icon: hue:double-spot
+                          template: light_button
+                        - type: custom:button-card
+                          entity: light.basement_tv_area_chandelier
+                          name: Chandelier 
+                          icon: hue:amaze-alt
+                          template: light_button
+                shutter:
+                  type: custom:layout-card
+                  layout_type: grid
+                  layout:
+
+                  cards:
+                    - content: |
+                        # Dining Curtain
+                      type: markdown
+                      style:
+                        .: |
+                          ha-card {
+                            background-color: rgba(0,0,0,0);
+                            box-shadow: none;
+                          }
+                        ha-markdown:
+                          $: |
+                            h1 {
+                              font-size: 20px;
+                              text-align: left;
+                              font-family: "Raleway", sans-serif;
+                            }
+                    - type: custom:layout-card
+                      layout_type: grid
+
+                      layout:
+                        grid-template-columns: repeat(auto-fill, minmax(280px, auto))
+                      cards:
+
+
+                        - type: custom:button-card
+                          entity: cover.basement_dining_curtain
+                          name: Dining Curtain
+                          template:
+                            - curtain_icon_slider   ## Curtain Slider Type (cover.)
+                            
+                    - content: |
+                        # TV Area Curtain
+                      type: markdown
+                      style:
+                        .: |
+                          ha-card {
+                            background-color: rgba(0,0,0,0);
+                            box-shadow: none;
+                          }
+                        ha-markdown:
+                          $: |
+                            h1 {
+                              font-size: 20px;
+                              text-align: left;
+                              font-family: "Raleway", sans-serif;
+                            }
+                    # - type: custom:layout-card
+                    #   layout_type: grid
+
+                    #   layout:
+                    #     grid-template-columns: repeat(auto-fill, minmax(280px, auto))
+                    #   cards:
+
+
+                    #     - type: custom:button-card
+                    #       entity: cover.basement_dining_curtain
+                    #       name: Dining Curtain
+                    #       template:
+                    #         - curtain_icon_slider   ## Curtain Slider Type (cover.)
+        view_layout:
+          grid-area: list
+      - type: custom:button-card
+        template: footer_button
+        view_layout:
+          grid-area: footer
+
+####################################################################################################
+
+
+  ##################################### mark-bedroom ###############################
+  - title: mark-bedroom
+    path: mark-bedroom
+    type: custom:grid-layout
+    layout: *Room_Page_layout
+    badges: []
+    cards:
+      - type: custom:mod-card
+        view_layout:
+          grid-area: sidebar
+        card_mod:
+          style: |
+            ha-card {
+              background-color: transparent;
+              width: 100%;
+              margin: 0px;
+              padding: 0px;
+              height: 260px;
+              box-shadow: none !important;
+              background-repeat: no-repeat;
+              background-position: center center;
+              background-size: cover;
+              border-radius: 0px 0px 30px 30px;
+            }
+            @media only screen and (min-width: 0px) {
+              ha-card {
+                background-image: url("/local/Home-Images/Bedroom1.jpg");
+              }
+            }
+            @media only screen and (min-width: 768px) {
+              ha-card {
+                background-image: url("/local/Home-Images/Bedroom1.jpg");
+              }
+            }
+            @media only screen and (min-width: 992px) {
+              ha-card {
+                background-image: url("/local/Home-Images/Bedroom1.jpg");
+              }
+            }
+        card:
+          type: custom:mod-card
+          card_mod: *Room_Page_Header_Style
+          card:
+            type: custom:layout-card
+            layout_type: grid
+            layout: *Room_Page_Header_Layout
+            cards:
+              - !include popup/menu-all-devices-popup.yaml
+              - type: custom:button-card
+                view_layout:
+                  grid-area: back
+                template: back_home
+              - type: markdown
+                content: >
+
+
+                  # Mark Bedroom
+                view_layout:
+                  grid-area: text
+                style: *Room_Page_Header_Markdown_Style
+              - type: custom:swipe-card
+                view_layout:
+                  grid-area: scene
+
+                start_card: 1
+                parameters:
+                  centeredSlides: false
+                  slidesPerView: auto
+                  spaceBetween: 10
+                cards:
+
+                        - type: custom:button-card
+                          entity: script.villa_lights_on
+                          name: Room Off
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="mdi:power"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+                        - type: custom:button-card
+                          entity: script.mark_bedroom_lights_on
+                          name:  Lights On
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="hue:bulb-group-sultan-lightstrip"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+                        - type: custom:button-card
+                          entity: script.mark_bedroom_lights_off
+                          name:  Lights Off
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="hue:bulb-group-sultan-lightstrip-off"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+
+                        - type: custom:button-card
+                          entity: script.villa_shutters_on
+                          name:  Covers On
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="mdi:blinds-open"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+                        - type: custom:button-card
+                          entity: script.villa_shutters_off
+                          name:  Covers Off
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="mdi:blinds"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+      - type: vertical-stack
+        cards:
+          - !include popup/selection-devices-mark-bedroom.yaml
+          - type: custom:mod-card
+            style: |
+              ha-card {
+                //background: var( --ha-card-background, var(--card-background-color, white) );
+                border-radius: 30px;
+                  }
+            card:
+              type: custom:state-switch
+              entity: input_select.mark_bedroom
+              default: lights
+              transition_time: 250
+              states:
+                lights:
+                  type: custom:layout-card
+                  layout_type: grid
+                  layout:
+                    grid-template-columns: repeat(auto-fill, minmax(115px, auto))
+                  cards:
+                    - type: custom:button-card
+                      entity: light.mark_room_spotlights
+                      name: Spot Lights
+                      icon: hue:double-spot
+                      template: light_button
+               
+                    - type: custom:button-card
+                      entity: light.mark_room_chandelier
+                      name: Chandelier
+                      icon: hue:amaze-alt
+                      template: light_button
+
+                shutter:
+                  type: custom:layout-card
+                  layout_type: grid
+
+                  layout:
+                    grid-template-columns: repeat(auto-fill, minmax(280px, auto))
+                  cards:
+
+
+                    - type: custom:button-card
+                      entity: cover.mark_curtain
+                      name: Bedroom Curtain
+                      template:
+                        - curtain_icon_slider   ## Curtain Slider Type (cover.)
+        
+                # ac:
+                #   type: custom:layout-card
+                #   layout_type: grid
+                #   layout:
+                #     grid-template-columns: repeat(auto-fill, minmax(280px, auto))
+                #   cards:
+
+
+                #       - !include
+                #         - /config/lovelace/Climate.yaml
+                #         - climate_name: Bedroom 1 AC
+                #           climate_entity: climate.bedroom_1_ac
+                #           fan_entity: light.bedroom_1_ac_fan_speed
+        view_layout:
+          grid-area: list
+      - type: custom:button-card
+        template: footer_button
+        view_layout:
+          grid-area: footer
+
+
+
+  ##################################### miros-bedroom ###############################
+  - title: miros-bedroom
+    path: miros-bedroom
+    type: custom:grid-layout
+    layout: *Room_Page_layout
+    badges: []
+    cards:
+      - type: custom:mod-card
+        view_layout:
+          grid-area: sidebar
+        card_mod:
+          style: |
+            ha-card {
+              background-color: transparent;
+              width: 100%;
+              margin: 0px;
+              padding: 0px;
+              height: 260px;
+              box-shadow: none !important;
+              background-repeat: no-repeat;
+              background-position: center center;
+              background-size: cover;
+              border-radius: 0px 0px 30px 30px;
+            }
+            @media only screen and (min-width: 0px) {
+              ha-card {
+                background-image: url("/local/Home-Images/Bedroom1.jpg");
+              }
+            }
+            @media only screen and (min-width: 768px) {
+              ha-card {
+                background-image: url("/local/Home-Images/Bedroom1.jpg");
+              }
+            }
+            @media only screen and (min-width: 992px) {
+              ha-card {
+                background-image: url("/local/Home-Images/Bedroom1.jpg");
+              }
+            }
+        card:
+          type: custom:mod-card
+          card_mod: *Room_Page_Header_Style
+          card:
+            type: custom:layout-card
+            layout_type: grid
+            layout: *Room_Page_Header_Layout
+            cards:
+              - !include popup/menu-all-devices-popup.yaml
+              - type: custom:button-card
+                view_layout:
+                  grid-area: back
+                template: back_home
+              - type: markdown
+                content: >
+
+                  # Miros Bedroom
+                view_layout:
+                  grid-area: text
+                style: *Room_Page_Header_Markdown_Style
+              - type: custom:swipe-card
+                view_layout:
+                  grid-area: scene
+
+                start_card: 1
+                parameters:
+                  centeredSlides: false
+                  slidesPerView: auto
+                  spaceBetween: 10
+                cards:
+
+                        - type: custom:button-card
+                          entity: script.villa_lights_on
+                          name: Room Off
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="mdi:power"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+                        - type: custom:button-card
+                          entity: script.miros_bedroom_lights_on
+                          name:  Lights On
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="hue:bulb-group-sultan-lightstrip"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+                        - type: custom:button-card
+                          entity: script.miros_bedroom_lights_off
+                          name:  Lights Off
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="hue:bulb-group-sultan-lightstrip-off"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+
+                        - type: custom:button-card
+                          entity: script.villa_shutters_on
+                          name:  Covers On
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="mdi:blinds-open"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+                        - type: custom:button-card
+                          entity: script.villa_shutters_off
+                          name:  Covers Off
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="mdi:blinds"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+      - type: vertical-stack
+        cards:
+          - !include popup/selection-devices-miros-bedroom.yaml
+          - type: custom:mod-card
+            style: |
+              ha-card {
+                //background: var( --ha-card-background, var(--card-background-color, white) );
+                border-radius: 30px;
+                  }
+            card:
+              type: custom:state-switch
+              entity: input_select.miros_bedroom
+              default: lights
+              transition_time: 250
+              states:
+                lights:
+                  type: custom:layout-card
+                  layout_type: grid
+                  layout:
+                    grid-template-columns: repeat(auto-fill, minmax(115px, auto))
+                  cards:
+                    - type: custom:button-card
+                      entity: light.miro_s_room_spotlights
+                      name: Spots
+                      icon: hue:double-spot
+                      template: light_button
+
+                    - type: custom:button-card
+                      entity: light.miro_s_room_sconces
+                      name: Sconces Light
+                      icon: hue:wall-spot
+                      template: light_button
+
+                    - type: custom:button-card
+                      entity: light.miro_s_room_cove_light
+                      name: Cove Light
+                      icon: hue:gradient-lightstrip
+                      template: light_button
+                    - type: custom:button-card
+                      entity: light.miro_s_room_hidden_light
+                      name: Hidden Light
+                      icon: hue:gradient-lightstrip
+                      template: light_button
+                    - type: custom:button-card
+                      entity: light.miro_s_room_chandelier
+                      name: Chandelier
+                      icon: hue:amaze-alt
+                      template: light_button
+
+                shutter:
+                  type: custom:layout-card
+                  layout_type: grid
+
+                  layout:
+                    grid-template-columns: repeat(auto-fill, minmax(280px, auto))
+                  cards:
+
+
+                    - type: custom:button-card
+                      entity: cover.miro_curtain
+                      name: Miros Curtain
+                      template:
+                        - curtain_icon_slider   ## Curtain Slider Type (cover.)
+
+                # ac:
+                #   type: custom:layout-card
+                #   layout_type: grid
+                #   layout:
+                #     grid-template-columns: repeat(auto-fill, minmax(280px, auto))
+                #   cards:
+
+
+                #       - !include
+                #         - /config/lovelace/Climate.yaml
+                #         - climate_name: Bedroom 1 AC
+                #           climate_entity: climate.bedroom_1_ac
+                #           fan_entity: light.bedroom_1_ac_fan_speed
+        view_layout:
+          grid-area: list
+      - type: custom:button-card
+        template: footer_button
+        view_layout:
+          grid-area: footer
+
+
+  ##################################### Entrance ###############################
+  - title: Entrance
+    path: ground-entrance
+    type: custom:grid-layout
+    layout: *Room_Page_layout
+    badges: []
+    cards:
+      - type: custom:mod-card
+        view_layout:
+          grid-area: sidebar
+        card_mod:
+          style: |
+            ha-card {
+              background-color: transparent;
+              width: 100%;
+              margin: 0px;
+              padding: 0px;
+              height: 260px;
+              box-shadow: none !important;
+              background-repeat: no-repeat;
+              background-position: center center;
+              background-size: cover;
+              border-radius: 0px 0px 30px 30px;
+            }
+            @media only screen and (min-width: 0px) {
+              ha-card {
+                background-image: url("/local/Home-Images/Entrance-pc.jpg");
+              }
+            }
+            @media only screen and (min-width: 768px) {
+              ha-card {
+                background-image: url("/local/Home-Images/Entrance-pc.jpg");
+              }
+            }
+            @media only screen and (min-width: 992px) {
+              ha-card {
+                background-image: url("/local/Home-Images/Entrance-pc.jpg");
+              }
+            }
+        card:
+          type: custom:mod-card
+          card_mod: *Room_Page_Header_Style
+          card:
+            type: custom:layout-card
+            layout_type: grid
+            layout: *Room_Page_Header_Layout
+            cards:
+              - !include popup/menu-all-devices-popup.yaml
+              - type: custom:button-card
+                view_layout:
+                  grid-area: back
+                template: back_home
+              - type: markdown
+                content: >
+
+
+                  # Ground Entrance
+                view_layout:
+                  grid-area: text
+                style: *Room_Page_Header_Markdown_Style
+              - type: custom:swipe-card
+                view_layout:
+                  grid-area: scene
+
+                start_card: 1
+                parameters:
+                  centeredSlides: false
+                  slidesPerView: auto
+                  spaceBetween: 10
+                cards:
+
+                        - type: custom:button-card
+                          entity: script.villa_lights_on
+                          name: Room Off
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="mdi:power"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+                        - type: custom:button-card
+                          entity: script.groundentrancefstairs_lights_on
+                          name:  Lights On
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="hue:bulb-group-sultan-lightstrip"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+                        - type: custom:button-card
+                          entity: script.groundentrancefstairs_lights_off
+                          name:  Lights Off
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="hue:bulb-group-sultan-lightstrip-off"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+
+                        - type: custom:button-card
+                          entity: script.villa_shutters_on
+                          name:  Covers On
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="mdi:blinds-open"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+                        - type: custom:button-card
+                          entity: script.villa_shutters_off
+                          name:  Covers Off
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="mdi:blinds"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+      - type: vertical-stack
+        cards:
+          # - !include popup/selection-devices-entrance.yaml
+          - type: custom:mod-card
+            style: |
+              ha-card {
+                //background: var( --ha-card-background, var(--card-background-color, white) );
+                border-radius: 30px;
+                  }
+            card:
+              type: custom:state-switch
+              entity: input_select.devices_entrance
+              default: lights
+ 
+              transition_time: 250
+              states:
+                lights:
+                  type: custom:layout-card
+                  layout_type: grid
+                  layout:
+
+                  cards:
+                    - content: |
+                        # Entrance Lights
+                      type: markdown
+                      style:
+                        .: |
+                          ha-card {
+                            background-color: rgba(0,0,0,0);
+                            box-shadow: none;
+                          }
+                        ha-markdown:
+                          $: |
+                            h1 {
+                              font-size: 20px;
+                              text-align: left;
+                              font-family: "Raleway", sans-serif;
+                            }
+
+                    - type: custom:layout-card
+                      layout_type: grid
+                      layout:
+                        grid-template-columns: repeat(auto-fill, minmax(115px, auto))
+
+                      cards:
+                        - type: custom:button-card
+                          entity: light.ground_entrance_spotlights_1
+                          name: Spots 1
+                          icon: hue:double-spot
+                          template: light_button
+                        - type: custom:button-card
+                          entity: light.ground_entrance_spotlights_2
+                          name: Spots 2
+                          icon: hue:double-spot
+                          template: light_button
+                    - content: |
+                        # First Floor Stairs Lights
+                      type: markdown
+                      style:
+                        .: |
+                          ha-card {
+                            background-color: rgba(0,0,0,0);
+                            box-shadow: none;
+                          }
+                        ha-markdown:
+                          $: |
+                            h1 {
+                              font-size: 20px;
+                              text-align: left;
+                              font-family: "Raleway", sans-serif;
+                            }
+
+                    - type: custom:layout-card
+                      layout_type: grid
+                      layout:
+                        grid-template-columns: repeat(auto-fill, minmax(115px, auto))
+
+                      cards:
+                        - type: custom:button-card
+                          entity: light.basement_to_ground_stairs_lights
+                          name: B.G Stairs
+                          icon: hue:double-spot
+                          template: light_button
+                        - type: custom:button-card
+                          entity: light.ground_to_first_stairs_light
+                          name: G.F Stairs 
+                          icon: hue:double-spot
+                          template: light_button
+
+                        - type: custom:button-card
+                          entity: light.ground_entrance_chandelier
+                          name: Chandelier 
+                          icon: hue:amaze-alt
+                          template: light_button
+
+                        - type: custom:button-card
+                          entity: light.first_stairs_wooden_led
+                          name: Wooden LED
+                          icon: hue:gradient-lightstrip
+                          template: light_button
+
+
+
+
+
+        view_layout:
+          grid-area: list
+      - type: custom:button-card
+        template: footer_button
+        view_layout:
+          grid-area: footer
+
+
+  ##################################### Reception 1,2 ###############################
+  - title: Reception1,2
+    path: reception1&2
+    type: custom:grid-layout
+    layout: *Room_Page_layout
+    badges: []
+    cards:
+      - type: custom:mod-card
+        view_layout:
+          grid-area: sidebar
+        card_mod:
+          style: |
+            ha-card {
+              background-color: transparent;
+              width: 100%;
+              margin: 0px;
+              padding: 0px;
+              height: 260px;
+              box-shadow: none !important;
+              background-repeat: no-repeat;
+              background-position: center center;
+              background-size: cover;
+              border-radius: 0px 0px 30px 30px;
+            }
+            @media only screen and (min-width: 0px) {
+              ha-card {
+                background-image: url("/local/Home-Images/Reception-mobile.jpg");
+              }
+            }
+            @media only screen and (min-width: 768px) {
+              ha-card {
+                background-image: url("/local/Home-Images/Reception-mobile.jpg");
+              }
+            }
+            @media only screen and (min-width: 992px) {
+              ha-card {
+                background-image: url("/local/Home-Images/reception-pc.jpg");
+              }
+            }
+        card:
+          type: custom:mod-card
+          card_mod: *Room_Page_Header_Style
+          card:
+            type: custom:layout-card
+            layout_type: grid
+            layout: *Room_Page_Header_Layout
+            cards:
+              - !include popup/menu-all-devices-popup.yaml
+              - type: custom:button-card
+                view_layout:
+                  grid-area: back
+                template: back_home
+
+              - type: markdown
+                content: >
+
+
+                  # Reception 1,2
+                view_layout:
+                  grid-area: text
+                style: *Room_Page_Header_Markdown_Style
+              - type: custom:swipe-card
+                view_layout:
+                  grid-area: scene
+
+                start_card: 1
+                parameters:
+                  centeredSlides: false
+                  slidesPerView: auto
+                  spaceBetween: 10
+                cards:
+
+                        - type: custom:button-card
+                          entity: script.villa_lights_on
+                          name: Room Off
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="mdi:power"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+                        - type: custom:button-card
+                          entity: script.ground_rec1_2_lights_on
+                          name:  Lights On
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="hue:bulb-group-sultan-lightstrip"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+                        - type: custom:button-card
+                          entity: script.ground_rec1_2_lights_off
+                          name:  Lights Off
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="hue:bulb-group-sultan-lightstrip-off"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+
+                        - type: custom:button-card
+                          entity: script.villa_shutters_on
+                          name: Villa Covers On
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="mdi:blinds-open"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+                        - type: custom:button-card
+                          entity: script.villa_shutters_off
+                          name: Villa Covers Off
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="mdi:blinds"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+                        - type: custom:button-card
+                          entity: script.1632840865496
+                          name: Work Mode
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="mdi:pen"
+                                  style="width: 20px; height: 20px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+
+      - type: vertical-stack
+        cards:
+          - !include popup/selection-devices-reception.yaml
+          - type: custom:mod-card
+            style: |
+              ha-card {
+                //background: var( --ha-card-background, var(--card-background-color, white) );
+                border-radius: 30px;
+                  }
+            card:
+              type: custom:state-switch
+              entity: input_select.devices_reception1_2
+              default: lights
+
+              transition_time: 300
+              states:
+                lights:
+                  type: grid
+                  square: false
+                  columns: 1
+                  cards:
+                    - type: custom:layout-card
+                      layout_type: grid
+                      layout:
+                        grid-template-columns: repeat(auto-fill, minmax(115px, auto))
+                      cards:
+                        - type: custom:button-card
+                          entity: light.ground_reception_1_spotlights
+                          name: Spot Lights 1
+                          icon: hue:double-spot
+                          template: light_button
+                        - type: custom:button-card
+                          entity: light.ground_reception_2_spotlights
+                          name: Spot Lights 2
+                          icon: hue:double-spot
+                          template: light_button
+
+                        - type: custom:button-card
+                          entity: light.ground_reception_1_chandelier
+                          name: Chandelier 1
+                          icon: hue:amaze-alt
+                          template: light_button
+                        - type: custom:button-card
+                          entity: light.ground_reception_2_chandelier
+                          name: Chandelier 2
+                          icon: hue:amaze-alt
+                          template: light_button
+                        - type: custom:button-card
+                          entity: light.ground_reception_1_led
+                          name: LED 1
+                          icon: hue:gradient-lightstrip
+                          template: light_button
+                        - type: custom:button-card
+                          entity: light.ground_reception_2_led
+                          name: LED 2
+                          icon: hue:gradient-lightstrip
+                          template: light_button
+
+
+
+                ac:
+                  type: custom:layout-card
+                  layout_type: grid
+                  layout:
+                    grid-template-columns: repeat(auto-fill, minmax(280px, auto))
+                  cards:
+
+
+                      - !include
+                        - /config/lovelace/Climate.yaml
+                        - climate_name: Reception 1 AC
+                          climate_entity: climate.reception_1_ac
+                          fan_entity: light.reception_1_ac_fan_speed
+
+
+                shutter:
+                  type: custom:layout-card
+                  layout_type: grid
+
+                  layout:
+                    grid-template-columns: repeat(auto-fill, minmax(280px, auto))
+                  cards:
+
+
+                    - type: custom:button-card
+                      entity: cover.ground_reception_1_curtain
+                      name: Curtain 1
+                      template:
+                        - curtain_icon_slider
+                    - type: custom:button-card
+                      entity: cover.ground_reception_1_curtain_2
+                      name: Curtain 2
+                      template:
+                        - curtain_icon_slider
+
+
+
+
+
+
+        view_layout:
+          grid-area: list
+      - type: custom:button-card
+        template: footer_button
+        view_layout:
+          grid-area: footer
+
+
+
+  ##################################### Reception 3 ###############################
+  - title: Reception3
+    path: reception3
+    type: custom:grid-layout
+    layout: *Room_Page_layout
+    badges: []
+    cards:
+      - type: custom:mod-card
+        view_layout:
+          grid-area: sidebar
+        card_mod:
+          style: |
+            ha-card {
+              background-color: transparent;
+              width: 100%;
+              margin: 0px;
+              padding: 0px;
+              height: 260px;
+              box-shadow: none !important;
+              background-repeat: no-repeat;
+              background-position: center center;
+              background-size: cover;
+              border-radius: 0px 0px 30px 30px;
+            }
+            @media only screen and (min-width: 0px) {
+              ha-card {
+                background-image: url("/local/Home-Images/Reception-mobile.jpg");
+              }
+            }
+            @media only screen and (min-width: 768px) {
+              ha-card {
+                background-image: url("/local/Home-Images/Reception-mobile.jpg");
+              }
+            }
+            @media only screen and (min-width: 992px) {
+              ha-card {
+                background-image: url("/local/Home-Images/reception-pc.jpg");
+              }
+            }
+        card:
+          type: custom:mod-card
+          card_mod: *Room_Page_Header_Style
+          card:
+            type: custom:layout-card
+            layout_type: grid
+            layout: *Room_Page_Header_Layout
+            cards:
+              - !include popup/menu-all-devices-popup.yaml
+              - type: custom:button-card
+                view_layout:
+                  grid-area: back
+                template: back_home
+
+              - type: markdown
+                content: >
+
+
+                  # Reception 3
+                view_layout:
+                  grid-area: text
+                style: *Room_Page_Header_Markdown_Style
+              - type: custom:swipe-card
+                view_layout:
+                  grid-area: scene
+
+                start_card: 1
+                parameters:
+                  centeredSlides: false
+                  slidesPerView: auto
+                  spaceBetween: 10
+                cards:
+
+                        - type: custom:button-card
+                          entity: script.villa_lights_on
+                          name: Room Off
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="mdi:power"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+                        - type: custom:button-card
+                          entity: script.ground_rec3_lights_on
+                          name:  Lights On
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="hue:bulb-group-sultan-lightstrip"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+                        - type: custom:button-card
+                          entity: script.ground_rec3_lights_off
+                          name:  Lights Off
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="hue:bulb-group-sultan-lightstrip-off"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+
+                        - type: custom:button-card
+                          entity: script.villa_shutters_on
+                          name: Villa Covers On
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="mdi:blinds-open"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+                        - type: custom:button-card
+                          entity: script.villa_shutters_off
+                          name: Villa Covers Off
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="mdi:blinds"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+                        - type: custom:button-card
+                          entity: script.1632840865496
+                          name: Work Mode
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="mdi:pen"
+                                  style="width: 20px; height: 20px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+
+      - type: vertical-stack
+        cards:
+          - !include popup/selection-devices-reception3.yaml
+          - type: custom:mod-card
+            style: |
+              ha-card {
+                //background: var( --ha-card-background, var(--card-background-color, white) );
+                border-radius: 30px;
+                  }
+            card:
+              type: custom:state-switch
+              entity: input_select.devices_reception3
+              default: lights
+
+              transition_time: 300
+              states:
+                lights:
+                  type: grid
+                  square: false
+                  columns: 1
+                  cards:
+                    - type: custom:layout-card
+                      layout_type: grid
+                      layout:
+                        grid-template-columns: repeat(auto-fill, minmax(115px, auto))
+                      cards:
+                        - type: custom:button-card
+                          entity: light.ground_reception_3_spotlights_1
+                          name: Spot Lights 1
+                          icon: hue:double-spot
+                          template: light_button
+                        - type: custom:button-card
+                          entity: light.ground_reception_3_spotslights_2
+                          name: Spot Lights 2
+                          icon: hue:double-spot
+                          template: light_button
+                        - type: custom:button-card
+                          entity: light.ground_reception_3_spotslights_3
+                          name: Spot Lights 3
+                          icon: hue:double-spot
+                          template: light_button
+
+                        - type: custom:button-card
+                          entity: light.ground_reception_3_sconces_1
+                          name: Sconces 1
+                          icon: hue:wall-shade
+                          template: light_button
+                        - type: custom:button-card
+                          entity: light.ground_reception_3_sconces_2
+                          name: Sconces 2
+                          icon: hue:wall-shade
+                          template: light_button
+
+                        - type: custom:button-card
+                          entity: light.ground_reception_3_led
+                          name: LED 
+                          icon: hue:gradient-lightstrip
+                          template: light_button
+
+
+
+                ac:
+                  type: custom:layout-card
+                  layout_type: grid
+                  layout:
+                    grid-template-columns: repeat(auto-fill, minmax(280px, auto))
+                  cards:
+
+
+                      - !include
+                        - /config/lovelace/Climate.yaml
+                        - climate_name: Reception 3 AC
+                          climate_entity: climate.reception_1_ac
+                          fan_entity: light.reception_1_ac_fan_speed
+
+
+                shutter:
+                  type: custom:layout-card
+                  layout_type: grid
+
+                  layout:
+                    grid-template-columns: repeat(auto-fill, minmax(280px, auto))
+                  cards:
+
+
+                    - type: custom:button-card
+                      entity: cover.ground_reception_3_curtain
+                      name: Reception 3 Curtain
+                      template:
+                        - curtain_icon_slider
+
+
+
+
+
+
+        view_layout:
+          grid-area: list
+      - type: custom:button-card
+        template: footer_button
+        view_layout:
+          grid-area: footer
+
+
+
+
+
+  ##################################### Ground Dining ###############################
+  - title: dining
+
+    path: dining
+    type: custom:grid-layout
+    layout: *Room_Page_layout
+    badges: []
+    cards:
+      - type: custom:mod-card
+        view_layout:
+          grid-area: sidebar
+        card_mod:
+          style: |
+            ha-card {
+              background-color: transparent;
+              width: 100%;
+              margin: 0px;
+              padding: 0px;
+              height: 260px;
+              box-shadow: none !important;
+              background-repeat: no-repeat;
+              background-position: center center;
+              background-size: cover;
+              border-radius: 0px 0px 30px 30px;
+            }
+            @media only screen and (min-width: 0px) {
+              ha-card {
+                background-image: url("/local/Home-Images/dining-pc.jpg");
+              }
+            }
+            @media only screen and (min-width: 768px) {
+              ha-card {
+                background-image: url("/local/Home-Images/dining-pc.jpg");
+              }
+            }
+            @media only screen and (min-width: 992px) {
+              ha-card {
+                background-image: url("/local/Home-Images/dining-pc.jpg");
+              }
+            }
+        card:
+          type: custom:mod-card
+          card_mod: *Room_Page_Header_Style
+          card:
+            type: custom:layout-card
+            layout_type: grid
+            layout: *Room_Page_Header_Layout
+            cards:
+              - !include popup/menu-all-devices-popup.yaml
+              - type: custom:button-card
+                view_layout:
+                  grid-area: back
+                template: back_home
+
+              - type: markdown
+                content: >
+
+
+                  #  Ground Dining
+                view_layout:
+                  grid-area: text
+                style: *Room_Page_Header_Markdown_Style
+              - type: custom:swipe-card
+                view_layout:
+                  grid-area: scene
+
+                start_card: 1
+                parameters:
+                  centeredSlides: false
+                  slidesPerView: auto
+                  spaceBetween: 10
+                cards:
+
+                        - type: custom:button-card
+                          entity: script.villa_lights_on
+                          name: Room Off
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="mdi:power"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+                        - type: custom:button-card
+                          entity: script.ground_dining_lights_on
+                          name:  Lights On
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="hue:bulb-group-sultan-lightstrip"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+                        - type: custom:button-card
+                          entity: script.ground_dining_lights_off
+                          name:  Lights Off
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="hue:bulb-group-sultan-lightstrip-off"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+
+                        - type: custom:button-card
+                          entity: script.villa_shutters_on
+                          name:  Covers On
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="mdi:blinds-open"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+                        - type: custom:button-card
+                          entity: script.villa_shutters_off
+                          name:  Covers Off
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="mdi:blinds"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+      - type: vertical-stack
+        cards:
+          - !include popup/selection-devices-dining.yaml
+          - type: custom:mod-card
+            style: |
+              ha-card {
+                //background: var( --ha-card-background, var(--card-background-color, white) );
+                border-radius: 30px;
+                  }
+            card:
+              type: custom:state-switch
+              entity: input_select.dining
+              default: lights
+
+              transition_time: 300
+              states:
+
+                lights:
+                  type: custom:layout-card
+                  layout_type: grid
+                  layout:
+                    grid-template-columns: repeat(auto-fill, minmax(115px, auto))
+                  cards:
+                    - type: custom:button-card
+                      entity: light.ground_dining_spotlights
+                      name: Spot
+                      icon: hue:double-spot
+                      template: light_button
+
+                    - type: custom:button-card
+                      entity: light.ground_dining_chandelier
+                      name: Chandelier
+                      icon: hue:amaze-alt
+                      template: light_button
+                    - type: custom:button-card
+                      entity: light.ground_dining_sconces
+                      name: Sconces Light
+                      icon: hue:gradient-lightstrip
+                      template: light_button
+                    - type: custom:button-card
+                      entity: light.ground_dining_cove
+                      name: Cove Light
+                      icon: hue:gradient-lightstrip
+                      template: light_button
+                ac:
+                  type: custom:layout-card
+                  layout_type: grid
+                  layout:
+                    grid-template-columns: repeat(auto-fill, minmax(280px, auto))
+                  cards:
+
+                      - !include
+                        - /config/lovelace/Climate.yaml
+                        - climate_name: Dining AC
+                          climate_entity: climate.kitchen_ac
+                          
+                          fan_entity: light.kitchen_ac_fan_speed
+
+                shutter:
+                  type: custom:layout-card
+                  layout_type: grid
+
+                  layout:
+                    grid-template-columns: repeat(auto-fill, minmax(280px, auto))
+                  cards:
+
+
+                    - type: custom:button-card
+                      entity: cover.ground_dining_curtain
+                      name: Dining Curtain
+                      template:
+                        - curtain_icon_slider
+                 
+
+        view_layout:
+          grid-area: list
+      - type: custom:button-card
+        template: footer_button
+        view_layout:
+          grid-area: footer
+
+
+
+  ##################################### First Stairs ###############################
+  - title: stairs
+    path: stairs
+    type: custom:grid-layout
+    layout: *Room_Page_layout
+    badges: []
+    cards:
+      - type: custom:mod-card
+        view_layout:
+          grid-area: sidebar
+        card_mod:
+          style: |
+            ha-card {
+              background-color: transparent;
+              width: 100%;
+              margin: 0px;
+              padding: 0px;
+              height: 260px;
+              box-shadow: none !important;
+              background-repeat: no-repeat;
+              background-position: center center;
+              background-size: cover;
+              border-radius: 0px 0px 30px 30px;
+            }
+            @media only screen and (min-width: 0px) {
+              ha-card {
+                background-image: url("/local/Home-Images/stairs-pc.jpg");
+              }
+            }
+            @media only screen and (min-width: 768px) {
+              ha-card {
+                background-image: url("/local/Home-Images/stairs-pc.jpg");
+              }
+            }
+            @media only screen and (min-width: 992px) {
+              ha-card {
+                background-image: url("/local/Home-Images/stairs-pc.jpg");
+              }
+            }
+        card:
+          type: custom:mod-card
+          card_mod: *Room_Page_Header_Style
+          card:
+            type: custom:layout-card
+            layout_type: grid
+            layout: *Room_Page_Header_Layout
+            cards:
+              - !include popup/menu-all-devices-popup.yaml
+              - type: custom:button-card
+                view_layout:
+                  grid-area: back
+                template: back_home
+              - type: markdown
+                content: >
+
+
+                  # First Stairs
+                view_layout:
+                  grid-area: text
+                style: *Room_Page_Header_Markdown_Style
+              - type: custom:swipe-card
+                view_layout:
+                  grid-area: scene
+
+                start_card: 1
+                parameters:
+                  centeredSlides: false
+                  slidesPerView: auto
+                  spaceBetween: 10
+                cards:
+
+                        - type: custom:button-card
+                          entity: script.villa_lights_on
+                          name: Room Off
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="mdi:power"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+                        - type: custom:button-card
+                          entity: script.ground_rec3_lights_on
+                          name:  Lights On
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="hue:bulb-group-sultan-lightstrip"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+                        - type: custom:button-card
+                          entity: script.ground_rec3_lights_off
+                          name:  Lights Off
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="hue:bulb-group-sultan-lightstrip-off"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+
+                        - type: custom:button-card
+                          entity: script.villa_shutters_on
+                          name: Villa Covers On
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="mdi:blinds-open"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+                        - type: custom:button-card
+                          entity: script.villa_shutters_off
+                          name: Villa Covers Off
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="mdi:blinds"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+                        - type: custom:button-card
+                          entity: script.1632840865496
+                          name: Work Mode
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="mdi:pen"
+                                  style="width: 20px; height: 20px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+      - type: vertical-stack
+        cards:
+          # - !include popup/selection-devices-entrance.yaml
+          - type: custom:mod-card
+            style: |
+              ha-card {
+                //background: var( --ha-card-background, var(--card-background-color, white) );
+                border-radius: 30px;
+                  }
+            card:
+                          
+                  type: custom:layout-card
+                  layout_type: grid
+                  layout:
+
+                  cards:
+
+                    - content: |
+                        # First Floor Stairs Lights
+                      type: markdown
+                      style:
+                        .: |
+                          ha-card {
+                            background-color: rgba(0,0,0,0);
+                            box-shadow: none;
+                          }
+                        ha-markdown:
+                          $: |
+                            h1 {
+                              font-size: 20px;
+                              text-align: left;
+                              font-family: "Raleway", sans-serif;
+                            }
+
+                    - type: custom:layout-card
+                      layout_type: grid
+                      layout:
+                        grid-template-columns: repeat(auto-fill, minmax(115px, auto))
+
+                      cards:
+                        - type: custom:button-card
+                          entity: light.basement_to_ground_stairs_lights
+                          name: B.G Stairs
+                          icon: hue:double-spot
+                          template: light_button
+                        - type: custom:button-card
+                          entity: light.ground_to_first_stairs_light
+                          name: G.F Stairs 
+                          icon: hue:double-spot
+                          template: light_button
+
+
+                        - type: custom:button-card
+                          entity: light.ground_entrance_chandelier
+                          name: Chandelier 
+                          icon: hue:amaze-alt
+                          template: light_button
+
+                        - type: custom:button-card
+                          entity: light.first_stairs_wooden_led
+                          name: Wooden LED
+                          icon: hue:gradient-lightstrip
+                          template: light_button
+
+                    - content: |
+                        # Entrance Lights
+                      type: markdown
+                      style:
+                        .: |
+                          ha-card {
+                            background-color: rgba(0,0,0,0);
+                            box-shadow: none;
+                          }
+                        ha-markdown:
+                          $: |
+                            h1 {
+                              font-size: 20px;
+                              text-align: left;
+                              font-family: "Raleway", sans-serif;
+                            }
+
+                    - type: custom:layout-card
+                      layout_type: grid
+                      layout:
+                        grid-template-columns: repeat(auto-fill, minmax(115px, auto))
+
+                      cards:
+                        - type: custom:button-card
+                          entity: light.ground_entrance_spotlights_1
+                          name: Spots 1
+                          icon: hue:double-spot
+                          template: light_button
+                        - type: custom:button-card
+                          entity: light.ground_entrance_spotlights_2
+                          name: Spots 2
+                          icon: hue:double-spot
+                          template: light_button
+
+
+
+        view_layout:
+          grid-area: list
+      - type: custom:button-card
+        template: footer_button
+        view_layout:
+          grid-area: footer
+
+  ##################################### Living  ###############################
+  - title: living
+
+    path: living
+    type: custom:grid-layout
+    layout: *Room_Page_layout
+    badges: []
+    cards:
+      - type: custom:mod-card
+        view_layout:
+          grid-area: sidebar
+        card_mod:
+          style: |
+            ha-card {
+              background-color: transparent;
+              width: 100%;
+              margin: 0px;
+              padding: 0px;
+              height: 260px;
+              box-shadow: none !important;
+              background-repeat: no-repeat;
+              background-position: center center;
+              background-size: cover;
+              border-radius: 0px 0px 30px 30px;
+            }
+            @media only screen and (min-width: 0px) {
+              ha-card {
+                background-image: url("/local/Home-Images/family-pc.jpg");
+              }
+            }
+            @media only screen and (min-width: 768px) {
+              ha-card {
+                background-image: url("/local/Home-Images/family-pc.jpg");
+              }
+            }
+            @media only screen and (min-width: 992px) {
+              ha-card {
+                background-image: url("/local/Home-Images/family-pc.jpg");
+              }
+            }
+        card:
+          type: custom:mod-card
+          card_mod: *Room_Page_Header_Style
+          card:
+            type: custom:layout-card
+            layout_type: grid
+            layout: *Room_Page_Header_Layout
+            cards:
+              - !include popup/menu-all-devices-popup.yaml
+              - type: custom:button-card
+                view_layout:
+                  grid-area: back
+                template: back_home
+
+              - type: markdown
+                content: >
+
+
+                  # First Floor Living 
+                view_layout:
+                  grid-area: text
+                style: *Room_Page_Header_Markdown_Style
+              - type: custom:swipe-card
+                view_layout:
+                  grid-area: scene
+
+                start_card: 1
+                parameters:
+                  centeredSlides: false
+                  slidesPerView: auto
+                  spaceBetween: 10
+                cards:
+
+                        - type: custom:button-card
+                          entity: script.villa_lights_on
+                          name: Room Off
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="mdi:power"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+                        - type: custom:button-card
+                          entity: script.first_living_lights_on
+                          name:  Lights On
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="hue:bulb-group-sultan-lightstrip"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+                        - type: custom:button-card
+                          entity: script.first_living_lights_off
+                          name:  Lights Off
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="hue:bulb-group-sultan-lightstrip-off"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+
+                        - type: custom:button-card
+                          entity: script.villa_shutters_on
+                          name: Villa Covers On
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="mdi:blinds-open"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+                        - type: custom:button-card
+                          entity: script.villa_shutters_off
+                          name: Villa Covers Off
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="mdi:blinds"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+                        - type: custom:button-card
+                          entity: script.1632840865496
+                          name: Work Mode
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="mdi:pen"
+                                  style="width: 20px; height: 20px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+      - type: vertical-stack
+        cards:
+          - !include popup/selection-devices-living.yaml
+          - type: custom:mod-card
+            style: |
+              ha-card {
+                //background: var( --ha-card-background, var(--card-background-color, white) );
+                border-radius: 30px;
+                  }
+            card:
+              type: custom:state-switch
+              entity: input_select.devices_living
+              default: lights
+
+              transition_time: 300
+              states:
+
+                lights:
+                          
+                  type: custom:layout-card
+                  layout_type: grid
+                  layout:
+
+                  cards:
+
+                    - content: |
+                        # Living Room Lights
+                      type: markdown
+                      style:
+                        .: |
+                          ha-card {
+                            background-color: rgba(0,0,0,0);
+                            box-shadow: none;
+                          }
+                        ha-markdown:
+                          $: |
+                            h1 {
+                              font-size: 20px;
+                              text-align: left;
+                              font-family: "Raleway", sans-serif;
+                            }
+                    - type: custom:layout-card
+                      layout_type: grid
+                      layout:
+                        grid-template-columns: repeat(auto-fill, minmax(115px, auto))
+                      cards:
+
+
+
+                          - type: custom:button-card
+                            entity: light.first_living_room_led
+                            name: LED
+                            icon: hue:gradient-lightstrip
+                            template: light_button
+                          - type: custom:button-card
+                            entity: light.first_living_room_spotlights
+                            name: Spots
+                            icon: hue:double-spot
+                            template: light_button
+                          - type: custom:button-card
+                            entity: light.first_living_room_spotlights_2
+                            name: Chandelier
+                            icon: hue:pendant-long
+                            template: light_button
+                    - content: |
+                        # Dining Lights
+                      type: markdown
+                      style:
+                        .: |
+                          ha-card {
+                            background-color: rgba(0,0,0,0);
+                            box-shadow: none;
+                          }
+                        ha-markdown:
+                          $: |
+                            h1 {
+                              font-size: 20px;
+                              text-align: left;
+                              font-family: "Raleway", sans-serif;
+                            }
+                    - type: custom:layout-card
+                      layout_type: grid
+                      layout:
+                        grid-template-columns: repeat(auto-fill, minmax(115px, auto))
+                      cards:
+
+
+
+                          - type: custom:button-card
+                            entity: light.first_dining_spotlights
+                            name: Spots
+                            icon: hue:double-spot
+                            template: light_button
+                          - type: custom:button-card
+                            entity: light.first_dining_sconces
+                            name: Sconces
+                            icon: hue:wall-appear-group
+                            template: light_button
+                shutter:
+                  type: custom:layout-card
+                  layout_type: grid
+
+                  layout:
+                    grid-template-columns: repeat(auto-fill, minmax(280px, auto))
+                  cards:
+
+
+                    - type: custom:button-card
+                      entity: cover.first_floor_living_curtain
+                      name: Living Curtain
+                      template:
+                        - curtain_icon_slider   ## Curtain Slider Type (cover.)
+       
+
+
+             
+
+
+
+
+        view_layout:
+          grid-area: list
+      - type: custom:button-card
+        template: footer_button
+        view_layout:
+          grid-area: footer
+
+  ##################################### Bedroom 1 ###############################
+  - title: bedroom1
+    path: bedroom1
+    type: custom:grid-layout
+    layout: *Room_Page_layout
+    badges: []
+    cards:
+      - type: custom:mod-card
+        view_layout:
+          grid-area: sidebar
+        card_mod:
+          style: |
+            ha-card {
+              background-color: transparent;
+              width: 100%;
+              margin: 0px;
+              padding: 0px;
+              height: 260px;
+              box-shadow: none !important;
+              background-repeat: no-repeat;
+              background-position: center center;
+              background-size: cover;
+              border-radius: 0px 0px 30px 30px;
+            }
+            @media only screen and (min-width: 0px) {
+              ha-card {
+                background-image: url("/local/Home-Images/Bedroom1.jpg");
+              }
+            }
+            @media only screen and (min-width: 768px) {
+              ha-card {
+                background-image: url("/local/Home-Images/Bedroom1.jpg");
+              }
+            }
+            @media only screen and (min-width: 992px) {
+              ha-card {
+                background-image: url("/local/Home-Images/Bedroom1.jpg");
+              }
+            }
+        card:
+          type: custom:mod-card
+          card_mod: *Room_Page_Header_Style
+          card:
+            type: custom:layout-card
+            layout_type: grid
+            layout: *Room_Page_Header_Layout
+            cards:
+              - !include popup/menu-all-devices-popup.yaml
+              - type: custom:button-card
+                view_layout:
+                  grid-area: back
+                template: back_home
+              - type: markdown
+                content: >
+
+                  # First Floor Bedroom 
+                view_layout:
+                  grid-area: text
+                style: *Room_Page_Header_Markdown_Style
+              - type: custom:swipe-card
+                view_layout:
+                  grid-area: scene
+
+                start_card: 1
+                parameters:
+                  centeredSlides: false
+                  slidesPerView: auto
+                  spaceBetween: 10
+                cards:
+
+                        - type: custom:button-card
+                          entity: script.villa_lights_on
+                          name: Room Off
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="mdi:power"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+                        - type: custom:button-card
+                          entity: script.first_bedroom_lights_on
+                          name:  Lights On
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="hue:bulb-group-sultan-lightstrip"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+                        - type: custom:button-card
+                          entity: script.first_bedroom_lights_off
+                          name:  Lights Off
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="hue:bulb-group-sultan-lightstrip-off"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+
+                        - type: custom:button-card
+                          entity: script.villa_shutters_on
+                          name: Villa Covers On
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="mdi:blinds-open"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+                        - type: custom:button-card
+                          entity: script.villa_shutters_off
+                          name: Villa Covers Off
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="mdi:blinds"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+                        - type: custom:button-card
+                          entity: script.1632840865496
+                          name: Work Mode
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="mdi:pen"
+                                  style="width: 20px; height: 20px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+      - type: vertical-stack
+        cards:
+          - !include popup/selection-devices-bedroom1.yaml
+          - type: custom:mod-card
+            style: |
+              ha-card {
+                //background: var( --ha-card-background, var(--card-background-color, white) );
+                border-radius: 30px;
+                  }
+            card:
+              type: custom:state-switch
+              entity: input_select.bedroom1
+              default: lights
+              transition_time: 250
+              states:
+                lights:
+                  type: custom:layout-card
+                  layout_type: grid
+                  layout:
+                    grid-template-columns: repeat(auto-fill, minmax(115px, auto))
+                  cards:
+                    - type: custom:button-card
+                      entity: light.first_room_sconces
+                      name: Sconces
+                      icon: hue:wall-appear-group
+                      template: light_button
+
+
+
+                    - type: custom:button-card
+                      entity: light.first_room_led
+                      name: LED
+                      icon: hue:gradient-lightstrip
+                      template: light_button
+                    - type: custom:button-card
+                      entity: light.first_room_chandelier
+                      name: Chandelier
+                      icon: hue:amaze-alt
+                      template: light_button
+
+                shutter:
+                  type: custom:layout-card
+                  layout_type: grid
+
+                  layout:
+                    grid-template-columns: repeat(auto-fill, minmax(280px, auto))
+                  cards:
+
+
+                    - type: custom:button-card
+                      entity: cover.first_floor_room_curtain
+                      name: Bedroom Curtain
+                      template:
+                        - curtain_icon_slider   ## Curtain Slider Type (cover.)
+
+
+        view_layout:
+          grid-area: list
+      - type: custom:button-card
+        template: footer_button
+        view_layout:
+          grid-area: footer
+
+
+  ##################################### Master room  ###############################
+  - title: masterroom
+    path: masterroom
+    type: custom:grid-layout
+    layout: *Room_Page_layout
+    badges: []
+    cards:
+      - type: custom:mod-card
+        view_layout:
+          grid-area: sidebar
+        card_mod:
+          style: |
+            ha-card {
+              background-color: transparent;
+              width: 100%;
+              margin: 0px;
+              padding: 0px;
+              height: 260px;
+              box-shadow: none !important;
+              background-repeat: no-repeat;
+              background-position: center center;
+              background-size: cover;
+              border-radius: 0px 0px 30px 30px;
+            }
+            @media only screen and (min-width: 0px) {
+              ha-card {
+                background-image: url("/local/Home-Images/Bedroom.jpg");
+              }
+            }
+            @media only screen and (min-width: 768px) {
+              ha-card {
+                background-image: url("/local/Home-Images/Bedroom.jpg");
+              }
+            }
+            @media only screen and (min-width: 992px) {
+              ha-card {
+                background-image: url("/local/Home-Images/Bedroom1-pc.jpg");
+              }
+            }
+        card:
+          type: custom:mod-card
+          card_mod: *Room_Page_Header_Style
+          card:
+            type: custom:layout-card
+            layout_type: grid
+            layout: *Room_Page_Header_Layout
+            cards:
+              - !include popup/menu-all-devices-popup.yaml
+              - type: custom:button-card
+                view_layout:
+                  grid-area: back
+                template: back_home
+              - type: markdown
+                content: >
+
+                  # Master Room
+                view_layout:
+                  grid-area: text
+                style: *Room_Page_Header_Markdown_Style
+              - type: custom:swipe-card
+                view_layout:
+                  grid-area: scene
+
+                start_card: 1
+                parameters:
+                  centeredSlides: false
+                  slidesPerView: auto
+                  spaceBetween: 10
+                cards:
+
+                        - type: custom:button-card
+                          entity: script.villa_lights_on
+                          name: Room Off
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="mdi:power"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+                        - type: custom:button-card
+                          entity: script.masterroom_lights_on
+                          name:  Lights On
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="hue:bulb-group-sultan-lightstrip"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+                        - type: custom:button-card
+                          entity: script.masterroom_lights_off
+                          name:  Lights Off
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="hue:bulb-group-sultan-lightstrip-off"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+
+                        - type: custom:button-card
+                          entity: script.villa_shutters_on
+                          name: Villa Covers On
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="mdi:blinds-open"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+                        - type: custom:button-card
+                          entity: script.villa_shutters_off
+                          name: Villa Covers Off
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="mdi:blinds"
+                                  style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+                        - type: custom:button-card
+                          entity: script.1632840865496
+                          name: Work Mode
+                          custom_fields:
+                            scene: |
+                              [[[
+                                return `<ha-icon
+                                  icon="mdi:pen"
+                                  style="width: 20px; height: 20px; color: rgba(0,0,0,0.7); ">
+                                  </ha-icon>`
+                              ]]]
+                          template: scene_button
+      - type: vertical-stack
+        cards:
+          - !include popup/selection-devices-master.yaml
+          - type: custom:mod-card
+            style: |
+              ha-card {
+                //background: var( --ha-card-background, var(--card-background-color, white) );
+                border-radius: 30px;
+                  }
+            card:
+              type: custom:state-switch
+              entity: input_select.master
+              default: lights
+              transition_time: 250
+              states:
+                lights:
+                  type: custom:layout-card
+                  layout_type: grid
+                  layout:
+                    grid-template-columns: repeat(auto-fill, minmax(115px, auto))
+                  cards:
+                    - type: custom:button-card
+                      entity: light.master_room_spotlights
+                      name: Spots
+                      icon: hue:double-spot
+                      template: light_button
+                    - type: custom:button-card
+                      entity: light.master_room_led
+                      name: LED
+                      icon: hue:gradient-lightstrip
+                      template: light_button
+
+                    - type: custom:button-card
+                      entity: light.master_room_chandelier
+                      name: Chandelier
+                      icon: hue:amaze-alt
+                      template: light_button
+
+                shutter:
+                  type: custom:layout-card
+                  layout_type: grid
+
+                  layout:
+                    grid-template-columns: repeat(auto-fill, minmax(280px, auto))
+                  cards:
+
+
+                    - type: custom:button-card
+                      entity: cover.master_room_curtain
+                      name: Master Curtain
+                      template:
+                        - curtain_icon_slider   ## Curtain Slider Type (cover.)
+
+        view_layout:
+          grid-area: list
+      - type: custom:button-card
+        template: footer_button
+        view_layout:
+          grid-area: footer
+
+
+  ##################################### Landscape ###############################
+
+
+
+
+  - title: landscape
+
+    path: landscape
+    type: custom:grid-layout
+    layout: *Room_Page_layout
+    badges: []
+    cards:
+      - type: custom:mod-card
+        view_layout:
+          grid-area: sidebar
+        card_mod:
+          style: |
+            ha-card {
+              background-color: transparent;
+              width: 100%;
+              margin: 0px;
+              padding: 0px;
+              height: 260px;
+              box-shadow: none !important;
+              background-repeat: no-repeat;
+              background-position: center center;
+              background-size: cover;
+              border-radius: 0px 0px 30px 30px;
+            }
+            @media only screen and (min-width: 0px) {
+              ha-card {
+                background-image: url("/local/Home-Images/garden-pc.jpg");
+              }
+            }
+            @media only screen and (min-width: 768px) {
+              ha-card {
+                background-image: url("/local/Home-Images/garden-pc.jpg");
+              }
+            }
+            @media only screen and (min-width: 992px) {
+              ha-card {
+                background-image: url("/local/Home-Images/garden-pc.jpg");
+              }
+            }
+        card:
+          type: custom:mod-card
+          card_mod: *Room_Page_Header_Style
+          card:
+            type: custom:layout-card
+            layout_type: grid
+            layout: *Room_Page_Header_Layout
+            cards:
+              - !include popup/menu-all-devices-popup.yaml
+              - type: custom:button-card
+                view_layout:
+                  grid-area: back
+                template: back_home
+
+              - type: markdown
+                content: >
+
+                  # Landscape
+                view_layout:
+                  grid-area: text
+                style: *Room_Page_Header_Markdown_Style
+
+      - type: vertical-stack
+        cards:
+
+          - type: custom:mod-card
+            style: |
+              ha-card {
+                //background: var( --ha-card-background, var(--card-background-color, white) );
+                border-radius: 30px;
+                  }
+            card:
+
+                  type: custom:layout-card
+                  layout_type: grid
+                  layout:
+                    grid-template-columns: repeat(auto-fill, minmax(115px, auto))
+                  cards:
+                    - type: custom:button-card
+                      entity: light.entrance_backyard_uplight_1
+                      name: Entrance Lights 1
+                      icon: hue:wall-econic-lantern-base
+                      template: light_button
+                    - type: custom:button-card
+                      entity: light.entrance_backyard_uplight_2
+                      name: Entrance Lights 2
+                      icon: hue:wall-econic-lantern-base
+                      template: light_button
+                    - type: custom:button-card
+                      entity: light.side_uplight
+                      name: Entrance Lights 3
+                      icon: hue:wall-econic-lantern-base
+                      template: light_button
+                    - type: custom:button-card
+                      entity: light.garage_uplight
+                      name: Garage uplight
+                      icon: hue:wall-econic-lantern-base
+                      template: light_button
+                    - type: custom:button-card
+                      entity: light.side_fence
+                      name: Side Fence
+                      icon: hue:pedestal-econic
+                      template: light_button
+                    - type: custom:button-card
+                      entity: light.pergola_lights
+                      name: Pergola Lights
+                      icon: hue:double-spot
+                      template: light_button
+                    - type: custom:button-card
+                      entity: light.front_back_yard_fence
+                      name: F.B Fence
+                      icon: hue:pedestal-econic
+                      template: light_button
+                    - type: custom:button-card
+                      entity: light.facade_light
+                      name: Facade Light
+                      icon: hue:wall-econic-lantern-top
+                      template: light_button
+                    - type: custom:button-card
+                      entity: light.garden_main_lights
+                      name: Garden Main
+                      icon: hue:wellness
+                      template: light_button
+                    - type: custom:button-card
+                      entity: light.garden_pendent
+                      name: Garden Pendent
+                      icon: hue:bulb-group-pillar-impress-short
+                      template: light_button
+                    - type: custom:button-card
+                      entity: light.garden_pendent_2
+                      name: Garden Uplight
+                      icon: hue:bulb-group-pillar-impress-short
+                      template: light_button
+                    - type: custom:button-card
+                      entity: light.garden_pendent_3
+                      name: Garden LED
+                      icon: hue:bulb-group-pillar-impress-short
+                      template: light_button
+                    - type: custom:button-card
+                      entity: light.pergola_main_light
+                      name: Pergola Main
+                      icon: hue:wellness
+                      template: light_button
+
+
+
+
+
+
+
+        view_layout:
+          grid-area: list
+      - type: custom:button-card
+        template: footer_button
+        view_layout:
+          grid-area: footer
+
+
+
+
+  ##################################### utilities ###############################
+
+
+
+
+  - title: utilities
+
+    path: utilities
+    type: custom:grid-layout
+    layout: *Room_Page_layout
+    badges: []
+    cards:
+      - type: custom:mod-card
+        view_layout:
+          grid-area: sidebar
+        card_mod:
+          style: |
+            ha-card {
+              background-color: transparent;
+              width: 100%;
+              margin: 0px;
+              padding: 0px;
+              height: 260px;
+              box-shadow: none !important;
+              background-repeat: no-repeat;
+              background-position: center center;
+              background-size: cover;
+              border-radius: 0px 0px 30px 30px;
+            }
+            @media only screen and (min-width: 0px) {
+              ha-card {
+                background-image: url("/local/Home-Images/garden-pc.jpg");
+              }
+            }
+            @media only screen and (min-width: 768px) {
+              ha-card {
+                background-image: url("/local/Home-Images/garden-pc.jpg");
+              }
+            }
+            @media only screen and (min-width: 992px) {
+              ha-card {
+                background-image: url("/local/Home-Images/garden-pc.jpg");
+              }
+            }
+        card:
+          type: custom:mod-card
+          card_mod: *Room_Page_Header_Style
+          card:
+            type: custom:layout-card
+            layout_type: grid
+            layout: *Room_Page_Header_Layout
+            cards:
+              - !include popup/menu-all-devices-popup.yaml
+              - type: custom:button-card
+                view_layout:
+                  grid-area: back
+                template: back_home
+
+              - type: markdown
+                content: >
+
+                  # Utilities
+                view_layout:
+                  grid-area: text
+                style: *Room_Page_Header_Markdown_Style
+
+      - type: vertical-stack
+        cards:
+
+          - type: custom:mod-card
+            style: |
+              ha-card {
+                //background: var( --ha-card-background, var(--card-background-color, white) );
+                border-radius: 30px;
+                  }
+            card:
+
+       
+                  type: custom:layout-card
+                  layout_type: grid
+                  layout:
+                    grid-template-columns: repeat(auto-fill, minmax(115px, auto))
+                  cards:
+
+                    - type: custom:button-card
+                      entity: switch.garage_gate
+                      name: Garage Gate 1
+                      icon: hue:room-carport
+                      template: light_button
+                    - type: custom:button-card
+                      entity: switch.garage_gate
+                      name: Garage Gate 2
+                      icon: hue:room-carport
+                      template: light_button
+
+                    - type: custom:button-card
+                      entity: switch.main_door
+                      name: Villa Gate
+                      icon: mdi:gate
+                      template: light_button
+
+
+
+
+        view_layout:
+          grid-area: list
+      - type: custom:button-card
+        template: footer_button
+        view_layout:
+          grid-area: footer
+
+
+
+  ##################################### Security ###############################
+  - title: security
+
+    path: security
+    icon: mdi:shield-lock-outline
+    type: custom:grid-layout
+    layout: *Room_Page_layout
+    badges: []
+    cards:
+      - type: custom:mod-card
+        view_layout:
+          grid-area: sidebar
+        card_mod:
+          style: |
+            ha-card {
+              background-color: transparent;
+              width: 100%;
+              margin: 0px;
+              padding: 0px;
+              height: 260px;
+              box-shadow: none !important;
+              background-repeat: no-repeat;
+              background-position: center center;
+              background-size: cover;
+              border-radius: 0px 0px 30px 30px;
+            }
+            @media only screen and (min-width: 0px) {
+              ha-card {
+                background-image: url("/local/Home-Images/stairs-pc.jpg");
+              }
+            }
+            @media only screen and (min-width: 768px) {
+              ha-card {
+                background-image: url("/local/Home-Images/stairs-pc.jpg");
+              }
+            }
+            @media only screen and (min-width: 992px) {
+              ha-card {
+                background-image: url("/local/Home-Images/stairs-pc.jpg");
+              }
+            }
+        card:
+          type: custom:mod-card
+          card_mod: *Room_Page_Header_Style
+          card:
+            type: custom:layout-card
+            layout_type: grid
+            layout: *Room_Page_Header_Layout
+            cards:
+              - !include popup/menu-all-devices-popup.yaml
+              - type: custom:button-card
+                view_layout:
+                  grid-area: back
+                template: back_home
+              - type: markdown
+                content: >
+
+                  # Security
+                view_layout:
+                  grid-area: text
+                style: *Room_Page_Header_Markdown_Style
+
+
+      - type: vertical-stack
+        cards:
+          - !include popup/selection-security.yaml
+          - type: custom:mod-card
+            style: |
+              ha-card {
+                //background: var( --ha-card-background, var(--card-background-color, white) );
+                border-radius: 30px;
+                  }
+            card:
+              type: custom:state-switch
+              entity: input_select.security
+              default: alarm
+              transition_time: 250
+              states:
+                alarm:
+                  type: custom:layout-card
+                  layout_type: grid
+                  layout:
+                    grid-template-columns: 100%
+                  cards:
+                    - type: custom:layout-card
+                      layout_type: grid
+                      layout:
+                        grid-template-columns: repeat(auto-fill, minmax(115px, auto))
+                      cards:
+
+                        - type: custom:button-card
+                          entity: switch.siren
+                          name: Siren
+                          icon: mdi:alarm-light
+                          template: siren_style
+                        - type: custom:button-card
+                          entity: switch.water_valve
+                          name: Water Valve
+                          icon: hue:water-valve
+                          template: light_button
+                        - type: custom:button-card
+                          entity: switch.gas_valve
+                          name: Gas Valve
+                      
+                          template: valve_style
+                    - type: alarm-panel
+                      states:
+                        - arm_home
+                        - arm_away
+                      entity: alarm_control_panel.home_alarm
+                
+                sensors:
+                  type: entities
+                  entities:
+                    - entity: binary_sensor.dining_motion_sensor
+                    - entity: binary_sensor.entrance_motion_sensor
+                    - entity: binary_sensor.lobby_motion_sensor
+                    - entity: binary_sensor.office_motion_sensor 
+                    - entity: binary_sensor.living_room_motion_sensor
+                    - entity: binary_sensor.master_room_motion_sensor
+                    - entity: binary_sensor.nour_room_motion_sensor
+                    - entity: binary_sensor.safiya_motion_sensor
+                    - entity: binary_sensor.habiba_motion_sensor
+                    - entity: binary_sensor.roof_room_motion_sensor
+                  title: Villa Motion Sensors
+                cameras:
+                    type: custom:layout-card
+                    layout_type: grid
+                    cards:
+                      - type: picture-entity
+                        entity: camera.cam_1
+                        camera_view: live
+                        camera_image: camera.cam_1
+                        view_layout:
+                          grid-area: cam1
+                      - type: picture-entity
+                        entity: camera.cam_2
+                        camera_image: camera.cam_2
+                        camera_view: live
+                        view_layout:
+                          grid-area: cam2
+                      - type: picture-entity
+                        entity: camera.cam_3
+                        camera_image: camera.cam_3
+                        camera_view: live
+                        view_layout:
+                          grid-area: cam3
+                      - type: picture-entity
+                        entity: camera.cam_4
+                        camera_image: camera.cam_4
+                        camera_view: live
+                        view_layout:
+                          grid-area: cam4
+                      - type: picture-entity
+                        entity: camera.cam_5
+                        camera_image: camera.cam_5
+                        camera_view: live
+                        view_layout:
+                          grid-area: cam5
+                      - type: picture-entity
+                        entity: camera.cam_6
+                        camera_image: camera.cam_6
+                        camera_view: live
+                        view_layout:
+                          grid-area: cam6
+                      - type: picture-entity
+                        entity: camera.cam_7
+                        camera_image: camera.cam_7
+                        camera_view: live
+                        view_layout:
+                          grid-area: cam7
+                      - type: picture-entity
+                        entity: camera.cam_8
+                        camera_image: camera.cam_8
+                        camera_view: live
+                        view_layout:
+                          grid-area: cam8
+                      - type: picture-entity
+                        entity: camera.cam_9
+                        camera_image: camera.cam_9
+                        camera_view: live
+                        view_layout:
+                          grid-area: cam9
+                      - type: picture-entity
+                        entity: camera.cam_10
+                        camera_image: camera.cam_10
+                        camera_view: live
+                        view_layout:
+                          grid-area: cam10
+                    layout:
+                      grid-gap: var(--custom-layout-card-padding)
+                      grid-auto-columns: 50% 50%
+                      grid-auto-rows: minmax(1fr,auto)
+                      grid-template-areas: |
+                        "cam1 cam2"
+                        "cam3 cam4"
+                        "cam5 cam6"
+                        "cam7 cam8"
+                        "cam9 cam10"
+                
+                      mediaquery:
+                        '(max-width: 800px)':
+                          grid-auto-columns: 100%
+                          grid-auto-rows: minmax(1fr,auto)
+                          grid-template-areas: |
+                            "cam1"
+                            "cam2"
+                            "cam3"
+                            "cam4"
+                            "cam5"
+                            "cam6"
+                            "cam7"
+                            "cam8"
+                            "cam9"
+                            "cam10"
+             
+                        '(max-width: 1200px)':
+                          grid-gap: var(--custom-layout-card-padding)
+                          grid-auto-columns: 50% 50%
+                          grid-auto-rows: minmax(1fr,auto)
+                          grid-template-areas: |
+                            "cam1 cam2"
+                            "cam3 cam4"
+                            "cam5 cam6"
+                            "cam7 cam8"
+                            "cam9 cam10"
+                        
+ 
+        view_layout:
+          grid-area: list
+      - type: custom:button-card
+        template: footer_button
+        view_layout:
+          grid-area: footer
+##################################### Lobby ###############################
+
+
+##################################### Scenario ###############################
+
+  - title: scenario
+
+    path: scenario
+    icon: mdi:movie-open-outline
+    type: custom:grid-layout
+    layout: *Room_Page_layout
+    badges: []
+    cards:
+      - type: custom:mod-card
+        view_layout:
+          grid-area: sidebar
+        card_mod:
+          style: |
+            ha-card {
+              background-color: transparent;
+              width: 100%;
+              margin: 0px;
+              padding: 0px;
+              height: 260px;
+              box-shadow: none !important;
+              background-repeat: no-repeat;
+              background-position: center center;
+              background-size: cover;
+              border-radius: 0px 0px 30px 30px;
+            }
+            @media only screen and (min-width: 0px) {
+              ha-card {
+                background-image: url("/local/Home-Images/roof-pc.jpg");
+              }
+            }
+            @media only screen and (min-width: 768px) {
+              ha-card {
+                background-image: url("/local/Home-Images/roof-pc.jpg");
+              }
+            }
+            @media only screen and (min-width: 992px) {
+              ha-card {
+                background-image: url("/local/Home-Images/roof-pc.jpg");
+              }
+            }
+        card:
+          type: custom:mod-card
+          card_mod: *Room_Page_Header_Style
+          card:
+            type: custom:layout-card
+            layout_type: grid
+            layout: *Room_Page_Header_Layout
+            cards:
+              - !include popup/menu-all-devices-popup.yaml
+              - type: custom:button-card
+                view_layout:
+                  grid-area: back
+                template: back_home
+         
+              - type: markdown
+                content: >
+
+
+                  # Villa Scenarios
+                view_layout:
+                  grid-area: text
+                style: *Room_Page_Header_Markdown_Style
+
+
+      - type: custom:layout-card
+        layout_type: grid
+        layout:
+
+        cards:
+          - content: |
+              # Villa Scenes
+            type: markdown
+            style:
+              .: |
+                ha-card {
+                  background-color: rgba(0,0,0,0);
+                  box-shadow: none;
+                }
+              ha-markdown:
+                $: |
+                  h1 {
+                    font-size: 20px;
+                    text-align: left;
+                    font-family: "Raleway", sans-serif;
+                  }
+
+          - type: custom:layout-card
+            layout_type: grid
+            layout:
+              grid-template-columns: repeat(auto-fill, minmax(150px, auto))
+            cards:
+              - type: custom:button-card
+                entity: script.1632841150416
+                name: Home Off
+                custom_fields:
+                  scene: |
+                    [[[
+                      return `<ha-icon
+                        icon="mdi:power"
+                        style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                        </ha-icon>`
+                    ]]]
+                template: scene_button
+
+              - type: custom:button-card
+                entity: script.villa_lights_on
+                name: Villa Lights On
+                custom_fields:
+                  scene: |
+                    [[[
+                      return `<ha-icon
+                        icon="hue:bulb-group-sultan-lightstrip"
+                        style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                        </ha-icon>`
+                    ]]]
+                template: scene_button
+              - type: custom:button-card
+                entity: script.villa_lights_off
+                name: Villa Lights Off
+                custom_fields:
+                  scene: |
+                    [[[
+                      return `<ha-icon
+                        icon="hue:bulb-group-sultan-lightstrip-off"
+                        style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                        </ha-icon>`
+                    ]]]
+                template: scene_button
+
+              - type: custom:button-card
+                entity: script.villa_shutters_on
+                name: Villa Covers On
+                custom_fields:
+                  scene: |
+                    [[[
+                      return `<ha-icon
+                        icon="mdi:blinds-open"
+                        style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                        </ha-icon>`
+                    ]]]
+                template: scene_button
+              - type: custom:button-card
+                entity: script.villa_shutters_off
+                name: Villa Covers Off
+                custom_fields:
+                  scene: |
+                    [[[
+                      return `<ha-icon
+                        icon="mdi:blinds"
+                        style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                        </ha-icon>`
+                    ]]]
+                template: scene_button
+
+          - content: |
+              # Basement Floor Scenes
+            type: markdown
+            style:
+              .: |
+                ha-card {
+                  background-color: rgba(0,0,0,0);
+                  box-shadow: none;
+                }
+              ha-markdown:
+                $: |
+                  h1 {
+                    font-size: 20px;
+                    text-align: left;
+                    font-family: "Raleway", sans-serif;
+                  }
+
+          - type: custom:layout-card
+            layout_type: grid
+            layout:
+              grid-template-columns: repeat(auto-fill, minmax(150px, auto))
+            cards:
+              - type: custom:button-card
+                entity: script.ground_off
+                name: Basement Off
+                custom_fields:
+                  scene: |
+                    [[[
+                      return `<ha-icon
+                        icon="mdi:power"
+                        style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                        </ha-icon>`
+                    ]]]
+                template: scene_button
+
+              - type: custom:button-card
+                entity: script.ground_on
+                name: Basement On
+                custom_fields:
+                  scene: |
+                    [[[
+                      return `<ha-icon
+                        icon="mdi:power"
+                        style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                        </ha-icon>`
+                    ]]]
+                template: scene_button
+
+              - type: custom:button-card
+                entity: script.basement_floor_lights_on
+                name: Base. Lights On
+                custom_fields:
+                  scene: |
+                    [[[
+                      return `<ha-icon
+                        icon="hue:bulb-group-sultan-lightstrip"
+                        style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                        </ha-icon>`
+                    ]]]
+                template: scene_button
+              - type: custom:button-card
+                entity: script.basement_floor_lights_off
+                name: Base. Lights Off
+                custom_fields:
+                  scene: |
+                    [[[
+                      return `<ha-icon
+                        icon="hue:bulb-group-sultan-lightstrip-off"
+                        style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                        </ha-icon>`
+                    ]]]
+                template: scene_button
+
+              - type: custom:button-card
+                entity: script.ground_cover_on
+                name: Base. Covers On
+                custom_fields:
+                  scene: |
+                    [[[
+                      return `<ha-icon
+                        icon="mdi:blinds-open"
+                        style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                        </ha-icon>`
+                    ]]]
+                template: scene_button
+              - type: custom:button-card
+                entity: script.ground_cover_off
+                name: Base. Covers Off
+                custom_fields:
+                  scene: |
+                    [[[
+                      return `<ha-icon
+                        icon="mdi:blinds"
+                        style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                        </ha-icon>`
+                    ]]]
+                template: scene_button    
+
+         
+          - content: |
+              # Ground Floor Scenes
+            type: markdown
+            style:
+              .: |
+                ha-card {
+                  background-color: rgba(0,0,0,0);
+                  box-shadow: none;
+                }
+              ha-markdown:
+                $: |
+                  h1 {
+                    font-size: 20px;
+                    text-align: left;
+                    font-family: "Raleway", sans-serif;
+                  }
+
+          - type: custom:layout-card
+            layout_type: grid
+            layout:
+              grid-template-columns: repeat(auto-fill, minmax(150px, auto))
+            cards:
+              - type: custom:button-card
+                entity: script.ground_off
+                name: Ground Off
+                custom_fields:
+                  scene: |
+                    [[[
+                      return `<ha-icon
+                        icon="mdi:power"
+                        style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                        </ha-icon>`
+                    ]]]
+                template: scene_button
+
+              - type: custom:button-card
+                entity: script.ground_floor_lights_on
+                name: Ground On
+                custom_fields:
+                  scene: |
+                    [[[
+                      return `<ha-icon
+                        icon="mdi:power"
+                        style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                        </ha-icon>`
+                    ]]]
+                template: scene_button
+
+              - type: custom:button-card
+                entity: script.ground_floor_lights_on
+                name: Ground Lights On
+                custom_fields:
+                  scene: |
+                    [[[
+                      return `<ha-icon
+                        icon="hue:bulb-group-sultan-lightstrip"
+                        style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                        </ha-icon>`
+                    ]]]
+                template: scene_button
+              - type: custom:button-card
+                entity: script.ground_floor_lights_off
+                name: Ground Lights Off
+                custom_fields:
+                  scene: |
+                    [[[
+                      return `<ha-icon
+                        icon="hue:bulb-group-sultan-lightstrip-off"
+                        style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                        </ha-icon>`
+                    ]]]
+                template: scene_button
+
+              - type: custom:button-card
+                entity: script.ground_cover_on
+                name: Ground Covers On
+                custom_fields:
+                  scene: |
+                    [[[
+                      return `<ha-icon
+                        icon="mdi:blinds-open"
+                        style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                        </ha-icon>`
+                    ]]]
+                template: scene_button
+              - type: custom:button-card
+                entity: script.ground_cover_off
+                name: Ground Covers Off
+                custom_fields:
+                  scene: |
+                    [[[
+                      return `<ha-icon
+                        icon="mdi:blinds"
+                        style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                        </ha-icon>`
+                    ]]]
+                template: scene_button    
+  
+                                
+          - content: |
+              # First Floor Scenes
+            type: markdown
+            style:
+              .: |
+                ha-card {
+                  background-color: rgba(0,0,0,0);
+                  box-shadow: none;
+                }
+              ha-markdown:
+                $: |
+                  h1 {
+                    font-size: 20px;
+                    text-align: left;
+                    font-family: "Raleway", sans-serif;
+                  }
+
+          - type: custom:layout-card
+            layout_type: grid
+            layout:
+              grid-template-columns: repeat(auto-fill, minmax(150px, auto))
+            cards:
+              - type: custom:button-card
+                entity: script.first_floor_off
+                name: First.F Off
+                custom_fields:
+                  scene: |
+                    [[[
+                      return `<ha-icon
+                        icon="mdi:power"
+                        style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                        </ha-icon>`
+                    ]]]
+                template: scene_button
+
+              - type: custom:button-card
+                entity: script.first_floor_on
+                name: First.F On
+                custom_fields:
+                  scene: |
+                    [[[
+                      return `<ha-icon
+                        icon="mdi:power"
+                        style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                        </ha-icon>`
+                    ]]]
+                template: scene_button
+
+              - type: custom:button-card
+                entity: script.first_floor_lights_on
+                name: First.F Lights On
+                custom_fields:
+                  scene: |
+                    [[[
+                      return `<ha-icon
+                        icon="hue:bulb-group-sultan-lightstrip"
+                        style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                        </ha-icon>`
+                    ]]]
+                template: scene_button
+              - type: custom:button-card
+                entity: script.first_floor_lights_off
+                name: First.F Lights Off
+                custom_fields:
+                  scene: |
+                    [[[
+                      return `<ha-icon
+                        icon="hue:bulb-group-sultan-lightstrip-off"
+                        style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                        </ha-icon>`
+                    ]]]
+                template: scene_button
+
+              - type: custom:button-card
+                entity: script.first_floor_covers_on
+                name: First.F Covers On
+                custom_fields:
+                  scene: |
+                    [[[
+                      return `<ha-icon
+                        icon="mdi:blinds-open"
+                        style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                        </ha-icon>`
+                    ]]]
+                template: scene_button
+              - type: custom:button-card
+                entity: script.first_floor_covers_off
+                name: First.F Covers Off
+                custom_fields:
+                  scene: |
+                    [[[
+                      return `<ha-icon
+                        icon="mdi:blinds"
+                        style="width: 20px; height: 25px; color: rgba(0,0,0,0.7); ">
+                        </ha-icon>`
+                    ]]]
+                template: scene_button    
+ 
+ 
+
+        view_layout:
+          grid-area: list
+      - type: custom:button-card
+        template: footer_button
+        view_layout:
+          grid-area: footer
+
+
+ ##################################### Lights ###############################
+
+  - title: lights
+    visible:
+      - user: f9a3344bf2d647ffbb8851021fa5e579
+    path: lights
+    icon: mdi:lightbulb-group-outline
+    type: custom:grid-layout
+    layout: *Room_Page_layout
+    badges: []
+    cards:
+      - type: custom:mod-card
+        view_layout:
+          grid-area: sidebar
+        card_mod:
+          style: |
+            ha-card {
+              background-color: transparent;
+              width: 100%;
+              margin: 0px;
+              padding: 0px;
+              height: 260px;
+              box-shadow: none !important;
+              background-repeat: no-repeat;
+              background-position: center center;
+              background-size: cover;
+              border-radius: 0px 0px 30px 30px;
+            }
+            @media only screen and (min-width: 0px) {
+              ha-card {
+                background-image: url("/local/Home-Images/lights-mob.png");
+              }
+            }
+            @media only screen and (min-width: 768px) {
+              ha-card {
+                background-image: url("/local/Home-Images/lights-mob.png");
+              }
+            }
+            @media only screen and (min-width: 992px) {
+              ha-card {
+                background-image: url("/local/Home-Images/lights-pc1.png");
+              }
+            }
+        card:
+          type: custom:mod-card
+          card_mod: 
+            style: |
+              ha-card {
+                --background: linear-gradient(0deg, #06090F 0%, rgba(0,0,0,0.1) 90%);
+               // backdrop-filter: blur(2px); 
+                box-shadow: none;
+                height: 262px;
+                border-radius: 0px 0px 25px 25px;
+                width: 100%;
+                margin: 0px;
+                padding: 0px;
+                transition: 2s ease;
+              }
+          card:
+            type: custom:layout-card
+            layout_type: grid
+            layout: *Room_Page_Header_Layout
+            cards:
+              - !include popup/menu-all-devices-popup.yaml
+              - type: custom:button-card
+                view_layout:
+                  grid-area: back
+                template: back_home
+         
+              - type: markdown
+                content: >
+
+                  {% if now().hour  < 5 %} Good Night {{'\U0001F634'}}
+
+                  {% elif now().hour < 12 %} Good Morning {{'\u2615\uFE0F'}}
+
+                  {% elif now().hour < 18 %} Good Afternoon
+                  {{'\U0001F44B\U0001F3FB'}}
+
+                  {% else %} Good Evening {{'\U0001F44B\U0001F3FB'}}{% endif %}
+
+                  # Villa Lights
+                view_layout:
+                  grid-area: text
+                style: *Room_Page_Header_Markdown_Style
+              - type: custom:button-card
+                view_layout:
+                  grid-area: weather
+                entity: weather.ahmed_magdy
+                template: weather
+      - type: entities
+        title: Villa Lights
+        entities:
+
+          - entity: light.dining_chandelier
+            icon: hue:amaze-alt
+          - entity: light.dining_cove_light
+            icon: hue:gradient-lightstrip
+          - entity: light.dining_spots_1
+            icon: hue:ceiling-fugato-two
+          - entity: light.dining_spots_2
+            icon: hue:ceiling-fugato-two
+          - entity: light.entrance_chandelier
+            icon: hue:amaze-alt
+          - entity: light.entrance_cove_light
+            icon: hue:gradient-lightstrip
+          - entity: light.entrance_spots_1
+            icon: hue:ceiling-fugato-two
+          - entity: light.entrance_spots_1_2
+            icon: hue:ceiling-fugato-two
+          - entity: light.entrance_spots_2
+            icon: hue:ceiling-fugato-two
+          - entity: light.entrance_spots_2_2
+            icon: hue:ceiling-fugato-two
+          - entity: light.first_roof_stairs_pendent
+
+          - entity: light.first_roof_stairs_steps_light
+            icon: hue:gradient-lightstrip
+          - entity: light.ground_first_stairs_chandelier
+            icon: hue:amaze-alt
+          - entity: light.ground_first_stairs_floor_light
+            icon: hue:gradient-lightstrip
+          - entity: light.habiba_corridor_spots
+            icon: hue:ceiling-fugato-two
+          - entity: light.habiba_cove_light
+            icon: hue:gradient-lightstrip
+          - entity: light.habiba_room_chandelier
+            icon: hue:amaze-alt
+          - entity: light.habiba_room_spots_1
+            icon: hue:ceiling-fugato-two
+          - entity: light.habiba_room_spots_2
+            icon: hue:ceiling-fugato-two
+          - entity: light.living_cove_light_1
+            icon: hue:gradient-lightstrip
+          - entity: light.living_cove_light_1_2
+            icon: hue:gradient-lightstrip
+          - entity: light.living_room_pendent
+            icon: hue:gradient-lightstrip
+          - entity: light.living_room_spots_1
+            icon: hue:ceiling-fugato-two
+          - entity: light.living_room_spots_2
+            icon: hue:ceiling-fugato-two
+          - entity: light.lobby_chandelier
+            icon: hue:amaze-alt
+          - entity: light.lobby_cove_light
+            icon: hue:gradient-lightstrip
+          - entity: light.lobby_spots_1
+            icon: hue:ceiling-fugato-two
+          - entity: light.lobby_spots_2
+            icon: hue:ceiling-fugato-two
+          - entity: light.master_room_balcony_light
+            icon: hue:wall-econic-lantern-base
+          - entity: light.master_room_cahndelier
+            icon: hue:amaze-alt
+          - entity: light.master_room_corridor_spots
+            icon: hue:ceiling-fugato-two
+          - entity: light.master_room_cove_light
+            icon: hue:gradient-lightstrip
+          - entity: light.master_room_spots_1
+            icon: hue:ceiling-fugato-two
+          - entity: light.master_room_spots_2
+            icon: hue:ceiling-fugato-two
+          - entity: light.nour_room_balcony_light
+            icon: hue:wall-econic-lantern-base
+          - entity: light.nour_room_cahndelier
+            icon: hue:amaze-alt
+          - entity: light.nour_room_corridor_spots
+            icon: hue:ceiling-fugato-two
+          - entity: light.nour_room_cove_light
+            icon: hue:gradient-lightstrip
+          - entity: light.nour_room_spots_1
+            icon: hue:ceiling-fugato-two
+          - entity: light.nour_room_spots_2
+            icon: hue:ceiling-fugato-two
+          - entity: light.reception_chandelier
+            icon: hue:amaze-alt
+          - entity: light.reception_cove_light
+            icon: hue:gradient-lightstrip
+          - entity: light.reception_spots_1
+            icon: hue:ceiling-fugato-two
+          - entity: light.reception_spots_2
+            icon: hue:ceiling-fugato-two
+          - entity: light.roof_living_room_cahndelier
+            icon: hue:amaze-alt
+          - entity: light.roof_living_room_spots_1
+            icon: hue:ceiling-fugato-two
+          - entity: light.roof_living_room_spots_2
+            icon: hue:ceiling-fugato-two
+          - entity: light.roof_outdoor_ableks
+          - entity: light.roof_outdoor_wall_lights
+          - entity: light.roof_high_wall_light
+          - entity: light.safiya_corridor_spots
+            icon: hue:ceiling-fugato-two
+          - entity: light.safiya_cove_light
+            icon: hue:gradient-lightstrip
+          - entity: light.safiya_room_chandelier
+            icon: hue:amaze-alt
+          - entity: light.safiya_room_spots_1
+            icon: hue:ceiling-fugato-two
+          - entity: light.safiya_room_spots_2
+            icon: hue:ceiling-fugato-two
+          - entity: light.salon_chandelier
+            icon: hue:amaze-alt
+          - entity: light.salon_cove_light
+            icon: hue:gradient-lightstrip
+          - entity: light.salon_spots_1
+            icon: hue:ceiling-fugato-two
+          - entity: light.salon_spots_2
+            icon: hue:ceiling-fugato-two
+          - entity: light.entrance_backyard_uplight_1
+            name: Entrance Lights 1
+            icon: hue:wall-econic-lantern-base
+
+
+          - entity: light.entrance_backyard_uplight_2
+            name: Entrance Lights 2
+            icon: hue:wall-econic-lantern-base
+
+          - entity: light.side_uplight
+            name: Entrance Lights 3
+            icon: hue:wall-econic-lantern-base
+
+
+          - entity: light.side_fence
+            name: Side Fence
+            icon: hue:pedestal-econic
+  
+          - entity: light.pergola_lights
+            name: Pergola Lights
+            icon: hue:double-spot
+
+
+          - entity: light.front_back_yard_fence
+            name: F.B Fence 
+            icon: hue:pedestal-econic
+
+          - entity: light.facade_light
+            name: Facade Light
+            icon: hue:wall-econic-lantern-top
+
+
+          - entity: light.garden_main_lights
+            name: Garden Main
+            icon: hue:wellness
+
+          - entity: light.garden_pendent
+            icon: hue:bulb-group-pillar-impress-short
+          - entity: light.pool_lights
+            icon: hue:gradient-lightstrip
+
+        style:
+          .: |
+            ha-card {
+              overflow: none;
+              margin: 0 0;
+              padding-top: 0px;
+              background-color: rgba(0,0,0,0);
+            }
+
+        view_layout:
+          grid-area: list
+      - type: custom:button-card
+        template: footer_button
+        view_layout:
+          grid-area: footer
+ ##################################### AC ###############################

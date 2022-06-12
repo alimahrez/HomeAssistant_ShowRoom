@@ -1,0 +1,218 @@
+# Theme based on Github
+# Creator: @einschmidt
+#
+#
+Github Dark Theme:
+  # Header:
+  app-header-background-color: "#161B22"
+  app-header-text-color: "#f6f8fa"
+  # Main Interface Colors
+  primary-color: "#1F6FEB" #was 79b8ff
+  dark-primary-color: "#005cc5"
+  primary-background-color: "#06090F"
+  secondary-background-color: "#21262D"
+  divider-color: "#21262D"
+  accent-color: "#1F6FEB"
+  # Text
+  primary-text-color: "#C3CBD4"
+  secondary-text-color: "#959da5"
+  text-primary-color: "#f6f8fa"
+  disabled-text-color: "#d1d5da"
+  # Sidebar Menu
+  sidebar-icon-color: "#8b949e"
+  sidebar-text-color: "#C3CBD4"
+  sidebar-background-color: "#0D1117"
+  sidebar-selected-background-color: "#21262D"
+  sidebar-selected-icon-color: "#F78166"
+  sidebar-selected-text-color: "#c9d1d9"
+  # Buttons
+  paper-item-icon-color: "#8b949e"
+  paper-item-icon-active-color: "#0366d6"
+  # States and Badges
+  state-icon-color: "#8b949e"
+  state-icon-active-color: "#2188ff"
+  state-icon-unavailable-color: var(--disabled-text-color)
+  # Sliders
+  paper-slider-knob-color: "#2188ff"
+  paper-slider-knob-start-color: var(--paper-slider-knob-color)
+  paper-slider-pin-color: var(--paper-slider-knob-color)
+  paper-slider-active-color: var(--paper-slider-knob-color)
+  paper-slider-secondary-color: var(--light-primary-color)
+  # Labels
+  label-badge-background-color: "#0D1117"
+  label-badge-text-color: "#C3CBD4"
+  label-badge-red: "#d73a49"
+  label-badge-green: "#28a745"
+  label-badge-blue: "#0366d6"
+  label-badge-yellow: "#dbab09"
+  label-badge-gray: "#0D1117"
+  # Cards
+  card-background-color: "#21262D"
+  ha-card-border-radius: "6px"
+  ha-card-box-shadow: "0px 0px 0px 1px #30363d"
+  paper-dialog-background-color: var(--card-background-color)
+  paper-listbox-background-color: var(--card-background-color)
+  paper-card-background-color: var(--card-background-color)
+  # Switches
+  switch-checked-button-color: "#1F6FEB"
+  switch-checked-track-color: "#1F6FEB"
+  switch-unchecked-button-color: "#959da5"
+  switch-unchecked-track-color: "#959da5"
+  # Toggles
+  paper-toggle-button-checked-button-color: var(--switch-checked-button-color)
+  paper-toggle-button-checked-bar-color: var(--switch-checked-track-color)
+  paper-toggle-button-unchecked-button-color: var(--switch-unchecked-button-color)
+  paper-toggle-button-unchecked-bar-color: var(--switch-unchecked-track-color)
+  # Table
+  table-row-background-color: "#0D1117"
+  table-row-alternative-background-color: "#161B22"
+  data-table-background-color: "#0D1117"
+  mdc-checkbox-unchecked-color: "#8b949e"
+  # Dropdowns
+  material-background-color: var(--secondary-background-color)
+  material-secondary-background-color: var(--primary-background-color)
+  # mdc-theme-surface: var(--primary-background-color)
+  # Pre/Code
+  markdown-code-background-color: "#2F363D"
+  # Customs
+  bar-card-color: "#1F6FEB"
+  bar-card-border-radius: "6px"
+  paper-tab-ink: transparent
+  # card mode
+  card-mod-theme: Github Dark Theme
+  card-mod-root-yaml: |
+    paper-tabs:
+      $: |
+        .not-visible {
+          display: none;
+        }
+        #selectionBar {
+          bottom: unset !important;
+        }
+    "ha-app-layout":
+      $: |
+        #contentContainer {
+          padding-top: 0px !important;
+        }
+    .: |
+      app-toolbar {
+        display: display;
+      }
+      .edit-mode, app-header, app-toolbar {
+        background-color: rgba(36, 36, 36, 0.5) !important;
+        color: var(--ch-all-tabs-color) !important;
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border-radius: 25px 25px 0px 0px;
+      }
+      app-header {
+        top: calc(100vh - 53px) !important;
+      }
+      app-header.edit-mode {
+        border-bottom: 2px var(--primary-color) solid;
+        padding-bottom: 10px;
+      }
+      app-header[shadow] > ::before {
+        box-shadow: inset 0px 5px 6px -3px rgba(0, 0, 0, 0.3);
+      }
+      #add-view ha-svg-icon {
+        background-color: var(--primary-color) !important;
+        color: #EEE !important;
+        border-radius: 5px !important;
+      }
+      .edit-icon {
+        color: var(--primary-color) !important;
+      }
+      mwc-icon-button[label="Start conversation"] {
+        top: 0;
+        right: calc(48px * 1);
+        z-index: 2;
+        position: absolute;
+      }
+      mwc-icon-button[title="Help"] {
+        top: 0;
+        right: calc(48px * 2);
+        position: absolute;
+        z-index: 2;
+      }
+      mwc-icon-button[title="Close"] {
+        top: 0;
+        left: 0;
+        position: absolute;
+        z-index: 2;
+      }
+      mwc-icon-button#add-view {
+        position: fixed;
+        right: calc(48px * 1);
+      }
+      ha-button-menu {
+        top: 0;
+        right: 0;
+        z-index: 2;
+        margin-left: 5px;
+        position: absolute;
+      }
+      app-toolbar > [main-title] {
+        display: display;
+      }
+      menu-button[style="visibility: hidden;"] {
+        display: none;
+      }
+      ha-menu-button {
+        z-index: 2;
+        top: 0px;
+        display: none !important;
+      }
+      paper-tabs {
+        --paper-tabs-selection-bar-color: var(--text-color) !important;
+        margin-left: 48px !important;
+      } 
+      paper-tab {
+        width: 7%; 
+      }
+      paper-tab[aria-selected="true"] {
+        color: var(--text-color) !important;
+        filter: drop-shadow(0px 0px 15px rgba(255, 255, 255, 0.5));
+        transition: 0.5s ease-out;
+      }
+      paper-tab[aria-selected="false"] {
+        transition: 1s ease-in;
+      }
+
+      @media (orientation: portrait) {
+        paper-tabs {
+          margin-left: 64px !important;
+          margin-right: 32px !important;
+        }
+        ch-header > paper-tabs,
+        app-header.edit-mode > * > paper-tabs {
+          margin-left: 10px !important;
+          margin-right: 10px !important;
+        }
+      }
+      ch-header > ha-button-menu {
+        top: unset;
+      }
+      ch-header > paper-tabs,
+      app-header.edit-mode > paper-tabs {
+        margin-left: 0;
+      }
+      app-toolbar a {
+        color: var(--primary-text-color) !important;
+      }
+
+    "ha-tabs":
+
+      $: |
+        #tabsContent {
+          width: 100% !important;
+        }
+        #tabsContent.scrollable {
+          text-align-last: justify;
+        }
+        #selectionBar {
+          box-shadow: 0px 0px 20px 2px rgb(255 255 255 / 31%);
+          top: 0;
+        }
+        
+        

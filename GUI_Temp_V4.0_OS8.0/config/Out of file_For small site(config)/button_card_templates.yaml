@@ -1,0 +1,1066 @@
+############# footer button ############
+footer_button:
+  show_entity_picture: true
+  show_icon: false
+
+  styles:
+    card:
+      - width: 100%
+      - background-color: transparent
+      - box-shadow: none
+      - height: 50px
+      - "--mdc-ripple-press-opacity": 0
+    icon:
+      - width: 30px
+      - margin: 0px
+############# Scene button #########
+scene_button:
+  color_type: icon
+  show_entity_picture: false
+  show_state: false
+  show_label: false
+
+  icon: mdi:movie-open-outline
+  tap_action:
+    action: toggle
+  extra_styles: >
+    @-webkit-keyframes
+    slide-in-top{0%{-webkit-transform:translateY(-1000px);transform:translateY(-1000px);opacity:0}100%{-webkit-transform:translateY(0);transform:translateY(0);opacity:1}}@keyframes
+    slide-in-top{0%{-webkit-transform:translateY(-1000px);transform:translateY(-1000px);opacity:0}100%{-webkit-transform:translateY(0);transform:translateY(0);opacity:1}}
+  state:
+    - value: "on"
+      color: "#ffffff"
+      styles:
+        card:
+          - background: "linear-gradient(to bottom, #c32650, #f15a29)"
+          - "--mdc-ripple-color": deepskyblue
+          - "--mdc-ripple-press-opacity": 1
+
+          - animation: 1s cubic-bezier(.39,.575,.565,1.000) both
+          # - box-shadow: 0px 0px 10px 0px
+        name:
+          - color: white
+          - transition: .4s ease
+    - value: "off"
+      color: "#f15a29"
+      styles:
+        card:
+          - background-image: "linear-gradient(to top, #c7c7c7, #ffffff)"
+        name:
+          - color: black
+          - transition: .4s ease
+  styles:
+    card:
+      - border-radius: 3px
+      - height: 50px
+      - width: 150px
+      - "--mdc-ripple-press-opacity": 0
+    grid:
+      - position: relative
+    custom_fields:
+      scene:
+        - position: absolute
+        - right: calc(7% + 90px)
+        - top: 35%
+        - height: 30px
+    name:
+      - font-size: 12px
+      - justify-self: start
+      - font-weight: bold
+      - position: relative
+      - left: 50px
+      - top: "-13px"
+    icon:
+      - position: absolute
+      - left: 3%
+      - width: 30%
+      - top: 10%
+
+########### Alarm Button style###########
+alarm_style:
+  color_type: card
+  show_entity_picture: false
+  show_icon: true
+  show_state: false
+  show_name: false
+  size: 110%
+  state:
+    - value: "on"
+      color: "#D43A41"
+      icon: mdi:alarm-check
+      styles:
+        card:
+          - background: "linear-gradient(to bottom, #c32650, #f15a29)"
+    - value: "off"
+      color: "#6F6F6F"
+      icon: mdi:alarm-off
+  styles:
+    card:
+      - height: 50px
+      - width: 50px
+      - border-radius: 3px
+      - left: "-80px"
+      - top: 100px
+      - z-index: 99
+      - postion: relative
+############ All Devices button style######
+
+device_style:
+  color_type: card
+  color: rgba(255,255,255,0)
+  show_entity_picture: true
+  show_icon: false
+  show_state: false
+  show_name: false
+
+  styles:
+    card:
+      - border-radius: 20%
+      - height: 6.5em
+      - width: 6.5em
+      - box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2),  0 0 10px rgba(255,255,255,.5)
+
+############## Base Button Light ###############
+light_button:
+  color_type: icon
+  show_entity_picture: false
+  show_icon: true
+  show_state: true
+  show_label: false
+  show_name: true
+  tap_action:
+    animation_card: |
+      [[[
+        const animation_speed_ms = 900;
+        const animation = `card_bounce ${animation_speed_ms}ms cubic-bezier(0.22, 1, 0.36, 1)`;
+        this.shadowRoot.getElementById("card").style.animation = animation;
+        window.setTimeout(() => {
+          this.shadowRoot.getElementById("card").style.animation = "none";
+        }, animation_speed_ms)
+      ]]]
+    action: toggle
+  triggers_update: all
+  state: &toggle-switch-states
+    - value: "on"
+      color: "#D43A41"
+      styles:
+        card:
+          - background-image: "linear-gradient(to top, #c7c7c7, #ffffff)"
+          - box-shadow: 0 0 10px 0px
+        name:
+          - color: black
+          - transition: .4s ease
+        state:
+          - color: rgba(0, 0, 0, 0.8)
+          - transition: .4s ease
+        icon:
+          - transition: .4s ease-out
+        custom_fields:
+          circle:
+            - transition: .4s cubic-bezier(.54, 1.60, .5, 1)
+            - transform: translateX(20px)
+          rect:
+            - background: "linear-gradient(to bottom, #c32650, #f15a29)"
+            - transition: .4s ease
+    - value: "off"
+      color: "#ffffff"
+      styles:
+        icon:
+          - transition: .4s ease-in
+        card:
+          - background: "#454545"
+          - transition: "off"
+        name:
+          - color: white
+          - transition: .4s ease
+        state:
+          - color: rgba(255, 255, 255, 0.8)
+          - transition: .4s ease
+        custom_fields:
+          circle:
+            - transition: .3s cubic-bezier(.54, 1.60, .5, 1)
+          rect:
+            - background: "linear-gradient(to bottom, #202020, #343434)"
+            - transition: .4s ease
+  custom_fields:
+    rect: |
+      [[[
+        return `<ha-card
+          style= "background-color: transparent; border-radius: 200px 200px; box-shadow: 0px 0px;">
+          </ha-card>`
+      ]]]
+    circle: |
+      [[[
+        return `<ha-icon
+          icon="mdi:brightness-1"
+          style="width: 20px; height: 20px; color: rgba(255,255,255,1); ">
+          </ha-icon>`
+      ]]]
+  styles:
+    card:
+      - padding: 5px 5px
+      - border-radius: 9px
+      - height: 94px
+      - width: 109px
+      - "--mdc-ripple-press-opacity": 0
+      - box-shadow: null
+    grid:
+      - position: relative
+    custom_fields: &style_toggle_switch
+      circle:
+        - position: absolute
+        - right: calc(7% + 20px)
+        - top: 13%
+        - height: 25px
+      rect:
+        - position: absolute
+        - right: 7%
+        - top: 15%
+        - height: 20px
+        - width: 40px
+        - border-radius: 200px 200px
+    state: &style_state
+      - font-size: 11px
+      - justify-self: start
+      - padding: 0px 0px
+      - position: relative
+      - bottom: 8px
+      - left: 6px
+    name: &style_name
+      - font-size: 12px
+      - justify-self: start
+      - font-weight: bold
+      - position: relative
+      - left: 6px
+      - bottom: 10px
+    icon: &style_icon
+      - position: absolute
+      - left: 0%
+      - top: "-12%"
+      - width: 35%
+
+#####################################################################
+######################## Start Selection Buttons ####################
+#####################################################################
+
+############### Selection Button #################
+select_button:
+  color_type: card
+  show_name: false
+  styles:
+    card:
+      - background-color: rgba(0, 0, 0, 0)
+      - border-color: transparent
+      - border-radius: 10px
+      - height: 60px
+      - width: 60px
+      - box-shadow: 0px 0px
+      - "--mdc-ripple-press-opacity": 0
+    icon:
+      - "--mdc-icon-size": 40px
+    grid:
+      - grid-template-areas: '" i ."'
+      - grid-template-columns: 100% 0%
+    img_cell:
+      - justify-content: start
+      - align-content: end
+    label:
+      - color: var(--secondary-text-color)
+      - justify-self: center
+      - align-self: center
+  show_label: true
+  ################# Selection Button Lights ###########
+
+select_lights:
+  template: select_button
+  tap_action:
+    action: call-service
+    service: input_select.select_option
+    service_data:
+      entity_id: >
+        [[[ return entity.entity_id ]]]
+      option: lights
+  state:
+    - value: lights
+      label: Lights
+      styles: &select_style
+        card:
+          - width: 150px
+        grid:
+          - grid-template-areas: '"i l"'
+          - grid-template-columns: 1.5fr  2fr
+          - grid-template-rows: 1fr
+        img_cell:
+          - justify-content: center
+        icon:
+          - color: rgba(251, 125, 85,0.7)
+############### select security########
+select_security:
+  entity: input_select.security
+  color_type: card
+  show_name: false
+  styles:
+    card:
+      - background-color: rgba(0, 0, 0, 0)
+      - border-color: transparent
+      - border-radius: 10px
+      - height: 60px
+      - width: 60px
+      - box-shadow: 0px 0px
+      - "--mdc-ripple-press-opacity": 0
+    icon:
+      - "--mdc-icon-size": 40px
+    grid:
+      - grid-template-areas: '" i ."'
+      - grid-template-columns: 100% 0%
+    img_cell:
+      - justify-content: start
+      - align-content: end
+    label:
+      - color: var(--secondary-text-color)
+      - justify-self: center
+      - align-self: center
+  show_label: true
+
+################### selection alram ##########
+select_alram:
+  template: select_security
+  tap_action:
+    action: call-service
+    service: input_select.select_option
+    service_data:
+      entity_id: input_select.security
+      option: alarm
+  state:
+    - value: alarm
+      label: Arm Home
+      styles: *select_style
+
+################### selection cameras ##########
+select_cameras:
+  template: select_security
+  tap_action:
+    action: call-service
+    service: input_select.select_option
+    service_data:
+      entity_id: input_select.security
+      option: cameras
+  state:
+    - value: cameras
+      label: Cameras
+      styles: *select_style
+
+################### selection sensors ##########
+select_sensors:
+  template: select_security
+  tap_action:
+    action: call-service
+    service: input_select.select_option
+    service_data:
+      entity_id: input_select.security
+      option: sensors
+  state:
+    - value: sensors
+      label: Sensors
+      styles: *select_style
+
+################# Selection Button covers ###########
+select_shutters:
+  template: select_button
+  tap_action:
+    action: call-service
+    service: input_select.select_option
+    service_data:
+      entity_id: >
+        [[[ return entity.entity_id ]]]
+      option: shutter
+  state:
+    - value: shutter
+      label: Shutters
+      styles: *select_style
+
+################# Selection Button AC ###########
+select_ac:
+  template: select_button
+  tap_action:
+    action: call-service
+    service: input_select.select_option
+    service_data:
+      entity_id: >
+        [[[ return entity.entity_id ]]]
+      option: ac
+  state:
+    - value: ac
+      label: AC
+      styles: *select_style
+
+################# Selection Button Scene ###########
+select_more:
+  template: select_button
+  tap_action:
+    action: call-service
+    service: input_select.select_option
+    service_data:
+      entity_id: >
+        [[[ return entity.entity_id ]]]
+      option: more
+  state:
+    - value: more
+      label: Scene
+      styles: *select_style
+################# Selection Button more ###########
+select_more_scene:
+  template: select_button
+  tap_action:
+    action: call-service
+    service: input_select.select_option
+    service_data:
+      entity_id: >
+        [[[ return entity.entity_id ]]]
+      option: more
+  state:
+    - value: more
+      label: More
+      styles: *select_style
+#####################################################################
+######################## End Selection Buttons ######################
+#####################################################################
+
+############## Climate Fan ###################
+fan_style:
+  color_type: card
+  show_icon: false
+  show_state: false
+  show_name: false
+  state: null
+  custom_fields:
+    fan: >
+      [[[ const path = '<circle cx="25" cy="25" r="6.6"/>
+      <path d="M31.9 30.4c-.5.6-1.1 1.1-1.7 1.5-1.4 1.1-3.2
+      1.7-5.2 1.7-2.3 0-4.5-.9-6-2.4-.9 1.1-1.6 2.3-2.3
+      3.2l-4.9 5.4c-1.8 2.7.3 5.6 2.5 7 3.9 2.4 9.8 3.1 14.1
+      1.9 4.6-1.3 7.9-4.7 7.4-9.7-.2-3.4-1.9-6-3.9-8.6zM17
+      28.3c-.4-1-.6-2.1-.6-3.3a8.7 8.7 0 0 1
+      6.4-8.4l-1.6-3.5L19 6.2c-1.5-2.8-5-2.5-7.3-1.2-4
+      2.2-7.5 6.9-8.7 11.3-1.2 4.6.2 9.2 4.7 11.3 3.1 1.3
+      6.1 1.2 9.3.7zm26.9-17.6c-3.3-3.4-8-4.6-12.1-1.8-2.8
+      1.8-4.2 4.6-5.5 7.5 4.2.6 7.4 4.2 7.4 8.6 0 .9-.1
+      1.7-.4 2.5 1.3.2 2.8.3 3.8.4 2.3.4 4.7 1.3 7.1 1.7
+      3.2.3 4.7-3 4.8-5.6.3-4.6-1.9-10.1-5.1-13.3z"/>';
+      const style = '<svg viewBox="0 0 50 50">
+      <style>@keyframes rotate{0%{visibility: visible;
+      transform: rotate(0deg);}100%{transform:
+      rotate(1080deg);}}.start{animation: rotate 6.8s
+      ease-in; transform-origin: center; fill: #5daeea;
+      visibility: hidden;}.on{animation: rotate 6.8s linear
+      infinite; transform-origin: center; fill: #5daeea;
+      animation-delay: 6.8s; visibility:
+      hidden;}.startmed{animation: rotate 2.8s ease-in;
+      transform-origin: center; fill: #5daeea; visibility:
+      hidden;}.onmed{animation: rotate 2.8s linear infinite;
+      transform-origin: center; fill: #5daeea;
+      animation-delay: 2.8s; visibility:
+      hidden;}.starthigh{animation: rotate 1.5s ease-in;
+      transform-origin: center; fill: #5daeea; visibility:
+      hidden;}.onhigh{animation: rotate 1.5s linear
+      infinite; transform-origin: center; fill: #5daeea;
+      animation-delay: 1.5s; visibility: hidden;}.end{
+      transform-origin: center; fill: #9ca2a5;}</style>'; if
+      (entity.state == 'on' && entity.attributes.brightness
+      >= 26 &&entity.attributes.brightness < 102) { return
+      `${style}<g class="start">${path}</g><g
+      class="on">${path}</g></svg>`; }
+        else if (entity.state == 'on' && entity.attributes.brightness
+      >= 102 && entity.attributes.brightness < 178) { return
+      `${style}<g class="startmed">${path}</g><g
+      class="onmed">${path}</g></svg>`; } else if
+      (entity.state == 'on' && entity.attributes.brightness
+      >= 178) { return `${style}<g
+      class="starthigh">${path}</g><g
+      class="onhigh">${path}</g></svg>`; }else { return
+      `${style}<g fill: #5daeea;>${path}</g></svg>`; } ]]]
+  styles:
+    card:
+      - border-radius: 10%
+      - height: 40px
+      - width: 40px
+      - top: "-125px"
+      - box-shadow: none
+      - background-color: rgba(0,0,0,0)
+    grid:
+      - position: relative
+    custom_fields:
+      fan:
+        - position: absolute
+        - height: 40px
+        - width: 40px
+############## Setting ###################
+
+setting:
+  tap_action:
+    action: navigate
+    navigation_path: /profile
+  icon: ios:gear
+  size: 30px
+  styles:
+    card:
+      - width: 90%
+      - background-color: transparent
+      - box-shadow: none
+      - justify-content: center
+      - justify-self: end
+      - "--mdc-ripple-press-opacity": 0
+    icon:
+      - margin: 0px
+      - color: var(--primary-icon-color, white)
+    img_cell:
+      - justify-content: center
+
+############### Back Home Page ################
+back_home:
+  icon: ios:chevron-left
+  size: 40px
+  styles:
+    card:
+      - border-radius: 0px 0px 25px 25px
+      - width: 100%
+      - background-color: transparent
+      - box-shadow: none
+      - justify-content: end
+      - "--mdc-ripple-press-opacity": 0
+    icon:
+      - margin: 0px
+    img_cell:
+      - justify-content: start
+  tap_action:
+    action: navigate
+    navigation_path: /lovelace/0
+
+################# Menu ###################
+menu_style:
+  icon: mdi:view-headline
+  show_icon: true
+  size: 30px
+  styles:
+    card:
+      - width: 100%
+      - background-color: transparent
+      - box-shadow: none
+      - justify-content: end
+      - justify-self: end
+      - "--mdc-ripple-press-opacity": 0
+    icon:
+      - margin: 0px
+      - color: var(--primary-icon-color, white)
+    img_cell:
+      - align-items: end
+      - justify-content: end
+
+################# Weather ###############
+weather:
+  show_entity_picture: true
+  show_icon: false
+  entity_picture: |
+    [[[ return "/local/weather/icon/"+entity.state +".png" ]]]
+  name: |
+    [[[ return entity.attributes.temperature + '°C' ]]]
+  layout: icon_name
+  styles:
+    card:
+      - width: 130%
+      - background-color: transparent
+      - box-shadow: none
+      - justify-content: center
+      - margin: 0px
+      - padding-left: 2vw
+      - justify-self: center
+      - "--mdc-ripple-press-opacity": 0
+    icon:
+      - width: 90px
+      - margin: 0px
+    img_cell:
+      - justify-content: start
+    name:
+      - font-size: 25px
+      - justify-content: start
+      - justify-self: start
+  tap_action:
+    action: more_info
+
+################# Sensor Style ###############
+sensor_style:
+  show_name: false
+  icon: mdi:motion-sensor
+  size: 30px
+  style: |-
+    :host{
+        place-self: center;
+    }
+  styles:
+    card:
+      - width: 100%
+      - background-color: transparent
+      - box-shadow: none
+      - "--mdc-ripple-press-opacity": 0
+      - top: "-50px"
+    icon:
+      - margin: 0px
+      - color: var(--primary-icon-color, white)
+    img_cell:
+      - justify-content: start
+      - align-items: start
+  state:
+    - value: "on"
+      styles:
+        icon:
+          - animation: blink 2s ease infinite
+          - color: rgba(251, 125, 85,1)
+
+#####################################################################
+######################## Covers (shutter&curtain)  ###################################
+#####################################################################
+
+######################### Base Button cover #######################
+cover_base:
+  color_type: icon
+  show_icon: true
+  show_state: false
+  show_label: false
+  show_name: true
+  tap_action:
+    action: toggle
+
+  styles:
+    card:
+      - padding: 5px 5px
+      - border-radius: 6px
+      - height: 100px
+      - width: 170px
+      - '--mdc-ripple-press-opacity': 0
+      - background-image: |
+          [[[ 
+            var stat = entity.state;                      
+            if (stat === 'open' || stat === 'opening'){
+
+              return 'linear-gradient(to top, #c7c7c7, #ffffff)';
+            }else{
+              return 'linear-gradient(to top, #454545, #454545)'; 
+            }
+          ]]]
+      - box-shadow: |
+          [[[ 
+            var stat = entity.state;                      
+            if (stat === 'open'){
+              return '0 0 10px 0px';
+            }else{
+              return '0 0 0px 0px'; 
+            }
+          ]]]
+    grid:
+      - position: relative
+    custom_fields:  
+      percentage:
+        - position: absolute
+        - justify-self: end
+        - font-size: 12px
+        - right: 9%
+        - bottom: 0px
+        - color: |
+            [[[ 
+              var stat = entity.state;                      
+              if (stat === 'open' || stat === 'opening'){
+                return 'black';  
+              }else{
+                return '#ffffff'; 
+              }
+            ]]]
+
+      graph:
+        - position: absolute
+        - top: 62px
+        - height: 30px
+        - left: -3%  
+      stop:
+        - position: absolute
+        - right: 10%
+        - top: 10%
+        - height: 20px
+        - width: 40px
+      arrow-up:
+        - position: absolute
+        - right: 30%
+        - top: 10%
+        - height: 20px
+        - width: 40px
+      arrow-down:
+        - position: absolute
+        - right: '-10%'
+        - top: 10%
+        - height: 20px
+        - width: 40px
+    name:
+      - font-size: 12px
+      - justify-self: start
+      - position: relative
+      - left: 5px
+      - bottom: 20px
+      - color: |
+          [[[ 
+            var stat = entity.state;                      
+            if (stat === 'open' || stat === 'opening'){
+              return 'black';
+            
+            }else{
+              return '#ffffff'; 
+            }
+          ]]]
+    icon:
+      - position: absolute
+      - left: 2%
+      - width: 25%
+      - top: '-5px'
+      - color: |
+          [[[ 
+            var stat = entity.state;                      
+            if (stat === 'open'){
+              return '#D43A41';
+            }else if( stat === 'opening' || stat === 'closing'){                                              
+              return '#8c8c8c';
+            }else{
+              return '#ffffff'; 
+            }
+          ]]]
+#########################  cover Button Base  (slider) #######################
+cover_slider_base:
+        show_name: false
+        size: 20px
+        styles:
+          card:
+            - width: 100%
+            - background-color: transparent
+            - box-shadow: none
+            - justify-content: center
+            - '--mdc-ripple-press-opacity': 0
+
+          img_cell:
+            - justify-content: center
+#########################  cover Button (slider) #######################
+cover_slider:
+
+  custom_fields:
+    percentage: |
+      [[[ 
+            return entity.attributes.current_position + "%";
+          
+      ]]]
+    arrow-up:
+      card:
+        type: custom:button-card
+        icon: mdi:arrow-up
+        entity: >
+                [[[ return entity.entity_id ]]]
+        template: cover_slider_base
+        styles:
+          icon:
+            - margin: 0px
+            - color: |
+                [[[ 
+                  var stat = entity.state;                      
+                  if (stat === 'open' || stat === 'opening'){
+                    return '#D43A41';
+                  
+                  }else{
+                    return '#ffffff'; 
+                  }
+                ]]]
+        tap_action:
+          action: call-service
+          service: cover.open_cover
+          service_data:
+            entity_id: >
+                [[[ return entity.entity_id ]]]
+    arrow-down:
+      card:
+        type: custom:button-card
+        icon: mdi:arrow-down
+        entity: >
+                [[[ return entity.entity_id ]]]
+        template: cover_slider_base
+        styles:
+          icon:
+            - margin: 0px
+            - color: |
+                [[[ 
+                  var stat = entity.state;                      
+                  if (stat === 'open' || stat === 'closing'){
+                    return '#D43A41';
+                  
+                  }else{
+                    return '#ffffff'; 
+                  }
+                ]]]
+        tap_action:
+          action: call-service
+          service: cover.close_cover
+          service_data:
+            entity_id: >
+                [[[ return entity.entity_id ]]]
+    stop:
+      card:
+        type: custom:button-card
+        icon: mdi:stop
+        entity: >
+                [[[ return entity.entity_id ]]]
+        template: cover_slider_base
+        styles:
+          icon:
+            - margin: 0px
+            - color: |
+                [[[ 
+                  var stat = entity.state;                      
+                  if (stat === 'open'){
+                    return '#D43A41';
+                  
+                  }else{
+                    return '#ffffff'; 
+                  }
+                ]]]
+        tap_action:
+          action: call-service
+          service: cover.stop_cover
+          service_data:
+            entity_id: >
+                [[[ return entity.entity_id ]]]
+    graph:
+      card:
+        type: custom:slider-entity-row
+        entity: >
+                [[[ return entity.entity_id ]]]
+        full_row: true
+  template: cover_base
+
+#########################  cover Button (switch) #######################
+cover_switch:
+  show_state: true
+  custom_fields:
+    rect: |
+      [[[
+        return `<ha-card
+          style= "background-color: transparent; border-radius: 200px 200px; box-shadow: 0px 0px;">
+          </ha-card>`
+      ]]]
+    circle: |
+      [[[
+        return `<ha-icon
+          icon="mdi:brightness-1"
+          style="width: 20px; height: 20px; color: rgba(255,255,255,1); ">
+          </ha-icon>`
+      ]]]
+  state: *toggle-switch-states
+  styles:
+    card:
+      - padding: 5px 5px
+      - border-radius: 6px
+      - height: 100px
+      - width: 170px
+      - '--mdc-ripple-press-opacity': 0
+    grid:
+      - position: relative
+    custom_fields: *style_toggle_switch
+    name: *style_name
+    state: *style_state
+    icon: 
+      - position: absolute
+      - left: 2%
+      - width: 25%
+      - top: '-5px'
+#########################  Shutter icon slider #######################
+shutter_icon_slider:
+  template: cover_slider
+  icon: |
+    [[[ 
+      var stat = entity.state;                      
+      if (stat === 'open'){
+        return 'mdi:window-shutter-open';
+      }else if( stat === 'opening' ){                                              
+        return 'mdi:archive-arrow-up-outline';
+      }else if( stat === 'closing'){                                              
+        return 'mdi:archive-arrow-down-outline';
+      }else{
+        return 'mdi:window-shutter'; 
+      }
+    ]]]
+#########################  curtain icon slider #######################
+curtain_icon_slider:
+  template: cover_slider
+  icon: |
+    [[[ 
+      var stat = entity.state;                      
+      if (stat === 'open'){
+        return 'mdi:blinds-open';
+      }else if( stat === 'opening' ){                                              
+        return 'mdi:archive-arrow-up-outline';
+      }else if( stat === 'closing'){                                              
+        return 'mdi:archive-arrow-down-outline';
+      }else{
+        return 'mdi:blinds'; 
+      }
+    ]]]
+#########################  shutter icon switch   #######################
+shutter_icon_switch:
+  template: cover_switch
+  icon: |
+    [[[ 
+      var stat = entity.state;                      
+      if (stat === 'on'){
+        return 'mdi:window-shutter-open';
+      }else if( stat === 'off'){                                              
+        return 'mdi:window-shutter';
+      }else{
+        return 'mdi:window-shutter'; 
+      }
+    ]]]
+#########################  curtain icon switch   #######################
+curtain_icon_switch:
+  template: cover_switch
+  icon: |
+    [[[ 
+      var stat = entity.state;                      
+      if (stat === 'on'){
+        return 'mdi:blinds-open';
+
+      }else{
+        return 'mdi:blinds'; 
+      }
+    ]]]
+#########################  Projector icon slider #######################
+projector_icon_slider:
+  template: cover_slider
+  icon: |
+    [[[ 
+      var stat = entity.state;                      
+      if (stat === 'open'){
+        return 'mdi:projector-screen-outline';
+      }else if( stat === 'opening' ){                                              
+        return 'mdi:projector-screen-outline';
+      }else if( stat === 'closing'){                                              
+        return 'mdi:projector-screen-off-outline';
+      }else{
+        return 'mdi:projector-screen-off-outline'; 
+      }
+    ]]]
+
+#############################################################
+#########################  Heater KNX #######################
+#############################################################
+heater_base:
+  color_type: icon
+  show_icon: true
+  show_state: true
+  show_name: true
+  icon: |
+    [[[ 
+      var stat = entity.state;                      
+      if (stat === 'on'){
+        return 'mdi:radiator';
+      }else{
+        return 'mdi:radiator-off'; 
+      }
+    ]]]
+  tap_action:
+    action: toggle
+  styles:
+    card:
+      - padding: 5px 5px
+      - border-radius: 6px
+      - height: 170px
+      - width: 245px
+      - background-image: |
+          [[[ 
+            var stat = entity.state;                      
+            if (stat === 'on'){
+              return 'linear-gradient(to top, #c7c7c7, #ffffff)';
+            }else{
+              return 'linear-gradient(to top, #454545, #454545)'; 
+            }
+          ]]]
+    grid:
+      - position: relative
+    custom_fields:
+      toggle-switch:
+        - position: absolute
+        - left: 40%
+        - top: '-2%'
+      time-counter:
+        - position: absolute
+        - font-size: 12px
+        - left: 35%
+        - top: 78%
+      current-temp:
+        - position: absolute
+        - left: 30%
+        - top: 20%
+      graph:
+        - position: absolute
+        - top: 45px
+        - height: 30px
+      stop:
+        - position: absolute
+        - right: 12%
+        - top: 40%
+        - height: 20px
+        - width: 40px
+      arrow-up:
+        - position: absolute
+        - right: 7%
+        - top: 15%
+        - height: 20px
+        - width: 40px
+      arrow-down:
+        - position: absolute
+        - right: 7%
+        - bottom: 25%
+        - height: 20px
+        - width: 40px
+      back-color:
+        - position: absolute
+        - right: '-2%'
+        - bottom: '-3%'
+      select:
+        - position: absolute
+        - left: 5px
+        - top: 75%
+    name:
+      - font-size: 12px
+      - position: relative
+      - left: 5px
+      - bottom: 60px
+      - color: &font-style |
+          [[[ 
+            var stat = entity.state;                      
+            if (stat === 'on'){
+              return 'black';
+            }else{
+              return '#ffffff'; 
+            }
+          ]]]
+    state:
+      - font-size: 9px
+      - position: relative
+      - right: 103px
+      - bottom: 60px
+      - color: *font-style
+    icon:
+      - position: absolute
+      - left: 0%
+      - width: 25%
+      - top: '-35px'
+      - color: |
+          [[[ 
+            var stat = entity.state;                      
+            if (stat === 'on'){
+              return '#D43A41';
+            }else{
+              return '#ffffff'; 
+            }
+          ]]]

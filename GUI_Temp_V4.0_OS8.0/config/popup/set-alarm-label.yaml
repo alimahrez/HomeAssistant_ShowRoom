@@ -1,0 +1,23 @@
+type: custom:button-card
+view_layout:
+  grid-area: auto
+color_type: card
+show_entity_picture: false
+show_icon: false
+show_state: false
+color: rgba(0,0,0,0)
+show_label: true
+show_name: true
+tap_action: none
+size: 70%
+name: Set Alarm
+styles:
+  card:
+    - left: "-115px"
+    - top: 60px
+    - box-shadow: none
+    - position: relative
+    - height: 30px
+    - width: 130px
+  name:
+    - font-size: 18px

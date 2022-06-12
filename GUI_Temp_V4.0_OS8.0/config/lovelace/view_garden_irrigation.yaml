@@ -1,0 +1,224 @@
+
+
+
+    title: Garden Irrigation
+    path: garden_irrigation
+    icon: mdi:sprinkler-variant
+    layout:
+      grid-gap: var(--custom-layout-card-padding)
+      grid-auto-columns: 10% 80% 10%
+      grid-auto-rows: minmax(1fr,auto)
+      grid-template-areas: |
+        "sidebar sidebar sidebar"
+        ".       list    ."
+        "footer  footer  footer"
+      mediaquery:
+        '(max-width: 800px)':
+          grid-auto-columns: 50% 50%
+          grid-auto-rows: minmax(1fr,auto)
+          grid-template-areas: |
+            "sidebar  sidebar  "
+            "list     list    "
+
+            "devices2 devices2 "
+            "footer   footer   "
+        '(max-width: 1200px)':
+          grid-gap: var(--custom-layout-card-padding)
+          grid-auto-columns: 10% 80% 10%
+          grid-auto-rows: minmax(1fr,auto)
+          grid-template-areas: |
+            "sidebar sidebar sidebar"
+            ".       list    ."
+            "footer  footer  footer"
+    
+    cards:
+      #==================
+      #=== SYSTEM STATUS
+      #==================
+    #   - !include garden_irrigation/status/page_status.yaml
+    
+    #   - type: custom:mod-card
+    #     view_layout:
+    #       grid-area: sidebar
+    #     card_mod:
+    #       style: |
+    #         ha-card {
+    #           background-color: transparent;
+    #           width: 100%;
+    #           margin: 0px;
+    #           padding: 0px;
+    #           height: 260px;
+    #           box-shadow: none !important;
+    #           background-repeat: no-repeat;
+    #           background-position: center center;
+    #           background-size: cover;
+    #           border-radius: 0px 0px 30px 30px;
+    #         }
+    #         @media only screen and (min-width: 0px) {
+    #           ha-card {
+    #             background-image: url("/local/Home-Images/pool-pc.png");
+    #           }
+    #         }
+    #         @media only screen and (min-width: 768px) {
+    #           ha-card {
+    #             background-image: url("/local/Home-Images/pool-pc.png");
+    #           }
+    #         }
+    #         @media only screen and (min-width: 992px) {
+    #           ha-card {
+    #             background-image: url("/local/Home-Images/pool-pc.png");
+    #           }
+    #         }
+    #     card:
+    #       type: custom:mod-card
+    #       card_mod: 
+    #         style: |
+    #           ha-card {
+    #             background: linear-gradient(0deg, #06090F 0%, rgba(0,0,0,0.3475140056022409) 90%);
+    #           // backdrop-filter: blur(2px); 
+    #             box-shadow: none;
+    #             height: 262px;
+    #             border-radius: 0px 0px 25px 25px;
+    #             width: 100%;
+    #             margin: 0px;
+    #             padding: 0px;
+    #             transition: 2s ease;
+
+    #           }
+    #       card:
+    #         type: custom:layout-card
+    #         layout_type: grid
+    #         layout: 
+    #           grid-gap: 0px
+    #           grid-template-columns: 40px 3fr 1fr
+    #           grid-template-rows: 80px 90px 90px 0px
+    #           grid-template-areas: |
+    #             "back weather  extras"
+    #             ".  text  text"
+    #             ". text  text"
+    #             ". .  sensor"
+    #         cards:
+    #           - !include ../popup/menu-all-devices-popup.yaml
+    #           - type: custom:button-card
+    #             view_layout:
+    #               grid-area: back
+    #             template: back_home
+ 
+    #           - type: markdown
+    #             content: >
+
+    #               {% if now().hour  < 5 %} Good Night {{'\U0001F634'}}
+
+    #               {% elif now().hour < 12 %} Good Morning {{'\u2615\uFE0F'}}
+
+    #               {% elif now().hour < 18 %} Good Afternoon
+    #               {{'\U0001F44B\U0001F3FB'}}
+
+    #               {% else %} Good Evening {{'\U0001F44B\U0001F3FB'}}{% endif %}
+
+    #               # Pool
+    #             view_layout:
+    #               grid-area: text
+    #             style: |
+    #               ha-card {
+    #                 background-color: transparent;
+    #                 box-shadow: 0px 0px transparent;
+    #                 text-align: start;
+    #                 display: flex;
+    #                 align-items: center;
+    #                 font-size: 15px;
+    #                 font-weight: normal;
+    #                 padding-left: 10px;
+    #                 transition: 0s;
+    #                 font-family:  "gravity";
+
+    #               }
+    #               @media only screen and (min-width: 0px) {
+    #                 ha-card {
+    #                   font-size: 16px;
+
+    #                 }
+    #               }
+    #               @media only screen and (min-width: 768px) {
+    #                 ha-card {
+    #                   font-size: 16px;
+    #                 }
+    #               }
+    #               @media only screen and (min-width: 992px) {
+    #                 ha-card {
+    #                   font-size: 25px;
+    #                 }
+    #               }
+    #           - type: custom:button-card
+    #             view_layout:
+    #               grid-area: weather
+    #             entity: weather.ahmed_magdy
+    #             template: weather
+    #   #===========
+      #=== CYCLES 
+      #===========
+      
+      - type: vertical-stack
+        view_layout:
+          grid-area: list
+        cards:
+        
+          - type: conditional
+            conditions:
+              - entity: input_boolean.irrigation_master_control_switch
+                state: "on"
+            card: 
+              !include garden_irrigation/cycles/page_cycles.yaml
+    
+          - type: conditional
+            conditions:
+              - entity: input_boolean.irrigation_master_control_switch
+                state: "on"
+            card: 
+              type: custom:hui-element
+              card_type: custom:state-switch
+              # entity: sensor.irrigation_ui_selected_cycle
+              entity: input_select.irrigation_cycle
+              default: cycle1
+              states:
+                cycle1:
+                  !include
+                    - garden_irrigation/cycles/section_cycle1_2_schedule.yaml
+                    - cycle: 1
+                cycle2:
+                  !include
+                    - garden_irrigation/cycles/section_cycle1_2_schedule.yaml
+                    - cycle: 2
+                cycle3:
+                  !include garden_irrigation/cycles/section_cycle3_schedule.yaml
+    
+    
+    #   #=============
+    #   #=== SETTINGS
+    #   #=============
+    #   - type: vertical-stack
+    #     cards:
+    #       - type: conditional
+    #         conditions:
+    #           - entity: input_boolean.irrigation_master_control_switch
+    #             state: "on"
+    #         card:
+    #           !include garden_irrigation/settings/page_settings.yaml
+    
+    #       - type: conditional
+    #         conditions:
+    #           - entity: input_boolean.irrigation_master_control_switch
+    #             state: "on"
+    #         card:
+    #           type: custom:hui-element
+    #           card_type: custom:state-switch
+    #           # entity: sensor.irrigation_ui_selected_settings
+    #           entity: input_select.irrigation_settings
+    #           default: General
+    #           states:
+    #             General:
+    #               !include garden_irrigation/settings/general/section_settings_general.yaml
+    #             Rainfall:
+    #               !include garden_irrigation/settings/rainfall/section_settings_rainfall.yaml
+    #             Temperature:
+    #               !include garden_irrigation/settings/temperature/section_settings_temperature.yaml

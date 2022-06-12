@@ -1,0 +1,154 @@
+################################################# KNX ##########################################
+
+################################################# Frontend ##########################################
+homeassistant:
+  packages: !include_dir_named package
+
+frontend:
+  themes: !include_dir_merge_named themes
+lovelace_gen:
+lovelace:
+  mode: yaml
+  resources:
+    [
+      { url: /hacsfiles/bar-card/bar-card.js, type: module },
+      { url: /hacsfiles/button-card/button-card.js, type: module },
+      { url: /hacsfiles/kiosk-mode/kiosk-mode.js, type: module },
+      { url: /hacsfiles/light-entity-card/light-entity-card.js, type: module },
+      { url: /hacsfiles/light-popup-card/light-popup-card.js, type: module },
+      { url: /hacsfiles/lovelace-card-mod/card-mod.js, type: module },
+      { url: /hacsfiles/lovelace-layout-card/layout-card.js, type: module },
+      {
+        url: /hacsfiles/lovelace-slider-entity-row/slider-entity-row.js,
+        type: module,
+      },
+      {
+        url: /hacsfiles/lovelace-valetudo-map-card/valetudo-map-card.js,
+        type: module,
+      },
+      {
+        url: /hacsfiles/mini-graph-card/mini-graph-card-bundle.js,
+        type: module,
+      },
+      { url: /hacsfiles/swipe-card/swipe-card.js, type: module },
+      { url: /hacsfiles/hass-hue-icons/hass-hue-icons.js, type: module },
+      {
+        url: /hacsfiles/Homekit-panel-card/homekit-panel-card.js,
+        type: module,
+      },
+      {
+        url: /hacsfiles/mini-media-player/mini-media-player-bundle.js,
+        type: module,
+      },
+      {
+        url: /hacsfiles/mini-climate-card/mini-climate-card-bundle.js,
+        type: module,
+      },
+      { url: /hacsfiles/rgb-light-card/card.js, type: module },
+      { url: /hacsfiles/channel-pad/card-channel-pad.js, type: module },
+      {
+        url: /hacsfiles/LG-WebOS-Remote-Control/lg-remote-control.js,
+        type: module,
+      },
+      {
+        url: /hacsfiles/lovelace-paper-buttons-row/paper-buttons-row.js,
+        type: module,
+      },
+      { url: /hacsfiles/weather-card/weather-card.js, type: module },
+      { url: /hacsfiles/hass-bha-icons/hass-bha-icons.js, type: module },
+      { url: /hacsfiles/lovelace-state-switchs/state-switch.js, type: module },
+      {
+        url: /hacsfiles/lovelace-time-picker-card/time-picker-card.js,
+        type: module,
+      },
+      { url: /hacsfiles/hass-shutter-card/hass-shutter-card.js, type: module },
+      {
+        url: /hacsfiles/lovelace-state-switchs/webpack.config.js,
+        type: module,
+      },
+      { url: /hacsfiles/lovelace-auto-entities/auto-entities.js, type: module },
+      { url: /hacsfiles/lovelace-card-tools/card-tools.js, type: module },
+      { url: /hacsfiles/lovelace-card-tools/card-tools.js, type: module },
+      { url: /hacsfiles/lovelace-card-tools/webpack.config.js, type: module },
+      { url: /hacsfiles/tv-card/tv-card.js, type: module },
+      { url: /hacsfiles/tv-card/tv-card-editor.js, type: module },
+      {
+        url: /hacsfiles/HomeAssistant-Cupertino-Icons/HomeAssistant-Cupertino-Icons-Legacy.js,
+        type: module,
+      },
+      { url: /hacsfiles/state-element/state-element.js, type: module },
+      {
+        url: /hacsfiles/config-template-card/config-template-card.js,
+        type: module,
+      },
+      {
+        url: /hacsfiles/lovelace-card-templater/lovelace-card-templater.js,
+        type: module,
+      },
+      { url: /hacsfiles/simple-thermostat/simple-thermostat.js, type: module },
+      { url: /local/state-switch.js, type: module },
+      { url: /local/custom-iframe-card.js, type: module },
+      { url: /hacsfiles/lovelace-hui-element/hui-element.js, type: module },
+      { url: /hacsfiles/cover-element/cover-element-bundle.js, type: module },
+      { url: /hacsfiles/lovelace-hui-element/webpack.config.js, type: module },
+      { url: /hacsfiles/lovelace-thermostat-card/main.js, type: module },
+      { url: /hacsfiles/lovelace-thermostat-card/styles.js, type: module },
+      { url: /hacsfiles/scheduler-card/scheduler-card.js, type: module },
+      {
+        url: /hacsfiles/lovelace-thermostat-card/thermostat_card.lib.js,
+        type: module,
+      },
+      { url: /local/javascript-resources/html-card.js, type: module },
+      { url: /local/javascript-resources/hass-hue-icon.js, type: module },
+      { url: /local/javascript-resources/climate-card.js, type: module },
+      { url: "/local/calendar-card.js?v=3.109.1", type: module },
+      { url: "/local/custom_icons.js?v=28082021", type: module },
+      { url: /hacsfiles/lovelace-mushroom/mushroom.js, type: module },
+      { url: /local/font.css, type: css },
+    ]
+
+  dashboards:
+    lovelace-irrigation:
+      mode: yaml
+      title: Irrigation
+      icon: mdi:flower
+      show_in_sidebar: true
+      filename: irrigation.yaml
+
+browser_mod:
+  prefix: "browser_mod_"
+################################################## Alarm Panel ##################################################################
+alarm_control_panel:
+  - platform: manual
+    name: Home Alarm
+    code: "1234"
+    arming_time: 10
+    delay_time: 5
+    trigger_time: 4
+    disarmed:
+      trigger_time: 0
+    armed_home:
+      arming_time: 0
+      delay_time: 0
+
+################################################## Sensors ##########################################
+sensor:
+  #HA system monitor sensors
+  - platform: systemmonitor
+    resources:
+      - type: disk_use_percent
+        arg: /home
+      - type: memory_free
+      - type: memory_use_percent
+      - type: processor_use
+      - type: last_boot
+      - type: ipv4_address
+        arg: eth0
+      - type: network_in
+        arg: eth0
+      - type: packets_in
+        arg: eth0
+      - type: packets_out
+        arg: eth0
+      - type: processor_temperature
+      - type: last_boot

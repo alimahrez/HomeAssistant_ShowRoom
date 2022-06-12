@@ -1,0 +1,133 @@
+
+    type: custom:layout-card
+    layout_type: grid
+    view_layout:
+      grid-area: extras
+    layout:
+      grid-template-columns: 40px 40px
+      grid-template-areas: |
+        "settings notifications"
+      place-content: end
+    cards:
+      - type: custom:button-card
+        view_layout:
+          grid-area: settings
+        template: setting
+      - type: custom:button-card
+        view_layout:
+          grid-area: notifications
+        template: menu_style
+        tap_action:
+              action: fire-dom-event
+              browser_mod:
+                command: popup
+                style:
+                  $: |
+                    .mdc-dialog .mdc-dialog__scrim {
+                      backdrop-filter: blur(15px);
+                      -webkit-backdrop-filter: blur(15px);
+                      background: rgba(0,0,0,0);
+                    }
+                    .mdc-dialog .mdc-dialog__container .mdc-dialog__surface {
+                      box-shadow: none !important;
+                      border-radius: var(--ha-card-border-radius);
+                      background-color: rgba(255, 255, 255, 0);
+                      backdrop-filter: blur(5px);
+                      //   height: 100vh;
+             
+                    }
+                  .: |
+                    :host {
+                      --ha-card-box-shadow: none;
+                    } 
+                    app-toolbar {
+                      background: none !important;
+                    }
+                brightnessWidth: 200px
+                brightnessHeight: 500px
+                switchWidth: 210px
+                switchHeight: 500px
+                color: '#E733FF'
+                color_temp: true
+                title: All Devices
+                card:
+                    type: custom:layout-card
+                    layout_type: grid
+                    layout:
+                      grid-template-columns: repeat(auto-fill, minmax(115px, auto))
+                    cards:
+                        - type: custom:button-card
+                          template: device_style 
+                          entity_picture: /local/iconHA/pulp.png
+                          size: 60%
+                          tap_action:
+                              action: call-service
+                              service: browser_mod.commands
+                              service_data:
+                                  commands:
+                                    - command: navigate
+                                      navigation_path: /lovelace/lights
+                                    - command: close_popup
+                        - type: custom:button-card
+                          template: device_style 
+                          entity_picture: /local/iconHA/Shutter-Icon.gif
+                          tap_action:
+                              action: call-service
+                              service: browser_mod.commands
+                              service_data:
+                                  commands:
+                                    - command: navigate
+                                      navigation_path: /lovelace/covers
+                                    - command: close_popup
+            
+                          size: 60%
+                        - type: custom:button-card
+                          template: device_style 
+                          entity_picture: /local/iconHA/AirConditioner-Icon-Off.png
+                          tap_action:
+                              action: call-service
+                              service: browser_mod.commands
+                              service_data:
+                                  commands:
+                                    - command: navigate
+                                      navigation_path: /lovelace/ac
+                                    - command: close_popup
+                          size: 75%
+                        - type: custom:button-card
+                          template: device_style 
+                          entity_picture: /local/iconHA/Media-Icon-Large.png
+                          tap_action:
+                              action: call-service
+                              service: browser_mod.commands
+                              service_data:
+                                  commands:
+                                    - command: navigate
+                                      navigation_path: /lovelace/media
+                                    - command: close_popup
+                          size: 60%
+                        - type: custom:button-card
+                          template: device_style 
+                          entity_picture: /local/iconHA/Security-Icon-Large.png
+                          tap_action:
+                              action: call-service
+                              service: browser_mod.commands
+                              service_data:
+                                  commands:
+                                    - command: navigate
+                                      navigation_path: /lovelace/security
+                                    - command: close_popup
+                          size: 70%    
+                        - type: custom:button-card
+                          
+                          entity_picture: /local/iconHA/scene/scene2.png
+                          tap_action:
+                              action: call-service
+                              service: browser_mod.commands
+                              service_data:
+                                  commands:
+                                    - command: navigate
+                                      navigation_path: /lovelace/scenario
+                                    - command: close_popup
+                          size: 70%  
+                          template: device_style 
+    

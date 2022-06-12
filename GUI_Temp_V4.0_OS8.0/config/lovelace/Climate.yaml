@@ -1,0 +1,418 @@
+# lovelace_gen
+#========================================================
+#=== Climate Card and switch between manual and automatic
+#===
+#=== Climate entity --> climate_entity
+#=== Climate Name --> climate_name
+#=== Fan Entity  --> fan_entity
+
+
+#========================================================
+
+type: custom:button-card
+entity: {{fan_entity}}
+color_type: icon
+show_icon: true
+show_state: true
+show_label: false
+show_name: true
+style: |-
+          :host{
+              place-self: center;
+
+          }
+name: {{climate_name}}
+icon: |
+  [[[
+    var stat = states['{{fan_entity}}'].state;
+    if (stat === 'on'){
+      return 'hue:ac-off';
+
+    }else{
+      return 'hue:ac-off';
+    }
+  ]]]
+tap_action:
+  action: toggle
+custom_fields:
+  fan: >
+    [[[ const path = '<circle cx="25" cy="25" r="6.6"/> <path d="M31.9
+    30.4c-.5.6-1.1 1.1-1.7 1.5-1.4 1.1-3.2 1.7-5.2 1.7-2.3 0-4.5-.9-6-2.4-.9
+    1.1-1.6 2.3-2.3 3.2l-4.9 5.4c-1.8 2.7.3 5.6 2.5 7 3.9 2.4 9.8 3.1 14.1 1.9
+    4.6-1.3 7.9-4.7 7.4-9.7-.2-3.4-1.9-6-3.9-8.6zM17
+    28.3c-.4-1-.6-2.1-.6-3.3a8.7 8.7 0 0 1 6.4-8.4l-1.6-3.5L19
+    6.2c-1.5-2.8-5-2.5-7.3-1.2-4 2.2-7.5 6.9-8.7 11.3-1.2 4.6.2 9.2 4.7 11.3 3.1
+    1.3 6.1 1.2 9.3.7zm26.9-17.6c-3.3-3.4-8-4.6-12.1-1.8-2.8 1.8-4.2 4.6-5.5 7.5
+    4.2.6 7.4 4.2 7.4 8.6 0 .9-.1 1.7-.4 2.5 1.3.2 2.8.3 3.8.4 2.3.4 4.7 1.3 7.1
+    1.7 3.2.3 4.7-3 4.8-5.6.3-4.6-1.9-10.1-5.1-13.3z"/>'; const style = '<svg
+    viewBox="0 0 50 50"> <style>@keyframes rotate{0%{visibility: visible;
+    transform: rotate(0deg);}100%{transform: rotate(1080deg);}}.start{animation:
+    rotate 6.8s ease-in; transform-origin: center; fill: #5daeea; visibility:
+    hidden;}.on{animation: rotate 6.8s linear infinite; transform-origin:
+    center; fill: #5daeea; animation-delay: 6.8s; visibility:
+    hidden;}.startmed{animation: rotate 2.8s ease-in; transform-origin: center;
+    fill: #5daeea; visibility: hidden;}.onmed{animation: rotate 2.8s linear
+    infinite; transform-origin: center; fill: #5daeea; animation-delay: 2.8s;
+    visibility: hidden;}.starthigh{animation: rotate 1.5s ease-in;
+    transform-origin: center; fill: #5daeea; visibility:
+    hidden;}.onhigh{animation: rotate 1.5s linear infinite; transform-origin:
+    center; fill: #5daeea; animation-delay: 1.5s; visibility: hidden;}.end{
+    transform-origin: center; fill: #9ca2a5;}</style>'; if (entity.state == 'on'
+    && entity.attributes.brightness >= 26 &&entity.attributes.brightness < 102)
+    { return `${style}<g class="start">${path}</g><g
+    class="on">${path}</g></svg>`; }
+      else if (entity.state == 'on' && entity.attributes.brightness
+    >= 102 && entity.attributes.brightness < 178) { return `${style}<g
+    class="startmed">${path}</g><g class="onmed">${path}</g></svg>`; } else if
+    (entity.state == 'on' && entity.attributes.brightness >= 178) { return
+    `${style}<g class="starthigh">${path}</g><g
+    class="onhigh">${path}</g></svg>`; }else { return `${style}<g fill:
+    #5daeea;>${path}</g></svg>`; } ]]]
+  power_off:
+    card:
+      type: custom:button-card
+      entity: {{fan_entity}}
+      show_name: false
+      show_state: false
+      show_icon: true
+      icon: mdi:power-standby
+      size: null
+      styles:
+        card:
+          - background-color: transparent
+          - box-shadow: none
+          - justify-content: center
+          - width: 25px
+          - '--mdc-ripple-press-opacity': 0
+        grid:
+          - grid-template-areas: '"s" '
+        icon:
+          - color: |
+              [[[
+                var stat = states['{{climate_entity}}'].state;
+                var fan = states['{{fan_entity}}'].state;
+
+                if (stat === 'off' && fan === 'off'){
+                  return '#c32650';
+                }else{
+                  return '#000';
+                }
+              ]]]
+      tap_action:
+        action: toggle
+  cool:
+    card:
+      type: custom:button-card
+      entity: {{climate_entity}}
+      show_name: false
+      show_state: false
+      show_icon: true
+      icon: mdi:snowflake
+      size: null
+      styles:
+        card:
+          - background-color: transparent
+          - box-shadow: none
+          - justify-content: center
+          - width: 25px
+          - '--mdc-ripple-press-opacity': 0
+        grid:
+          - grid-template-areas: '"s" '
+        icon:
+          - color: |
+              [[[
+                var stat = states['{{climate_entity}}'].state;
+                var fan = states['{{fan_entity}}'].state;
+
+                if (stat === 'cool' && fan === 'on'){
+                  return '#c32650';
+                }else if (stat !== 'cool' && fan == 'off'){
+                  return '#ff';
+                }else{
+                  return '#000';
+                }
+              ]]]
+      tap_action:
+        action: null
+  heat:
+    card:
+      type: custom:button-card
+      entity: {{climate_entity}}
+      show_name: false
+      show_state: false
+      show_icon: true
+      icon: mdi:fire
+      size: null
+      styles:
+        card:
+          - background-color: transparent
+          - box-shadow: none
+          - justify-content: center
+          - width: 25px
+          - '--mdc-ripple-press-opacity': 0
+        grid:
+          - grid-template-areas: '"s" '
+        icon:
+          - color: |
+              [[[
+                var stat = states['{{climate_entity}}'].state;
+                var fan = states['{{fan_entity}}'].state;
+
+                if (stat === 'heat' && fan === 'on'){
+                  return '#c32650';
+                }else if (stat !== 'heat' && fan == 'off'){
+                  return '#ff';
+                }else{
+                  return '#000';
+                }
+              ]]]
+      tap_action:
+        action: null
+  current-temp:
+    card:
+      type: custom:button-card
+      show_name: false
+      show_label: true
+      show_state: false
+      show_icon: false
+      label: |
+        [[[
+          var bri = states['{{climate_entity}}'].attributes.current_temperature;
+          return 'Current Temp: ' + (bri ? bri : '0') + '℃';
+        ]]]
+      styles:
+        card:
+          - background-color: transparent
+          - box-shadow: none
+          - width: 110px
+        grid:
+          - grid-template-areas: ' "l" "l" '
+          - grid-template-columns: 100%
+          - grid-template-rows: 50% 50%
+        label:
+          - font-size: 11px
+          - color: |
+              [[[
+                var stat = states['{{fan_entity}}'].state;
+                if (stat === 'on'){
+                  return 'black';
+                }else{
+                  return '#fffff';
+                }
+              ]]]
+      tap_action:
+        action: null
+  back-color:
+    card:
+      type: custom:button-card
+      icon: mdi:back-color
+      size: 10px
+      entity: {{fan_entity}}
+      show_name: false
+      styles:
+        card:
+          - border-radius: 0px
+          - background: 'linear-gradient(to bottom, #c32650, #f15a29)'
+          - box-shadow: none
+          - height: 170px
+          - width: 82px
+          - '--mdc-ripple-press-opacity': 0
+      tap_action:
+        action: toggle
+
+  set-temp:
+    card:
+      type: custom:climate-card
+      entity: {{climate_entity}}
+      header: false
+      control: false
+      layout:
+        mode:
+          icons: false
+          names: false
+          headings: false
+        step: column
+      step_size: '1'
+      decimals: '0'
+
+      fallback: 'Off'
+      style:
+        .: |
+          ha-card {
+             background-color: transparent;
+             --st-font-size-sensors: 0px;
+             --st-spacing: 0px;
+             --st-mode-active-background: white;
+             --st-fault-inactive-color: white;
+             width: 0px;
+             height: 0px;
+             '--mdc-ripple-press-opacity': 0;
+          }
+  select:
+    card:
+      actions:
+        - call: >-
+            this.value == 0 ? entity.turn_off() : entity.turn_on({ brightness:
+            this.value })
+          selector: select
+          type: change
+      bindings:
+        - bind: return attr.brightness || 0
+          selector: select
+          type: value
+      content: |-
+        <section>
+
+         <style>
+            select {
+              padding: 2px;
+              border-radius: 10px;
+              height: 30px;
+              width: 70px;
+              color: rgba(0, 0, 0, 0.8);
+              font-size: 14px;
+              font-color: rgba(0, 0, 0, 1);
+              background-color: rgba(0,0,0,0);
+            }
+
+          </style>
+
+
+        <select  class="custom-select"  >
+
+
+          <option >Select</option>
+          <option value='27'>Low</option>
+          <option value='103'>Med</option>
+          <option value='180'>High</option>
+
+          <option value='0'>Off</option>
+        </select>
+
+        </section>
+      entity: {{fan_entity}}
+      type: custom:example-card
+      style: |
+        ha-card {
+          height: 170px;
+          width: 245px;
+          top: 20%;
+            }
+styles:
+  card:
+    - padding: 5px 5px
+    - border-radius: 6px
+    - height: 170px
+    - width: 275px
+    - '--mdc-ripple-press-opacity': 0
+    - background-image: |
+        [[[
+          var stat = states['{{fan_entity}}'].state;
+          if (stat === 'on'){
+            return 'linear-gradient(to top, #c7c7c7, #ffffff)';
+
+          }else{
+            return 'linear-gradient(to top, #454545, #454545)';
+          }
+        ]]]
+  grid:
+    - position: relative
+  custom_fields:
+    fan:
+      - position: absolute
+      - left: 15%
+      - width: 15%
+      - top: 25px
+    power_off:
+      - position: absolute
+      - font-size: 12px
+      - left: 35%
+      - top: 76%
+    cool:
+      - position: absolute
+      - font-size: 12px
+      - left: 47%
+      - top: 76%
+    heat:
+      - position: absolute
+      - font-size: 12px
+      - left: 60%
+      - top: 76%
+    current-temp:
+      - position: absolute
+      - left: 31%
+      - top: 20%
+    graph:
+      - position: absolute
+      - top: 45px
+      - height: 30px
+    stop:
+      - position: absolute
+      - right: 9%
+      - top: 45%
+      - height: 20px
+      - width: 40px
+    set-temp:
+      - position: absolute
+      - right: 14%
+      - top: 5%
+      - width: 42px
+    arrow-down:
+      - position: absolute
+      - right: 7%
+      - bottom: 25%
+      - height: 20px
+      - width: 40px
+    back-color:
+      - position: absolute
+      - right: '-3%'
+      - bottom: '-3%'
+    select:
+      - position: absolute
+      - left: 5px
+      - top: 75%
+  name:
+    - font-size: 12px
+    - justify-self: start
+    - position: relative
+    - left: 5px
+    - bottom: 60px
+    - color: |
+        [[[
+          var stat = states['{{fan_entity}}'].state;
+          if (stat === 'on'){
+            return 'black';
+
+          }else{
+            return '#ffffff';
+          }
+        ]]]
+  state:
+    - font-size: 9px
+    - position: relative
+    - right: 103px
+    - bottom: 60px
+    - color: |
+        [[[
+          var stat = states['{{fan_entity}}'].state;
+          if (stat === 'on'){
+            return 'black';
+
+          }else{
+            return '#ffffff';
+          }
+        ]]]
+  icon:
+    - position: absolute
+    - left: 0%
+    - width: 25%
+    - top: '-35px'
+    - color: |
+        [[[
+          var stat = states['{{fan_entity}}'].state;
+          if (stat === 'on'){
+            return '#D43A41';
+          }else{
+            return '#ffffff';
+          }
+        ]]]

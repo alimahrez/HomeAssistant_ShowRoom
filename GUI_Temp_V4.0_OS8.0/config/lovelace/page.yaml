@@ -1,0 +1,199 @@
+    title: Safiya's Room
+    path: safiyas-room
+    type: custom:grid-layout
+    layout:
+      grid-gap: var(--custom-layout-card-padding)
+      grid-auto-columns: 10% 80% 10%
+      grid-auto-rows: minmax(1fr,auto)
+      grid-template-areas: |
+        "sidebar sidebar sidebar"
+        "sensors sensors sensors"
+        ".       list    ."
+        "footer  footer  footer"
+      mediaquery:
+        '(max-width: 800px)':
+          grid-auto-columns: 50% 50%
+          grid-auto-rows: minmax(1fr,auto)
+          grid-template-areas: |
+            "sidebar  sidebar  "
+            "sensors  sensors"
+            "list     list    "
+            "devices2 devices2 "
+            "footer   footer   "
+        '(max-width: 1200px)':
+          grid-gap: var(--custom-layout-card-padding)
+          grid-auto-columns: 50% 50%
+          grid-auto-rows: minmax(1fr,auto)
+          grid-template-areas: |
+            "sidebar   sidebar"
+            "sensors  sensors"
+            "list      list"
+            "footer    footer"
+    badges: []
+    cards:
+      - type: custom:mod-card
+        view_layout:
+          grid-area: sidebar
+        card:
+          type: custom:mod-card
+          card:
+            type: custom:layout-card
+            layout_type: grid
+            layout:
+              grid-gap: 0px
+              grid-template-columns: 40px 4fr auto
+              grid-template-rows: 80px 70px 70px 0px
+              grid-template-areas: |
+                "back weather  extras"
+                ". text  text"
+                ". text  text"
+                ". .  sensor"
+            cards:
+              - type: custom:button-card
+                view_layout:
+                  grid-area: back
+                icon: ios:chevron-left
+                size: 40px
+                styles:
+                  card:
+                    - border-radius: 0px 0px 25px 25px
+                    - width: 100%
+                    - background-color: transparent
+                    - box-shadow: none
+                    - justify-content: end
+                    - '--mdc-ripple-press-opacity': 0
+                  icon:
+                    - margin: 0px
+                  img_cell:
+                    - justify-content: start
+                tap_action:
+                  action: navigate
+                  navigation_path: /testing-dashboard/0
+              - type: custom:button-card
+                entity: input_boolean.dummy
+                show_name: false
+                view_layout:
+                  grid-area: sensor
+                icon: mdi:motion-sensor
+                size: 30px
+                style: |-
+                  :host{
+                      place-self: center;
+                  }
+                styles:
+                  card:
+                    - width: 100%
+                    - background-color: transparent
+                    - box-shadow: none
+                    - '--mdc-ripple-press-opacity': 0
+                    - top: '-50px'
+                  icon:
+                    - margin: 0px
+                    - color: var(--primary-icon-color, white)
+                  img_cell:
+                    - justify-content: start
+                    - align-items: start
+                state:
+                  - value: 'on'
+                    styles:
+                      icon:
+                        - animation: blink 2s ease infinite
+                        - color: rgba(251, 125, 85,1)
+              - type: markdown
+                content: >
+
+                  {% if now().hour  < 5 %} Good Night {{'\U0001F634'}}
+
+                  {% elif now().hour < 12 %} Good Morning {{'\u2615\uFE0F'}}
+
+                  {% elif now().hour < 18 %} Good Afternoon
+                  {{'\U0001F44B\U0001F3FB'}}
+
+                  {% else %} Good Evening {{'\U0001F44B\U0001F3FB'}}{% endif %}
+
+                  # Safiya Room
+                view_layout:
+                  grid-area: text
+                style: |
+                  ha-card {  
+                    background-color: transparent;
+                    box-shadow: 0px 0px transparent;
+                    text-align: start;
+                    display: flex;
+                    align-items: center;
+                    font-size: 16px;
+                    font-weight: normal;
+                    padding-left: 10px;
+                    transition: 0s;
+                    font-family:  "gravity";
+
+                  }
+                  @media only screen and (min-width: 0px) {
+                    ha-card {
+                      font-size: 16px;
+
+                    }
+                  }
+                  @media only screen and (min-width: 768px) {
+                    ha-card {
+                      font-size: 16px;
+                    }
+                  }
+                  @media only screen and (min-width: 992px) {
+                    ha-card {
+                      font-size: 25px;
+                    }
+                  }
+              - type: custom:layout-card
+                layout_type: grid
+                view_layout:
+                  grid-area: extras
+                layout:
+                  grid-template-columns: 40px 40px
+                  grid-template-areas: |
+                    "settings notifications"
+                  place-content: end
+                cards:
+                  - type: custom:button-card
+                    view_layout:
+                      grid-area: settings
+                    tap_action:
+                      action: navigate
+                      navigation_path: /lovelace/setting
+                    icon: ios:gear
+                    size: 30px
+                    styles:
+                      card:
+                        - width: 90%
+                        - background-color: transparent
+                        - box-shadow: none
+                        - justify-content: center
+                        - justify-self: end
+                        - '--mdc-ripple-press-opacity': 0
+                      icon:
+                        - margin: 0px
+                        - color: var(--primary-icon-color, white)
+                      img_cell:
+                        - justify-content: center
+                  - type: custom:button-card
+                    view_layout:
+                      grid-area: notifications
+                    icon: mdi:view-headline
+                    show_icon: true
+                    size: 30px
+                    styles:
+                      card:
+                        - width: 100%
+                        - background-color: transparent
+                        - box-shadow: none
+                        - justify-content: end
+                        - justify-self: end
+                        - '--mdc-ripple-press-opacity': 0
+                      icon:
+                        - margin: 0px
+                        - color: var(--primary-icon-color, white)
+                      img_cell:
+                        - align-items: end
+                        - justify-content: end
+                    # tap_action:
+                    #     !include popup/menu-all-devices-popup.yaml

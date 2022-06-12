@@ -1,0 +1,432 @@
+# lovelace_gen
+#========================================================
+#=== Heater Card and switch between manual and automatic
+#===
+#=== Heater entity --> heater_entity
+#=== Heater Name --> heater_name
+#=== Auto/Manual switch entity --> toggle_switch_entity
+
+#=== Timer entity --> timer_entity
+#=== current Temp Sensor --> temp_sensor_entity
+#=== Counter entity --> counter_entity
+#========================================================
+
+type: custom:button-card
+entity: {{heater_entity}}
+color_type: icon
+show_icon: true
+show_state: true
+show_name: true
+style: |-
+          :host{
+              place-self: center;
+              
+          }
+name: {{heater_name}}
+icon: |
+  [[[ 
+    var stat = states['{{heater_entity}}'].state;                      
+    if (stat === 'on'){
+      return 'hue:heater-on';
+    }else{
+      return 'hue:heater-off'; 
+    }
+  ]]]
+tap_action:
+  action: toggle
+custom_fields:
+  toggle-switch:
+    card:
+      type: custom:button-card
+      entity: {{toggle_switch_entity}}
+      show_name: false
+      show_state: false
+      show_icon: false
+      custom_fields:
+        rect: |
+          [[[
+            return `<ha-card
+              style= "background-color: transparent; border-radius: 200px 200px; box-shadow: 0px 0px;">
+              </ha-card>`
+          ]]] 
+        circle: |
+          [[[
+            return `<ha-icon
+              icon="mdi:brightness-1"
+              style="width: 22.5px; height: 22.5px; color: rgba(255,255,255,1); ">
+              </ha-icon>`
+          ]]] 
+      state:
+        - value: 'on'
+          styles:
+            custom_fields:
+              circle:
+                - transition: .4s cubic-bezier(.54, 1.60, .5, 1)
+                - transform: translateX(22.5px)
+              rect:
+                - background: 'linear-gradient(to bottom, #c32650, #f15a29)'
+                - transition: .4s ease
+        - value: 'off'
+          styles:
+            custom_fields:
+              circle:
+                - transition: .4s cubic-bezier(.54, 1.60, .5, 1)
+              rect:
+                - background: 'linear-gradient(to bottom, #202020, #343434)'
+                - transition: .4s ease
+      styles:
+        card:
+          - background-color: transparent
+          - box-shadow: none
+          - justify-content: center
+          - width: 55px
+          - height: 32px
+          - '--mdc-ripple-press-opacity': 0
+        grid:
+          - position: relative
+        state:
+          - font-size: 12px
+          - color: |
+              [[[ 
+                var stat = states['{{heater_entity}}'].state;                      
+                if (stat === 'on'){
+                  return 'black';  
+                }else{
+                  return '#454545'; 
+                }
+              ]]]
+        custom_fields:
+          circle:
+            - position: absolute
+            - right: calc(7% + 22.5px)
+            - top: 14%
+            - height: 28px
+          rect:
+            - position: absolute
+            - right: 7%
+            - top: 15%
+            - height: 22.5px
+            - width: 45px
+            - border-radius: 200px 200px
+      tap_action:
+        action: toggle
+  time-counter:
+    card:
+      type: custom:button-card
+      entity: {{timer_entity}}
+      show_name: false
+      show_state: true
+      show_icon: false
+      styles:
+        card:
+          - background-color: transparent
+          - box-shadow: none
+          - justify-content: center
+          - width: 75px
+          - '--mdc-ripple-press-opacity': 0
+        grid:
+          - grid-template-areas: '"s" '
+        state:
+          - font-size: 12px
+          - color: |
+              [[[ 
+                var stat = states['{{heater_entity}}'].state;                      
+                if (stat === 'on'){
+                  return 'black';  
+                }else{
+                  return '#454545'; 
+                }
+              ]]]
+      tap_action:
+        action: null
+  current-temp:
+    card:
+      type: custom:button-card
+      entity: {{temp_sensor_entity}}
+      show_name: true
+      show_state: true
+      show_icon: false
+      name: Current Temp
+      styles:
+        card:
+          - background-color: transparent
+          - box-shadow: none
+          - width: 70px
+        grid:
+          - grid-template-areas: '" n ""s" '
+          - grid-template-columns: 100%
+          - grid-template-rows: 50% 50%
+        state:
+          - font-size: 10px
+          - color: |
+              [[[ 
+                var stat = states['{{heater_entity}}'].state;                      
+                if (stat === 'on'){
+                  return 'black';  
+                }else{
+                  return '#fffff'; 
+                }
+              ]]]
+        name:
+          - font-size: 11px
+          - color: |
+              [[[ 
+                var stat = states['{{heater_entity}}'].state;                      
+                if (stat === 'on'){
+                  return 'black';  
+                }else{
+                  return '#ffffff'; 
+                }
+              ]]]
+      tap_action:
+        action: null
+  back-color:
+    card:
+      type: custom:button-card
+      icon: mdi:back-color
+      size: 10px
+      # entity: {{heater_entity}}
+      show_name: false
+      styles:
+        card:
+          - border-radius: 0px
+          - background: 'linear-gradient(to bottom, #c32650, #f15a29)'
+          - box-shadow: none
+          - height: 170px
+          - width: 80px
+          - '--mdc-ripple-press-opacity': 0
+      tap_action:
+        action: null
+
+  arrow-up:
+    card:
+      type: custom:button-card
+      icon: mdi:chevron-up
+      show_name: false
+      size: 100%
+      styles:
+        card:
+          - width: 100%
+          - background-color: transparent
+          - box-shadow: none
+          - justify-content: center
+          - '--mdc-ripple-press-opacity': 0
+        icon:
+          - margin: 0px
+          - color: '#ffffff'
+        img_cell:
+          - justify-content: center
+      tap_action:
+        action: call-service
+        service: counter.increment
+        service_data:
+          entity_id: {{counter_entity}}
+  arrow-down:
+    card:
+      type: custom:button-card
+      icon: mdi:chevron-down
+      show_name: false
+      size: 100%
+      styles:
+        card:
+          - width: 100%
+          - background-color: transparent
+          - box-shadow: none
+          - justify-content: center
+          - '--mdc-ripple-press-opacity': 0
+        icon:
+          - margin: 0px
+          - color: '#ffffff'
+        img_cell:
+          - justify-content: center
+      tap_action:
+        action: call-service
+        service: counter.decrement
+        service_data:
+          entity_id: {{counter_entity}}
+  stop:
+    card:
+      type: custom:button-card
+      entity: {{counter_entity}}
+      show_name: true
+      show_state: true
+      show_icon: false
+      name: °C
+      styles:
+        card:
+          - background-color: transparent
+          - box-shadow: none
+          - justify-content: center
+          - width: 65px
+          - '--mdc-ripple-press-opacity': 0
+        grid:
+          - grid-template-areas: '"s n" '
+          - grid-template-columns: 60% 40%
+          - grid-template-rows: 100%
+        state:
+          - font-size: 29px
+        name:
+          - font-size: 22px
+      tap_action:
+        action: null
+  select:
+    card:
+      actions:
+        - call: >-
+            this.value == 0 ? entity.cancel() : entity.start({ duration:
+            this.value })
+          selector: select
+          type: change
+      bindings:
+        - bind: return attr.duration || 0
+          selector: select
+          type: value
+      content: |-
+        <section>
+
+         <style>
+            select {
+              padding: 2px;
+              border-radius: 10px;
+              height: 30px;
+              width: 70px;
+              color: rgba(0, 0, 0, 0.8);
+              font-size: 14px;
+              font-color: rgba(0, 0, 0, 1);
+              background-color: rgba(0,0,0,0);
+            }
+         
+          </style>  
+
+
+        <select  class="custom-select"  >
+          <option >Timer</option>
+
+          <option value='00:05:00'>5 Min</option>
+          <option value='00:10:00'>10 Min</option>
+          <option value='00:20:00'>20 Min</option>
+          <option value='00:30:00'>30 Min</option>
+          <option value='00:40:00'>40 Min</option>
+          <option value='00:50:00'>50 Min</option>
+          <option value='00:60:00'>1 hr</option>
+
+          <option value='0'>Stop</option>
+        </select>
+
+        </section>
+      entity: {{timer_entity}}
+      type: custom:example-card
+      style: |
+        ha-card {
+          height: 170px;
+          width: 245px;
+          top: 20%;
+            }
+styles:
+  card:
+    - padding: 5px 5px
+    - border-radius: 6px
+    - height: 170px
+    - width: 275px
+    - '--mdc-ripple-press-opacity': 0
+    - background-image: |
+        [[[ 
+          var stat = states['{{heater_entity}}'].state;                      
+          if (stat === 'on'){
+            return 'linear-gradient(to top, #c7c7c7, #ffffff)';
+          
+          }else{
+            return 'linear-gradient(to top, #454545, #454545)'; 
+          }
+        ]]]
+  grid:
+    - position: relative
+  custom_fields:
+    toggle-switch:
+      - position: absolute
+      - left: 40%
+      - top: '-2%'
+    time-counter:
+      - position: absolute
+      - font-size: 12px
+      - left: 35%
+      - top: 78%
+    current-temp:
+      - position: absolute
+      - left: 35%
+      - top: 20%
+    graph:
+      - position: absolute
+      - top: 45px
+      - height: 30px
+    stop:
+      - position: absolute
+      - right: 12%
+      - top: 40%
+      - height: 20px
+      - width: 40px
+    arrow-up:
+      - position: absolute
+      - right: 7%
+      - top: 15%
+      - height: 20px
+      - width: 40px
+    arrow-down:
+      - position: absolute
+      - right: 7%
+      - bottom: 25%
+      - height: 20px
+      - width: 40px
+    back-color:
+      - position: absolute
+      - right: '-2%'
+      - bottom: '-3%'
+    select:
+      - position: absolute
+      - left: 5px
+      - top: 75%
+  name:
+    - font-size: 12px
+    - justify-self: start
+    - position: relative
+    - left: 5px
+    - bottom: 60px
+    - color: |
+        [[[ 
+          var stat = states['{{heater_entity}}'].state;                      
+          if (stat === 'on'){
+            return 'black';
+          
+          }else{
+            return '#ffffff'; 
+          }
+        ]]]
+  state:
+    - font-size: 9px
+    - position: relative
+    - right: 103px
+    - bottom: 60px
+    - color: |
+        [[[ 
+          var stat = states['{{heater_entity}}'].state;                      
+          if (stat === 'on'){
+            return 'black';
+          
+          }else{
+            return '#ffffff'; 
+          }
+        ]]]
+  icon:
+    - position: absolute
+    - left: 2%
+    - width: 25%
+    - top: '-35px'
+    - color: |
+        [[[ 
+          var stat = states['{{heater_entity}}'].state;                      
+          if (stat === 'on'){
+            return '#D43A41';
+          }else{
+            return '#ffffff'; 
+          }
+        ]]]

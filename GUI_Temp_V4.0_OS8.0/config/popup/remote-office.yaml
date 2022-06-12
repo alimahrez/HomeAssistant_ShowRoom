@@ -1,0 +1,524 @@
+type: custom:layout-card
+layout_type: grid
+cards:
+  - type: custom:button-card
+    view_layout:
+      grid-area: remote
+    show_icon: true
+    show_entity_picture: false
+    entity: media_player.office
+    icon: mdi:remote-tv
+    color_type: label
+    size: 70%
+    show_name: false
+    label: Remote
+    styles:
+      card:
+        - background: "linear-gradient(to bottom, #"#f15a29", #"#f15a29")"
+        - height: 50px
+        - box-shadow: 0px 0px 0px
+        - width: 110px
+ 
+      grid:
+        - grid-template-areas: ' "i l"'
+        - grid-template-columns: 40% 60%
+        - grid-template-rows: 1fr
+      label:
+        - color: null
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        command: popup
+        style:
+          $: |
+            .mdc-dialog .mdc-dialog__scrim {
+              backdrop-filter: blur(15px);
+              -webkit-backdrop-filter: blur(15px);
+              background: rgba(0,0,0,0.3);
+            }     .mdc-dialog .mdc-dialog__container
+            .mdc-dialog__surface {
+              box-shadow: none !important;
+              border-radius: 25px; 
+              border-radius: var(--ha-card-border-radius);
+              background-color: rgba(255, 255, 255, 0.15);
+              backdrop-filter: blur(5px);
+              //   height: 100vh;
+              width: 5px;
+            }
+          .: |
+            :host {
+              border-radius: 25px;
+              color: rgba(0,0,0,0.4);
+              background: rgba(0,0,0,0);
+            }
+            :host .content {
+               border-radius: 25px;
+
+             }           
+            app-toolbar {
+              background: none !important;
+            }
+        brightnessWidth: 200px
+        brightnessHeight: 500px
+        switchWidth: 210px
+        switchHeight: 500px
+        color: "#E733FF"
+        color_temp: true
+        title: Samsung Remote
+        card:
+          type: horizontal-stack
+          cards:
+            - type: custom:tv-card
+              style: |
+                ha-card {
+                   position: relative;
+                   //left:50px;
+                  width: 400px;
+                  background: rgba(0,0,0,0);
+                }
+              entity: media_player.office
+              theme: Google Dark Theme
+              tv: true
+              menu:
+                service: media_player.play_media
+                service_data:
+                  media_content_id: KEY_MENU
+                  media_content_type: send_key
+                  entity_id: media_player.office
+              power:
+                service: media_player.toggle
+                service_data:
+                  entity_id: media_player.office
+              channeldown:
+                service: media_player.play_media
+                service_data:
+                  media_content_id: KEY_CHDOWN
+                  media_content_type: send_key
+                  entity_id: media_player.office
+              channelup:
+                service: media_player.play_media
+                service_data:
+                  media_content_id: KEY_CHUP
+                  media_content_type: send_key
+                  entity_id: media_player.office
+              home:
+                service: media_player.play_media
+                service_data:
+                  media_content_id: KEY_HOME
+                  media_content_type: send_key
+                  entity_id: media_player.office
+              info:
+                service: media_player.play_media
+                service_data:
+                  media_content_id: KEY_TOPMENU
+                  media_content_type: send_key
+                  entity_id: media_player.office
+              play:
+                service: media_player.media_play_pause
+                service_data:
+                  entity_id: media_player.office
+              remote: media_player.office
+              volume_up:
+                service: media_player.play_media
+                service_data:
+                  media_content_id: KEY_VOLUP
+                  media_content_type: send_key
+                  entity_id: media_player.office
+              volume_down:
+                service: media_player.play_media
+                service_data:
+                  media_content_id: KEY_VOLDOWN
+                  media_content_type: send_key
+                  entity_id: media_player.office
+              volume_mute:
+                service: media_player.play_media
+                service_data:
+                  media_content_id: KEY_MUTE
+                  media_content_type: send_key
+                  entity_id: media_player.office
+              up:
+                service: media_player.play_media
+                service_data:
+                  media_content_id: KEY_UP
+                  media_content_type: send_key
+                  entity_id: media_player.office
+              down:
+                service: media_player.play_media
+                service_data:
+                  media_content_id: KEY_DOWN
+                  media_content_type: send_key
+                  entity_id: memedia_player.office
+              reverse:
+                service: media_player.media_previous_track
+                service_data:
+                  entity_id: media_player.office
+              forward:
+                service: media_player.media_next_track
+                service_data:
+                  entity_id: media_player.office
+              right:
+                service: media_player.play_media
+                service_data:
+                  media_content_id: KEY_RIGHT
+                  media_content_type: send_key
+                  entity_id: media_player.office
+              left:
+                service: media_player.play_media
+                service_data:
+                  media_content_id: KEY_LEFT
+                  media_content_type: send_key
+                  entity_id: media_player.office
+              select:
+                service: media_player.play_media
+                service_data:
+                  media_content_id: KEY_ENTER
+                  media_content_type: send_key
+                  entity_id: media_player.office
+              source:
+                service: browser_mod.popup
+                service_data:
+                  style:
+                    $: |
+                      .mdc-dialog .mdc-dialog__scrim {
+                        backdrop-filter: blur(15px);
+                        -webkit-backdrop-filter: blur(15px);
+                        background: rgba(0,0,0,0.3);
+                      }     .mdc-dialog .mdc-dialog__container
+                      .mdc-dialog__surface {
+                        box-shadow: none !important;
+                        border-radius: 25px; 
+                        border-radius: var(--ha-card-border-radius);
+                        background-color: rgba(255, 255, 255, 0.15);
+                        backdrop-filter: blur(5px);
+                        //   height: 100vh;
+                        width: 5px;
+                      }
+                    .: |
+                      :host {
+                        border-radius: 25px;
+                        color: rgba(0,0,0,0.4);
+                        background: rgba(0,0,0,0);
+                      }
+                      :host .content {
+                         border-radius: 25px;
+
+                       }           
+                      app-toolbar {
+                        background: none !important;
+                      }
+                  brightnessWidth: 200px
+                  brightnessHeight: 500px
+                  switchWidth: 210px
+                  switchHeight: 500px
+                  color: "#E733FF"
+                  color_temp: true
+                  title: Tv Source
+                  card:
+                    type: vertical-stack
+                    cards:
+                      - type: custom:button-card
+                        color_type: card
+                        color: rgba(0,0,0,0.5)
+                        tab_action: null
+                        show_entity_picture: false
+                        show_icon: false
+                        show_state: false
+                        size: 100%
+                        show_name: true
+                        name: Sources
+                        entity_picture: /local/TV_Remote/primeviedo.png
+                        styles:
+                          card:
+                            - height: 75px
+                            - box-shadow: none
+                            - border-radius: 3%
+                          name:
+                            - font-size: 25px
+                          entity_picture:
+                            - width: 90px
+                            - height: 35px
+                        tap_action:
+                          action: call-service
+                          service: media_player.select_source
+                          service_data:
+                            entity_id: media_player.office
+                            source: Source
+                      - type: horizontal-stack
+                        cards:
+                          - type: custom:button-card
+                            color_type: card
+                            color: rgba(0,0,0,0.5)
+                            show_entity_picture: false
+                            show_icon: false
+                            show_state: false
+                            size: 100%
+                            show_name: true
+                            name: Tv
+                            entity_picture: /local/TV_Remote/primeviedo.png
+                            styles:
+                              card:
+                                - height: 75px
+                                - border-radius: 3%
+                              entity_picture:
+                                - width: 90px
+                                - height: 35px
+                              name:
+                                - font-size: 23px
+                            tap_action:
+                              action: call-service
+                              service: media_player.select_source
+                              service_data:
+                                entity_id: media_player.office
+                                source: TV
+                          - type: custom:button-card
+                            color_type: card
+                            color: rgba(0,0,0,0.5)
+                            tab_action: null
+                            show_entity_picture: false
+                            show_icon: false
+                            show_state: false
+                            size: 100%
+                            show_name: true
+                            name: HDMI
+                            entity_picture: /local/TV_Remote/primeviedo.png
+                            styles:
+                              card:
+                                - height: 75px
+                                - border-radius: 3%
+                              entity_picture:
+                                - width: 90px
+                                - height: 35px
+                              name:
+                                - font-size: 23px
+                            tap_action:
+                              action: call-service
+                              service: media_player.select_source
+                              service_data:
+                                entity_id: media_player.office
+                                source: HDMI1
+                      - type: horizontal-stack
+                        cards:
+                          - type: custom:button-card
+                            color_type: card
+                            color: rgba(0,0,0,0.5)
+                            show_entity_picture: false
+                            show_icon: false
+                            show_state: false
+                            size: 100%
+                            show_name: true
+                            name: HDMI 2
+                            styles:
+                              card:
+                                - height: 75px
+                                - border-radius: 3%
+                              entity_picture:
+                                - width: 90px
+                                - height: 35px
+                              name:
+                                - font-size: 23px
+                            tap_action:
+                              action: call-service
+                              service: media_player.select_source
+                              service_data:
+                                entity_id: media_player.office
+                                source: HDMI2
+                          - type: custom:button-card
+                            color_type: card
+                            color: rgba(0,0,0,0.5)
+                            tab_action: null
+                            show_entity_picture: false
+                            show_icon: false
+                            show_state: false
+                            size: 100%
+                            show_name: true
+                            name: HDMI 3
+                            styles:
+                              card:
+                                - height: 75px
+                                - border-radius: 3%
+                              entity_picture:
+                                - width: 90px
+                                - height: 35px
+                              name:
+                                - font-size: 23px
+                            tap_action:
+                              action: call-service
+                              service: media_player.select_source
+                              service_data:
+                                entity_id: media_player.office
+                                source: HDMI3
+                      - type: horizontal-stack
+                        cards:
+                          - type: custom:button-card
+                            color_type: card
+                            color: rgba(0,0,0,0.5)
+                            show_entity_picture: true
+                            show_icon: false
+                            show_state: false
+                            size: 100%
+                            show_name: false
+                            name: Netflix
+                            entity_picture: /local/TV_Remote/Netflix.png
+                            tap_action:
+                              action: call-service
+                              service: media_player.select_source
+                              service_data:
+                                entity_id: media_player.office
+                                source: Netflix
+                            styles:
+                              card:
+                                - height: 75px
+                                - border-radius: 3%
+                              entity_picture:
+                                - width: 100px
+                          - type: custom:button-card
+                            color_type: card
+                            color: rgba(0,0,0,0.5)
+                            show_entity_picture: true
+                            show_icon: false
+                            show_state: false
+                            size: 100%
+                            show_name: false
+                            name: Spotify
+                            entity_picture: /local/TV_Remote/Spotify.png
+                            styles:
+                              card:
+                                - height: 75px
+                                - border-radius: 3%
+                              entity_picture:
+                                - width: 100px
+                                - height: 45px
+                            tap_action:
+                              action: call-service
+                              service: media_player.select_source
+                              service_data:
+                                entity_id: media_player.office
+                                source: Spotify
+                      - type: horizontal-stack
+                        cards:
+                          - type: custom:button-card
+                            color_type: card
+                            color: rgba(0,0,0,0.5)
+                            tab_action: null
+                            show_entity_picture: true
+                            show_icon: false
+                            show_state: false
+                            size: 100%
+                            show_name: false
+                            name: YouTube
+                            entity_picture: /local/TV_Remote/youtube7.png
+                            tap_action:
+                              action: call-service
+                              service: media_player.select_source
+                              service_data:
+                                entity_id: media_player.office
+                                source: YouTube
+                            styles:
+                              card:
+                                - height: 75px
+                                - border-radius: 3%
+                              entity_picture:
+                                - width: 100px
+                                - height: 45px
+                          - type: custom:button-card
+                            color_type: card
+                            color: rgba(0,0,0,0.5)
+                            tab_action: null
+                            show_entity_picture: true
+                            show_icon: false
+                            show_state: false
+                            size: 100%
+                            show_name: false
+                            name: Prime Video
+                            entity_picture: /local/TV_Remote/primeviedo.png
+                            styles:
+                              card:
+                                - height: 75px
+                                - border-radius: 3%
+                              entity_picture:
+                                - width: 90px
+                                - height: 35px
+                            tap_action:
+                              action: call-service
+                              service: media_player.select_source
+                              service_data:
+                                entity_id: media_player.office
+                                source: Prime Video
+            - type: custom:button-card
+              color_type: card
+              color: rgba(31,31,255,0)
+              show_entity_picture: false
+              show_icon: false
+              show_state: false
+              name: Back
+              size: 60%
+              styles:
+                card:
+                  - position: relative
+                  - height: 50px
+                  - z-index: 1
+                  - width: 50px
+                  - border-radius: 20%
+                  - box-shadow: none
+                  - index_z: 22
+                  - right: 230px
+                  - top: 105px
+              tap_action:
+                action: call-service
+                service: media_player.play_media
+                service_data:
+                  media_content_id: KEY_RETURN
+                  media_content_type: send_key
+                  entity_id: media_player.office
+            - type: custom:button-card
+              color_type: card
+              color: rgba(32,33,36,0)
+              show_entity_picture: false
+              show_icon: false
+              show_state: false
+              size: 60%
+              styles:
+                card:
+                  - position: relative
+                  - box-shadow: none
+                  - height: 50px
+                  - z-index: 1
+                  - width: 50px
+                  - border-radius: 20%
+                  - index_z: 22
+                  - right: 280px
+                  - top: 29px
+              tap_action:
+                action: call-service
+                service: media_player.play_media
+                service_data:
+                  media_content_id: KEY_RETURN
+                  media_content_type: send_key
+                  entity_id: media_player.office
+    show_label: true
+  - type: media-control
+    entity: media_player.office
+    theme: ios-custom-light-mod
+    view_layout:
+      grid-area: media
+layout:
+  grid-gap: var(--custom-layout-card-padding)
+  grid-auto-columns: 70% 30%
+  grid-auto-rows: minmax(1fr,auto)
+  grid-template-areas: |
+    ". remote "
+    "media media "
+  mediaquery:
+    "(max-width: 800px)":
+      grid-auto-columns: 70% 30%
+      grid-auto-rows: minmax(1fr,auto)
+      grid-template-areas: |
+        "remote remote "
+        "media media "
+    "(max-width: 1200px)":
+      grid-gap: var(--custom-layout-card-padding)
+      grid-auto-columns: 70% 30%
+      grid-auto-rows: minmax(1fr,auto)
+      grid-template-areas: |
+        "remote remote "
+        "media media "
